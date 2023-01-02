@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SMART AKB</title>
+  <title>GO-DANG</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('assets/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
@@ -37,7 +37,6 @@
           <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-          @auth
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <i class="icon-head mx-0"></i>
@@ -49,19 +48,6 @@
               </a>
             </div>
           </li>
-          @else
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <i class="icon-head mx-0"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="/login">
-                <i class="ti-arrow-circle-down text-primary"></i>
-                Log In
-              </a>
-            </div>
-          </li>
-          @endauth
           <li class="nav-item nav-settings d-none d-lg-flex">
             <a class="nav-link" href="#">
               <i class="icon-ellipsis"></i>
@@ -85,27 +71,27 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/sensor">
-              <i class="icon-eye menu-icon"></i>
-              <span class="menu-title">Sensor</span>
+            <a class="nav-link" href="/barang">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Barang</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/alat">
+            <a class="nav-link">
               <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Alat</span>
+              <span class="menu-title">Transaksi</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#list" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Library</span>
+              <span class="menu-title">Laporan</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="list">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/kategori">Kategori</a></li>
-                <li class="nav-item"><a class="nav-link" href="/iot">IoT</a></li>
+                <li class="nav-item"><a class="nav-link">Penjualan</a></li>
+                <li class="nav-item"><a class="nav-link">Pengiriman</a></li>
               </ul>
             </div>
           </li>
