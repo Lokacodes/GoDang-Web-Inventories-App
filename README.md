@@ -1,2 +1,2 @@
 # jelajahGudangMagang
-web app untuk magang loka dan dimas hehehe
+web app untuk magang loka dan dimas
