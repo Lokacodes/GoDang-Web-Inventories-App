@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pengiriman extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'kode_pengiriman',
+        'kode_barang',
+        'jumlah_barang',
+        'fee_ekspedisi',
+    ];
 }
