@@ -1,6 +1,7 @@
 @extends('index')
+
 @section('content')
-    <!--List IOT-->
+    <!--List Barang-->
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -30,7 +31,41 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                                $no = 1;
+                            @endphp
+                            @forelse ($barang as $b)
+                                <tr>
+                                    <td>
+                                        <center>{{ $no++ }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ $b->kode_barang }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ $b->nama_barang }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ $b->nama_brand }}</center>
+                                    </td>
+                                    <td>
+                                        <center>{{ $b->harga_jual }}</center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="/barang/{{ $b->kode_barang }}">
+                                                <button type="button" class="btn btn-link btn-fw">View More</button>
+                                            </a>
+                                        </center>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7">
+                                        <center>Belum Ada Data</center>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -40,7 +75,7 @@
     <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
     </div>
-
+    <!--Modal Barang-->
     <div class="modal fade" id="addTodoModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,15 +89,21 @@
                             <div class="form-group">
                                 <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                                 <div class="form-group">
-                                    <label for="kategori">Kategori</label>
-                                    <select class="form-control" name="kategori" id="kategori">
+                                    <label for="kode_kategori">Kategori</label>
+                                    <select class="form-control" name="kode_kategori" id="kode_kategori">
                                         <option selected value="-">-</option>
+                                        @foreach ($kat as $k)
+                                            <option value="{{ $k->kode_kategori }}">{{ $k->nama_kategori }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="brand">Brand</label>
-                                    <select class="form-control" name="brand" id="brand">
+                                    <label for="kode_brand">Brand</label>
+                                    <select class="form-control" name="kode_brand" id="kode_brand">
                                         <option selected value="-">-</option>
+                                        @foreach ($brand as $b)
+                                            <option value="{{ $b->kode_brand }}">{{ $b->nama_brand }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 
 class BarangController extends Controller
@@ -10,8 +11,15 @@ class BarangController extends Controller
     //List Barang
     public function Index()
     {
-        $barang = Barang::all();
-        return view('Barang.list', ['barang'=>$barang]);
+        //Show Join In Form
+        $kategori = DB::table('kategoris')->get();
+        $brand = DB::table('brands')->get();
+
+        //Join
+        $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
+                        ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+                        ->get();
+        return view('Barang.list', ['barang'=>$barang, 'kat'=>$kategori, 'brand'=>$brand]);
     }
 
     //Create Barang
