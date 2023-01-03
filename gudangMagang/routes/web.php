@@ -22,3 +22,6 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 //Barang
 Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
+
+//Barang
+Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
