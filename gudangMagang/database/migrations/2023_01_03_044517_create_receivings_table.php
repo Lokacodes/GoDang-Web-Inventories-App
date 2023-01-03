@@ -18,7 +18,7 @@ class CreateReceivingsTable extends Migration
             $table->string('kode_receive')->nullable();
             $table->date('tanggal_receive')->nullable();
             $table->string('kode_barang')->nullable();
-            $table->string('kode_receive')->nullable();
+            $table->string('supplier')->nullable();
             $table->string('jumlah_barang')->nullable();
 
             $table->timestamps();

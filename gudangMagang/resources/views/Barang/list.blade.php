@@ -102,26 +102,36 @@
                     $('#ver').val("0");
                 });
                 $('#tambah').click(function() {
-                    let id_kategori = $('#id_kategori').val();
-                    let kategori = $('#kategori').val();
+                    let kode_barang = $('#kode_barang').val();
+                    let kode_kategori = $('#kode_kategori').val();
+                    let kode_brand = $('#kode_brand').val();
+                    let nama_barang = $('#nama_barang').val();
+                    let harga_jual = $('#harga_jual').val();
                     var ver = $('#ver').val();
 
                     //Store Kategori
-                    if (id_kategori != "" && kategori != "" && ver == "0") {
+                    if (kode_barang != "" && kode_kategori != "" && kode_brand != "" && nama_barang != "" &&
+                        harga_jual != "" && ver == "0") {
                         $.ajax({
-                            url: "/kategori/store",
+                            url: "/barang/store",
                             type: "POST",
                             data: {
                                 _token: $("#csrf").val(),
-                                id_kategori: id_kategori,
-                                kategori: kategori,
+                                kode_barang: kode_barang,
+                                kode_kategori: kode_kategori,
+                                kode_brand: kode_brand,
+                                nama_barang: nama_barang,
+                                harga_jual: harga_jual,
                             },
                             success: function(data) {
                                 if (data)
                                     alert(data.message);
-                                window.location = "/kategori";
-                                $('#id_kategori').val("");
-                                $('#kategori').val("");
+                                window.location = "/barang";
+                                $('#kode_barang').val("");
+                                $('#kode_kategori').val("");
+                                $('#kode_brand').val("");
+                                $('#nama_barang').val("");
+                                $('#harga_jual').val("");
                             },
                             error: function(response) {
                                 let data = response.responseJSON.error;

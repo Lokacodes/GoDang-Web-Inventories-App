@@ -22,6 +22,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 //Barang
 Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
+Route::post('/barang/store', [\App\Http\Controllers\BarangController::class, 'store']);
 
 //Barang
 Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
