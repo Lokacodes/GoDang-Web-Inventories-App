@@ -27,7 +27,7 @@ class KategoriController extends Controller
                 $kategori->nama_kategori = $request->nama_kategori;
                 $kategori->save();
 
-                return response()->json(['success' => true, 'message' => 'success'], 200);
+                return response()->json(['success' => true, 'message' => 'Kategori Baru Telah Ditambahkan'], 200);
             }
         }
     }

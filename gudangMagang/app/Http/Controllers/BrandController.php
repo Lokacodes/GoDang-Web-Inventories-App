@@ -27,7 +27,7 @@ class BrandController extends Controller
                 $brand->nama_brand = $request->nama_brand;
                 $brand->save();
 
-                return response()->json(['success' => true, 'message' => 'success'], 200);
+                return response()->json(['success' => true, 'message' => 'Brand Baru Telah Ditambahkan'], 200);
             }
         }
     }
