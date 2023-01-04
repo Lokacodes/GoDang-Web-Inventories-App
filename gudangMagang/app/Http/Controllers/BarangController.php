@@ -17,9 +17,9 @@ class BarangController extends Controller
 
         //Join
         $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
-                        ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-                        ->get();
-        return view('Barang.list', ['barang'=>$barang, 'kat'=>$kategori, 'brand'=>$brand]);
+            ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            ->get();
+        return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand]);
     }
 
     //Create Barang
@@ -44,32 +44,30 @@ class BarangController extends Controller
         }
     }
 
+    //Detail Barang
     public function show(Request $request)
     {
         $barang = DB::table('barangs')->get();
 
-        // $kat = DB::table('alats')
-        //     ->join('kategoris', 'kategoris.id_kategori', '=', 'alats.id_kategori')
-        //     ->get();
-        // $kat = Kategori::whereIdKategori($request->id_kategori)->firstOrFail();
         $kat = DB::table('kategoris')->get();
         $det = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
-                ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-                ->get();
+            ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            ->get();
         $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
         return view('Barang.detail', ['barang' => $barang, 'det' => $det, 'kat' => $kat]);
     }
 
+    //Edit Form Barang
     public function form(Request $request)
     {
         $barang = DB::table('barangs')->get();
         $kat = DB::table('kategoris')->get();
         $brand = DB::table('brands')->get();
         $det = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
-                ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-                ->get();
+            ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            ->get();
         $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
-        return view('Barang.editDetail', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand'=> $brand]);
+        return view('Barang.edit', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand' => $brand]);
     }
 
     //Update Process
@@ -93,14 +91,15 @@ class BarangController extends Controller
             $path = $request->file('foto')->store('images');
         }
 
-        Barang::updateOrCreate(['kode_barang'=>$request->kode_barang], [
-            'nama_barang'=>$request->nama_barang, 
-            'kode_kategori'=>$request->kode_kategori, 
-            'kode_brand'=>$request->kode_brand, 
-            'harga_beli'=>$request->harga_beli,
-            'harga_jual'=>$request->harga_jual,
-            'stok_barang'=>$request->stok_barang, 
-            'foto'=>$path]);
+        Barang::updateOrCreate(['kode_barang' => $request->kode_barang], [
+            'nama_barang' => $request->nama_barang,
+            'kode_kategori' => $request->kode_kategori,
+            'kode_brand' => $request->kode_brand,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'stok_barang' => $request->stok_barang,
+            'foto' => $path
+        ]);
 
         return redirect('/barang')->with('success', 'Data Telah Terupdate');
     }
