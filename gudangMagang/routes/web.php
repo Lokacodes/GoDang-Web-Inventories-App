@@ -35,5 +35,5 @@ Route::post('/kategori/store', [\App\Http\Controllers\KategoriController::class,
 Route::get('/brand', [\App\Http\Controllers\BrandController::class, 'index']);
 Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store']);
 
-//Barang
-//Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
+//Receiving
+Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);

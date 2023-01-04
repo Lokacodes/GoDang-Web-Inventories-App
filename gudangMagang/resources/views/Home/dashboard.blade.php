@@ -48,47 +48,46 @@
         </div>
     </div>
 
-    {{-- <div class="container">
+    <div class="container">
         <div class="card">
             <div class="face hidden">
                 <div class="content">
-                    <h2>Lorem Ipsum</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor maximus risus pellentesque
-                        imperdiet.</p>
+                    <h2><center>Barang</center></h2>
+                    <div class="price">{{ $barang }} <small>Barang</small></div><br>
+                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
                 </div>
             </div>
             <div class="face front">
-                <i class="fa fa-lock"></i>
-                <h2>Security</h2>
+                <i class="ti-bag"></i>
+                <h2>Barang</h2>
             </div>
         </div>
         <div class="card">
             <div class="face hidden">
                 <div class="content">
-                    <h2>Lorem Ipsum</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor maximus risus pellentesque
-                        imperdiet.</p>
+                    <h2><center>Receiving</center></h2>
+                    <div class="price">{{ $receive }} <small>Receiving</small></div><br>
+                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
                 </div>
             </div>
             <div class="face front">
-                <i class="fa fa-star"></i>
-                <h2>premium</h2>
+                <i class="ti-shopping-cart"></i>
+                <h2>Receiving</h2>
             </div>
         </div>
         <div class="card">
             <div class="face hidden">
                 <div class="content">
-                    <h2>Lorem Ipsum</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor maximus risus pellentesque
-                        imperdiet.</p>
+                    <h2><center>Sending</center></h2><br>
+                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
                 </div>
             </div>
             <div class="face front">
-                <i class="fa fa-life-ring"></i>
-                <h2>support</h2>
+                <i class="ti-truck"></i>
+                <h2>Sending</h2>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <!--JS Jam & Tanggal-->
     <script type="text/javascript">

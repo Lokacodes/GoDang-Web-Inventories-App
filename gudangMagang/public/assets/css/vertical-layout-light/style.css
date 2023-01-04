@@ -9193,6 +9193,13 @@ pre code {
   overflow-y: scroll;
 }
 
+.price {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 20px;
+}
+
 .container,
 .container-fluid,
 .container-sm,
@@ -9200,6 +9207,9 @@ pre code {
 .container-lg,
 .container-xl {
   width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  display: grid;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
