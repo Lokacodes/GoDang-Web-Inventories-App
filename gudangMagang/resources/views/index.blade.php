@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/s/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/dashboard.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/AK.png') }}" />
 </head>
 
@@ -90,7 +90,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test">
+                        <a class="nav-link" href="/receive">
                             <i class="ti-shopping-cart menu-icon"></i>
                             <span class="menu-title">Receiving</span>
                         </a>
