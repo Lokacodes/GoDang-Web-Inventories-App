@@ -51,7 +51,7 @@
                                     <td>
                                         <center>{{ $b->harga_jual }}</center>
                                     </td>
-                                    <td>
+                                    <td> 
                                         <center>
                                             <a href="/barang/{{ $b->kode_barang }}">
                                                 <button type="button" class="btn btn-link btn-fw">View More</button>

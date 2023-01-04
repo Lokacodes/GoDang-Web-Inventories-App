@@ -23,6 +23,8 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 //Barang
 Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
 Route::get('/barang/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'show']);
+Route::get('/barang/edit/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'form']);
+Route::post('/barang/update/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'update']);
 Route::post('/barang/store', [\App\Http\Controllers\BarangController::class, 'store']);
 
 //Kategori

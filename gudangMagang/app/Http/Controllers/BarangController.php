@@ -25,9 +25,9 @@ class BarangController extends Controller
     //Create Barang
     public function store(Request $request)
     {
-        $message = ['kode_barang.unique' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
+        $message = ['kode_barang.required' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
         if ($request->ajax()) {
-            $validator = Validator($request->all(), ['kode_barang' => 'unique:barangs', 'nama_barang' => 'required'], $message);
+            $validator = Validator($request->all(), ['kode_barang' => 'required', 'nama_barang' => 'required'], $message);
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
             } else {
@@ -58,5 +58,50 @@ class BarangController extends Controller
                 ->get();
         $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
         return view('Barang.detail', ['barang' => $barang, 'det' => $det, 'kat' => $kat]);
+    }
+
+    public function form(Request $request)
+    {
+        $barang = DB::table('barangs')->get();
+        $kat = DB::table('kategoris')->get();
+        $brand = DB::table('brands')->get();
+        $det = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
+                ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+                ->get();
+        $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
+        return view('Barang.editDetail', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand'=> $brand]);
+    }
+
+    //Update Process
+    public function update(Request $request, $id)
+    {
+
+        //Validate Data
+        $validate = $request->validate([
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'kode_kategori' => 'required',
+            'kode_brand' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
+            'stok_barang' => 'required',
+            'foto' => 'image|max:2048',
+        ]);
+
+        //File Store
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('images');
+        }
+
+        Barang::updateOrCreate(['kode_barang'=>$request->kode_barang], [
+            'nama_barang'=>$request->nama_barang, 
+            'kode_kategori'=>$request->kode_kategori, 
+            'kode_brand'=>$request->kode_brand, 
+            'harga_beli'=>$request->harga_beli,
+            'harga_jual'=>$request->harga_jual,
+            'stok_barang'=>$request->stok_barang, 
+            'foto'=>$path]);
+
+        return redirect('/barang')->with('success', 'Data Telah Terupdate');
     }
 }

@@ -92,8 +92,14 @@
         </div>
     </div>
 
+    <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/barang/edit/{{ $det->kode_barang }}">
+            <button type="button" class="btn btn-primary">EDIT</button>
+        </a>
+    </div>
+
     {{-- Button Action --}}
-    <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
+    {{-- <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
         <div class="btn-group">
             <a class="btn btn-primary">Action</a>
             <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
@@ -106,7 +112,7 @@
                     data-id="{{ $det->kode_alat }}">Hapus</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Edit Modal --}}
     {{-- <div class="modal fade" id="addTodoModal" aria-hidden="true">
