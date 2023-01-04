@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () { 
-    return view('Receive.receive');
-});
+// Route::get('/test', function () { 
+//     return view('Receive.receive');
+// });
 
 //Home
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -37,3 +37,6 @@ Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'stor
 
 //Receiving
 Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
+
+//Send
+Route::get('/sending', [\App\Http\Controllers\SendingController::class, 'index']);

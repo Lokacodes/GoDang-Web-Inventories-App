@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
+    //View Kategori
     public function index()
     {
         $kategori = Kategori::all();
         return view('kategori.kategori', ['kategori' => $kategori]);
     }
 
+    //Add Kategori
     public function store(Request $request)
     {
-        //
         $message = ['kode_kategori.unique' => 'Kode Kategori Sudah Ada', 'nama_kategori.required' => 'Nama Kategori Tidak Boleh Kosong'];
         if ($request->ajax()) {
             $validator = Validator($request->all(), ['kode_kategori' => 'unique:kategoris', 'nama_kategori' => 'required'], $message);

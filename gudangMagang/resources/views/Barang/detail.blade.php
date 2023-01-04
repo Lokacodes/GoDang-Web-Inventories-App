@@ -86,7 +86,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Gambar</p>
-                    <img src="{{ '../../../storage/app/images/($post->foto)' }}">
+                    <img src="{{ asset('storage/images/'.$det->foto)}}" alt="">
                 </div>
             </div>
         </div>

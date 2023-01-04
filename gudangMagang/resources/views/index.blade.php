@@ -117,16 +117,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#list" aria-expanded="false"
+                        <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
                             aria-controls="form-elements">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Report</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="list">
+                        <div class="collapse" id="report">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="/lsending">Sending</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/lreceiving">Receiving</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
                             </ul>
                         </div>

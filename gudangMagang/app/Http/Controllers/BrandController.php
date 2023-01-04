@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    //View Brand
     public function index()
     {
         $brand = Brand::all();
         return view('Brand.brand', ['brand' => $brand]);
     }
 
+    //Add Brand
     public function store(Request $request)
     {
         //
