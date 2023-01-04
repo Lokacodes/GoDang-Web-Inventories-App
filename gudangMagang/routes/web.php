@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
+Route::get('/test', function () { 
     return view('Receive.receive');
 });
 
@@ -22,6 +22,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 //Barang
 Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
+Route::get('/barang/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'show']);
 Route::post('/barang/store', [\App\Http\Controllers\BarangController::class, 'store']);
 
 //Kategori
