@@ -58,8 +58,8 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body" id="tabelGudang" name="tabelGundang">
+        <div class="card" id="tabelGudang" name="tabelGundang">
+            <div class="card-body">
                 <h4 class="card-title">Barang List</h4>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -88,6 +88,8 @@
             $(document).ready(function() {
                 let detail = document.getElementById('detail');
                 detail.style.visibility = 'hidden';
+                // let tabel = document.getElementById('tabel');
+                // tabel.style.visibility = 'hidden';
                 //alert("ready");
                 $("#caribarang").autocomplete({
                     source: function(request, response) {
