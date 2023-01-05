@@ -77,6 +77,8 @@
             <!-- sidebar -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
+            @if (Auth::user()->level == 'super')
+            
                     <li class="nav-item">
                         <a class="nav-link" href="/">
                             <i class="ti-home menu-icon"></i>
@@ -131,8 +133,43 @@
                             </ul>
                         </div>
                     </li>
-                </ul>
-            </nav>
+                
+            @elseif (Auth::user()->level == 'kasir')
+            
+                    <li class="nav-item">
+                        <a class="nav-link" href="/receive">
+                            <i class="ti-shopping-cart menu-icon"></i>
+                            <span class="menu-title">Receiving</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sending">
+                            <i class="ti-truck menu-icon"></i>
+                            <span class="menu-title">Sending</span>
+                        </a>
+                    </li>
+                
+            @elseif (Auth::user()->level == 'user')
+            
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
+                            aria-controls="form-elements">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Report</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="report">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                
+            @endif
+        </ul>
+    </nav>
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
