@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AKB</title>
+    <title>GO-DANG</title>
     <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/s/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/login.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/AK.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
 </head>
 
 <body>
     <div class="container-fluid page-body-wrapper">
     <section class="forms-section">
-        <h1 class="section-title">Smart AKB</h1>
+        <h1 class="section-title">GO-DANG</h1>
         <div class="forms">
             <div class="form-wrapper is-active">
                 <button type="button" class="switcher switcher-login">

@@ -1,5 +1,13 @@
 @extends('index')
 @section('content')
+
+<div class="col-md-12 grid-margin">
+    <div class="row">
+        <div class="col-12 col-xl-8 mb-4 mb-xl-0"> 
+            <h3 class="font-weight-bold">Welcome, {{ auth()->user()->nama }}</h3>
+        </div>
+    </div>
+</div>
     <div class="col-md-12 grid-margin transparent">
         <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent">
@@ -48,6 +56,7 @@
         </div>
     </div>
 
+    @if (Auth::user()->role== 'super')
     <div class="container">
         <div class="card">
             <div class="face hidden">
@@ -88,7 +97,7 @@
             </div>
         </div>
     </div>
-
+    @endif
     <!--JS Jam & Tanggal-->
     <script type="text/javascript">
         window.setTimeout("jam_aktif()", 1000);

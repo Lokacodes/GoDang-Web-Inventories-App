@@ -135,7 +135,12 @@
                     </li>
                 
             @elseif (Auth::user()->role == 'kasir')
-            
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="ti-home menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/receive">
                             <i class="ti-shopping-cart menu-icon"></i>
@@ -150,7 +155,12 @@
                     </li>
                 
             @elseif (Auth::user()->role == 'user')
-            
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="ti-home menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
                             aria-controls="form-elements">
