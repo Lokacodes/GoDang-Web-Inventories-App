@@ -77,7 +77,7 @@
             <!-- sidebar -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-            @if (Auth::user()->level == 'super')
+            @if (Auth::user()->role== 'super')
             
                     <li class="nav-item">
                         <a class="nav-link" href="/">
@@ -134,7 +134,7 @@
                         </div>
                     </li>
                 
-            @elseif (Auth::user()->level == 'kasir')
+            @elseif (Auth::user()->role == 'kasir')
             
                     <li class="nav-item">
                         <a class="nav-link" href="/receive">
@@ -149,7 +149,7 @@
                         </a>
                     </li>
                 
-            @elseif (Auth::user()->level == 'user')
+            @elseif (Auth::user()->role == 'user')
             
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
