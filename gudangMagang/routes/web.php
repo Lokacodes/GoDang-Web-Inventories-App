@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //login
-Route::get('/login',[\App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::get('/login',[\App\Http\Controllers\LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'auth']);
 Route::post('/registrasi', [\App\Http\Controllers\LoginController::class, 'registrasi']);
 

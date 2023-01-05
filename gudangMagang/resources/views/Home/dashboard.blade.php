@@ -56,14 +56,16 @@
         </div>
     </div>
 
-    @if (Auth::user()->role== 'super')
+    @if (Auth::user()->role== 'super' || Auth::user()->role== 'kasir')
     <div class="container">
         <div class="card">
             <div class="face hidden">
                 <div class="content">
                     <h2><center>Barang</center></h2>
                     <div class="price">{{ $barang }} <small>Barang</small></div><br>
+                    @if (Auth::user()->role== 'super')
                     <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
+                    @endif
                 </div>
             </div>
             <div class="face front">
@@ -76,7 +78,9 @@
                 <div class="content">
                     <h2><center>Receiving</center></h2>
                     <div class="price">{{ $receive }} <small>Receiving</small></div><br>
+                    @if (Auth::user()->role== 'super')
                     <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
+                    @endif
                 </div>
             </div>
             <div class="face front">
@@ -88,7 +92,9 @@
             <div class="face hidden">
                 <div class="content">
                     <h2><center>Sending</center></h2><br>
+                    @if (Auth::user()->role== 'super')
                     <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
+                    @endif
                 </div>
             </div>
             <div class="face front">
