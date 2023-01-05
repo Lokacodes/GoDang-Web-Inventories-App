@@ -18,23 +18,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //login
-Route::get('/login',[\App\Http\Controllers\LoginController::class, 'index']);
+Route::get('/login',[\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'auth']);
 Route::post('/registrasi', [\App\Http\Controllers\LoginController::class, 'registrasi']);
-//Home
-
 
 //Barang
-
 Route::post('/barang/update/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'update']);
 Route::post('/barang/store', [\App\Http\Controllers\BarangController::class, 'store']);
 
 //Kategori
-
 Route::post('/kategori/store', [\App\Http\Controllers\KategoriController::class, 'store']);
 
 //Brand
-
 Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store']);
 
 //Receiving
