@@ -32,7 +32,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3">Kategori Barang</label>:
                                     <div class="col-sm-8">
-                                        {{ $det->kode_kategori }}
+                                        {{ $det->nama_kategori }}
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3">Brand</label>:
                                     <div class="col-sm-8">
-                                        {{ $det->kode_brand }}
+                                        {{ $det->nama_brand }}
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Gambar</p>
-                    <img src="{{ asset('storage/images/'.$det->foto)}}" alt="">
+                    <label class="col-sm-12">COMING SOON</label>
                 </div>
             </div>
         </div>

@@ -62,11 +62,11 @@
                             </span>
                         </div>
                     </div> --}}
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="foto">Foto</label>
                         <input type="file" class="form-control form-control-user" id="foto" name="foto"
                              accept="image/*" placeholder="Foto IoT">
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
                 </form>

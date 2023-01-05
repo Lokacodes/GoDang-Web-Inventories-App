@@ -37,8 +37,8 @@ Route::post('/kategori/store', [\App\Http\Controllers\KategoriController::class,
 
 Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store']);
 
-
-
+//Receiving
+Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);

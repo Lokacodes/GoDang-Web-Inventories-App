@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="harga_jual">Harga Jual</label>
-                                    <input type="text" class="form-control" id="harga_jual" name="harga_jual"
+                                    <input type="text" onkeypress="return hanyaAngka(event)" class="form-control" id="harga_jual" name="harga_jual"
                                         placeholder="harga_jual">
                                 </div>
                             </div>
@@ -187,6 +187,15 @@
                     }
                 });
             });
+        </script>
+        
+        <script>
+            function hanyaAngka(event) {
+                var angka = (event.which) ? event.which : event.keyCode
+                if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+                    return false;
+                return true;
+            }
         </script>
     @endpush
 @endsection
