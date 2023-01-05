@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/s/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/dashboard.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/AK.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
 </head>
 
 <body>
@@ -24,9 +24,9 @@
         <!-- navbar -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset('assets/images/AK.png') }}"
+                <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset('assets/images/logo.png') }}"
                         class="mr-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset('assets/images/AK.png') }}"
+                <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset('assets/images/logo.png') }}"
                         alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -90,7 +90,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/receive">
+                        <a class="nav-link" href="/receiving">
                             <i class="ti-shopping-cart menu-icon"></i>
                             <span class="menu-title">Receiving</span>
                         </a>

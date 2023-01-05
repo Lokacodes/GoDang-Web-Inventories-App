@@ -36,7 +36,7 @@ Route::get('/brand', [\App\Http\Controllers\BrandController::class, 'index']);
 Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store']);
 
 //Receiving
-Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
+Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
 
 //Send
 Route::get('/sending', [\App\Http\Controllers\SendingController::class, 'index']);

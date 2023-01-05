@@ -20,17 +20,20 @@ class BarangController extends Controller
         $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
             ->get();
+
+        //View File
         return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand]);
     }
 
     //Create Barang
     public function store(Request $request)
     {
-        $message = ['kode_barang.required' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
+        //
+        $message = ['kode_barang.unique' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
         if ($request->ajax()) {
-            $validator = Validator($request->all(), ['kode_barang' => 'required', 'nama_barang' => 'required'], $message);
+            $validator = Validator($request->all(), ['kode_barang' => 'unique:barangs', 'nama_barang' => 'required'], $message);
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+                return response()->json(['success' => false, 'errors' => $validator->errors($message)], 422);
             } else {
                 $barang = new Barang;
                 $barang->kode_barang = $request->kode_barang;
@@ -51,10 +54,11 @@ class BarangController extends Controller
         $barang = DB::table('barangs')->get();
 
         $kat = DB::table('kategoris')->get();
-        $det = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
+
+        $det = Barang::whereKodeBarang($request->kode_barang)
+            ->join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-            ->get();
-        $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
+            ->first();
         return view('Barang.detail', ['barang' => $barang, 'det' => $det, 'kat' => $kat]);
     }
 
@@ -100,9 +104,9 @@ class BarangController extends Controller
         // }
 
         //File Store
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('images');
-        }
+        // if ($request->hasFile('foto')) {
+        //     $path = $request->file('foto')->store('images');
+        // }
 
         $data = Barang::updateOrCreate(['kode_barang' => $request->kode_barang]);
         $data -> nama_barang = $nama_barang;
@@ -111,9 +115,8 @@ class BarangController extends Controller
         $data -> harga_beli = $harga_beli;
         $data -> harga_jual = $harga_jual;
         $data -> stok_barang = $stok_barang;
-        $data -> foto = $path;
+        // $data -> foto = $path;
         $data -> save();
-
 
         return redirect('/barang')->with('success', 'Data Telah Terupdate');
     }
