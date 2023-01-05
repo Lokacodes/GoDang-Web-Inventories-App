@@ -1,2 +1,2 @@
-# jelajahGudangMagang
-web app untuk magang loka dan dimas
+# Jelajah Gudang Magang
+Web App Gudang Untuk Magang Loka dan Dimas
