@@ -1,13 +1,12 @@
 @extends('index')
 @section('content')
-
-<div class="col-md-12 grid-margin">
-    <div class="row">
-        <div class="col-12 col-xl-8 mb-4 mb-xl-0"> 
-            <h3 class="font-weight-bold">Welcome, {{ auth()->user()->nama }}</h3>
+    <div class="col-md-12 grid-margin">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">Welcome, {{ auth()->user()->nama }}</h3>
+            </div>
         </div>
     </div>
-</div>
     <div class="col-md-12 grid-margin transparent">
         <div class="row">
             <div class="col-md-6 mb-4 stretch-card transparent">
@@ -56,48 +55,55 @@
         </div>
     </div>
 
-    @if (Auth::user()->role== 'super')
-    <div class="container">
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Barang</center></h2>
-                    <div class="price">{{ $barang }} <small>Barang</small></div><br>
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
+    @if (Auth::user()->role == 'super')
+        <div class="container">
+            <div class="card">
+                <div class="face hidden">
+                    <div class="content">
+                        <h2>
+                            <center>Barang</center>
+                        </h2>
+                        <div class="price">{{ $barang }} <small>Barang</small></div><br>
+                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
+                    </div>
+                </div>
+                <div class="face front">
+                    <i class="ti-bag"></i>
+                    <h2>Barang</h2>
                 </div>
             </div>
-            <div class="face front">
-                <i class="ti-bag"></i>
-                <h2>Barang</h2>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Receiving</center></h2>
-                    <div class="price">{{ $receive }} <small>Receiving</small></div><br>
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
+            <div class="card">
+                <div class="face hidden">
+                    <div class="content">
+                        <h2>
+                            <center>Receiving</center>
+                        </h2>
+                        <div class="price">{{ $receive }} <small>Receiving</small></div><br>
+                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
+                    </div>
+                </div>
+                <div class="face front">
+                    <i class="ti-shopping-cart"></i>
+                    <h2>Receiving</h2>
                 </div>
             </div>
-            <div class="face front">
-                <i class="ti-shopping-cart"></i>
-                <h2>Receiving</h2>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Sending</center></h2><br>
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
+            <div class="card">
+                <div class="face hidden">
+                    <div class="content">
+                        <h2>
+                            <center>Sending</center>
+                        </h2><br>
+                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
+                    </div>
+                </div>
+                <div class="face front">
+                    <i class="ti-truck"></i>
+                    <h2>Sending</h2>
                 </div>
             </div>
-            <div class="face front">
-                <i class="ti-truck"></i>
-                <h2>Sending</h2>
-            </div>
         </div>
-    </div>
     @endif
+
     <!--JS Jam & Tanggal-->
     <script type="text/javascript">
         window.setTimeout("jam_aktif()", 1000);

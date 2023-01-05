@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/dashboard.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
+    <link href="{{ asset('assets/jqueryui/jquery-ui.css') }}" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -41,7 +43,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                 aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="/logout">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="ti-arrow-circle-up text-primary"></i>
                                     Log Out
                                 </a>
@@ -77,115 +79,131 @@
             <!-- sidebar -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-            @if (Auth::user()->role== 'super')
-            
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            <i class="ti-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/barang">
-                            <i class="ti-bag menu-icon"></i>
-                            <span class="menu-title">Barang</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/receiving">
-                            <i class="ti-shopping-cart menu-icon"></i>
-                            <span class="menu-title">Receiving</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sending">
-                            <i class="ti-truck menu-icon"></i>
-                            <span class="menu-title">Sending</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#master" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="ti-notepad menu-icon"></i>
-                            <span class="menu-title">Master Data</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="master">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="/kategori">Kategori</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/brand">Brand</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/ekspedisi">Ekspedisi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Report</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="report">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                
-            @elseif (Auth::user()->role == 'kasir')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            <i class="ti-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/receive">
-                            <i class="ti-shopping-cart menu-icon"></i>
-                            <span class="menu-title">Receiving</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sending">
-                            <i class="ti-truck menu-icon"></i>
-                            <span class="menu-title">Sending</span>
-                        </a>
-                    </li>
-                
-            @elseif (Auth::user()->role == 'user')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            <i class="ti-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="icon-paper menu-icon"></i>
-                            <span class="menu-title">Report</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="report">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                
-            @endif
-        </ul>
-    </nav>
-            <!-- partial -->
+                    @if (Auth::user()->role == 'super')
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <i class="ti-home menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/barang">
+                                <i class="ti-bag menu-icon"></i>
+                                <span class="menu-title">Barang</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/receiving">
+                                <i class="ti-shopping-cart menu-icon"></i>
+                                <span class="menu-title">Receiving</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sending">
+                                <i class="ti-truck menu-icon"></i>
+                                <span class="menu-title">Sending</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#master" aria-expanded="false"
+                                aria-controls="form-elements">
+                                <i class="ti-notepad menu-icon"></i>
+                                <span class="menu-title">Master Data</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="master">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"><a class="nav-link" href="/kategori">Kategori</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/brand">Brand</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/ekspedisi">Ekspedisi</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
+                                aria-controls="form-elements">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Report</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="report">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @elseif (Auth::user()->role == 'kasir')
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <i class="ti-home menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/receive">
+                                <i class="ti-shopping-cart menu-icon"></i>
+                                <span class="menu-title">Receiving</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sending">
+                                <i class="ti-truck menu-icon"></i>
+                                <span class="menu-title">Sending</span>
+                            </a>
+                        </li>
+                    @elseif (Auth::user()->role == 'user')
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <i class="ti-home menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false"
+                                aria-controls="form-elements">
+                                <i class="icon-paper menu-icon"></i>
+                                <span class="menu-title">Report</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="report">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
+
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="content">
                         @yield('content')
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Are You Sure To Logout?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -210,6 +228,7 @@
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
+    <script src="{{ asset('assets/jqueryui/jquery-ui.js') }}"></script>
     <!-- End custom js for this page-->
     @stack('page-script')
 

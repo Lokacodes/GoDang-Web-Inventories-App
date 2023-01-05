@@ -28,13 +28,18 @@ class BarangController extends Controller
     //Create Barang
     public function store(Request $request)
     {
-        //
+        //Message Alert (X)
         $message = ['kode_barang.unique' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
+        
+        //Validasi
         if ($request->ajax()) {
             $validator = Validator($request->all(), ['kode_barang' => 'unique:barangs', 'nama_barang' => 'required'], $message);
+            //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors($message)], 422);
-            } else {
+            }
+            //Berhasil 
+            else {
                 $barang = new Barang;
                 $barang->kode_barang = $request->kode_barang;
                 $barang->nama_barang = $request->nama_barang;
@@ -43,6 +48,7 @@ class BarangController extends Controller
                 $barang->harga_jual = $request->harga_jual;
                 $barang->save();
 
+                //View Alert
                 return response()->json(['success' => true, 'message' => 'Barang Baru Ditambahkan'], 200);
             }
         }
@@ -51,39 +57,49 @@ class BarangController extends Controller
     //Detail Barang
     public function show(Request $request)
     {
+        //Select Table
         $barang = DB::table('barangs')->get();
-
         $kat = DB::table('kategoris')->get();
 
+        //Show Detail Barang & Join Table
         $det = Barang::whereKodeBarang($request->kode_barang)
             ->join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
             ->first();
+
+        //View Views
         return view('Barang.detail', ['barang' => $barang, 'det' => $det, 'kat' => $kat]);
     }
 
     //Edit Form Barang
     public function form(Request $request)
     {
+        //Select Table
         $barang = DB::table('barangs')->get();
         $kat = DB::table('kategoris')->get();
         $brand = DB::table('brands')->get();
-        $det = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
-            ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-            ->get();
-        $det = Barang::whereKodeBarang($request->kode_barang)->firstOrFail();
+
+        //Show Detail Barang & Join Table
+        $det = Barang::whereKodeBarang($request->kode_barang)
+            -> join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
+            -> join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            -> first();
+
+        //Return View
         return view('Barang.edit', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand' => $brand]);
     }
 
     //Update Process
     public function update(Request $request)
     {
+        //Variable
         $nama_barang = $request->nama_barang;
         $kode_kategori = $request->kode_kategori;
         $kode_brand = $request->kode_brand;
         $harga_beli = $request->harga_beli;
         $harga_jual = $request->harga_jual;
         $stok_barang = $request->stok_barang;
+
         //Validate Data
         $validate = $request->validate([
             'kode_barang' => 'required',
@@ -96,18 +112,12 @@ class BarangController extends Controller
             'foto' => 'image|max:2048',
         ]);
 
-        // //File Store
-        // if ($request->hasFile('foto')) {
-        //     $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-        //     $data->foto = $request->file('foto')->getClientOriginalName();
-        //     $data->update($request->all());
-        // }
-
         //File Store
         // if ($request->hasFile('foto')) {
         //     $path = $request->file('foto')->store('images');
         // }
 
+        //Update Process
         $data = Barang::updateOrCreate(['kode_barang' => $request->kode_barang]);
         $data -> nama_barang = $nama_barang;
         $data -> kode_kategori = $kode_kategori;
@@ -118,6 +128,7 @@ class BarangController extends Controller
         // $data -> foto = $path;
         $data -> save();
 
+        //Return View
         return redirect('/barang')->with('success', 'Data Telah Terupdate');
     }
 }

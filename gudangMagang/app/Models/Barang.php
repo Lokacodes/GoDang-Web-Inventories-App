@@ -9,6 +9,7 @@ class Barang extends Model
 {
     use HasFactory;
 
+    //Yang Diisi
     protected $fillable = [
         'kode_barang',
         'kode_brand',

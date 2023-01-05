@@ -11,8 +11,11 @@ class HomeController extends Controller
     // Dashboard
     public function index()
     {
+        //Count Table
         $barang = Barang::count();
         $receive = Receiving::count();
+
+        //Return Views
         return view('Home.dashboard', ['barang'=>$barang, 'receive'=>$receive]);
     }
 

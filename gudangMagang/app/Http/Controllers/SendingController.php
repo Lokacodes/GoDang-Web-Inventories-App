@@ -10,8 +10,10 @@ class SendingController extends Controller
     //View Send
     public function index()
     {
+        //Select Table
         $send = DB::table('barangs')->get();
 
+        //Return Views
         return view('Send.send', ['send' => $send]);
     }
 }

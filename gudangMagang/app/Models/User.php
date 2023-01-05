@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+     //Yang Diisi
     protected $fillable = [
         'nama',
         'username',

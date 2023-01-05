@@ -17,17 +17,23 @@ class KategoriController extends Controller
     //Add Kategori
     public function store(Request $request)
     {
+        //Message Alert (X)
         $message = ['kode_kategori.unique' => 'Kode Kategori Sudah Ada', 'nama_kategori.required' => 'Nama Kategori Tidak Boleh Kosong'];
+        //Validasi
         if ($request->ajax()) {
             $validator = Validator($request->all(), ['kode_kategori' => 'unique:kategoris', 'nama_kategori' => 'required'], $message);
+            //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-            } else {
+            } 
+            //Berhasil
+            else {
                 $kategori = new Kategori;
                 $kategori->kode_kategori = $request->kode_kategori;
                 $kategori->nama_kategori = $request->nama_kategori;
                 $kategori->save();
 
+                //View Alert
                 return response()->json(['success' => true, 'message' => 'Kategori Baru Telah Ditambahkan'], 200);
             }
         }

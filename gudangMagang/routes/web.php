@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Route::get('/test', function () { 
 //     return view('Receive.receive');
 // });
@@ -34,19 +23,23 @@ Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'stor
 
 //Receiving
 Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
+Route::post('/receiving/search', [\App\Http\Controllers\ReceivingController::class, 'searchbarang']);
 
+//Route Group
 Route::group(['middleware' => ['auth']], function(){
+    
+    //Dashboard
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
-    //view barang
+    //View Barang
     Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
     Route::get('/barang/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'show']);
     Route::get('/barang/edit/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'form']);
 
-    //view kategori
+    //View Kategori
     Route::get('/kategori', [\App\Http\Controllers\KategoriController::class, 'index']);
 
-    //view brand
+    //View Brand
     Route::get('/brand', [\App\Http\Controllers\BrandController::class, 'index']);
 
     //Receiving
@@ -54,6 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     //Send
     Route::get('/sending', [\App\Http\Controllers\SendingController::class, 'index']);
-
+    
+    //logout
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
 });

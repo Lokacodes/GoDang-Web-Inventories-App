@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Receiving extends Model
 {
     use HasFactory;
+
+    //Yang Diisi
     protected $fillable = [
         'kode_receive',
         'tanggal_receive',
