@@ -42,4 +42,18 @@ class SupplierController extends Controller
             }
         }
     }
+
+    //Search Supplier
+    public function search(Request $request)
+    {
+        //Variable
+        $cari = $request->cari;
+
+        //Request To Table
+        $supplier = DB::table('suppliers')
+                ->where('nama_supplier', 'like', "%" . $cari . "%");
+
+        //Retrun Views
+        return view('Suply.supplier', ['supplier' => $supplier]);
+    }
 }

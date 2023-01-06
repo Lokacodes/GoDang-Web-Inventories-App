@@ -1,7 +1,8 @@
 @extends('index')
 @section('content')
     {{-- Search Box --}}
-    <br><div class="row">
+    {{-- <br>
+    <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="search-wrapper">
                 <div class="input-holder">
@@ -11,7 +12,12 @@
                 <span class="close" onclick="searchToggle(this, event);"></span>
             </div>
         </div>
-    </div><br>
+    </div><br> --}}
+    <p>Cari Data Pegawai :</p>
+	<form action="/supplier/search" method="GET">
+		<input type="text" name="cari" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+		<input type="submit" value="CARI">
+	</form>
 
     {{-- Table Supplier --}}
     <div class="row">
@@ -32,14 +38,31 @@
                                     <th>
                                         <center>Nama Supplier</center>
                                     </th>
-                                    <th>
-                                        <center>Alamat</center>
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @forelse ($supplier as $s)
+                                    <tr>
+                                        <td>
+                                            <center>{{ $no++ }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $s->kode_supplier }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $s->nama_supplier }}</center>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3">
+                                            <center>Belum Ada Data</center>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

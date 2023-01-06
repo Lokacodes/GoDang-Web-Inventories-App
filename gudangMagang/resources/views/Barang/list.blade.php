@@ -1,6 +1,22 @@
 @extends('index')
-
 @section('content')
+    {{-- Search Box --}}
+    {{-- <br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <form action="/barang/search" method="get">
+                <div class="search-wrapper">
+                    <div class="input-holder">
+                        <input type="text" name="cari" class="search-input" placeholder="Type to search" />
+                        <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                    </div>
+                    <span class="close" onclick="searchToggle(this, event);"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br> --}}
+
     <!--List Barang-->
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
