@@ -10,7 +10,7 @@
                 </div>
                 <!--Button Modal-->
                 <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
+                    <button type="button" class="btn btn-primary" id="modal">Tambah Kategori</button>
                 </div>
             </div>
         </div>
