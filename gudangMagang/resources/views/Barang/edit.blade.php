@@ -51,6 +51,15 @@
                         <input type="text" class="form-control form-control-user" id="stok_barang" name="stok_barang"
                             value="{{ $det->stok_barang }}" placeholder="Stok Barang">
                     </div>
+                    <div class="form-group">
+                        <label>Supplier</label>
+                        <select class="form-control" name="kode_supplier" id="kode_supplier" value="{{ $det->kode_supplier }}">
+                            <option selected="{{ $det->kode_supplier }}">{{ $det->kode_supplier }}</option>
+                            @foreach ($supplier as $s)
+                                <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     {{-- <div class="form-group">
                         <label for="foto">Foto Barang</label>
                         <input type="file" class="file-upload-default" id="foto" name="foto"

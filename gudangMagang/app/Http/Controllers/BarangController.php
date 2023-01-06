@@ -78,15 +78,17 @@ class BarangController extends Controller
         $barang = DB::table('barangs')->get();
         $kat = DB::table('kategoris')->get();
         $brand = DB::table('brands')->get();
+        $supplier = DB::table('suppliers')->get();
 
         //Show Detail Barang & Join Table
         $det = Barang::whereKodeBarang($request->kode_barang)
             -> join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             -> join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            -> join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
             -> first();
 
         //Return View
-        return view('Barang.edit', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand' => $brand]);
+        return view('Barang.edit', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand' => $brand, 'supplier' => $supplier]);
     }
 
     //Update Process
@@ -99,6 +101,7 @@ class BarangController extends Controller
         $harga_beli = $request->harga_beli;
         $harga_jual = $request->harga_jual;
         $stok_barang = $request->stok_barang;
+        $kode_supplier = $request->kode_supplier;
 
         //Validate Data
         $validate = $request->validate([
@@ -109,7 +112,8 @@ class BarangController extends Controller
             'harga_beli' => 'required',
             'harga_jual' => 'required',
             'stok_barang' => 'required',
-            'foto' => 'image|max:2048',
+            'kode_supplier' => 'required'
+            //'foto' => 'image|max:2048',
         ]);
 
         //File Store
@@ -125,6 +129,7 @@ class BarangController extends Controller
         $data -> harga_beli = $harga_beli;
         $data -> harga_jual = $harga_jual;
         $data -> stok_barang = $stok_barang;
+        $data -> kode_supplier = $kode_supplier;
         // $data -> foto = $path;
         $data -> save();
 

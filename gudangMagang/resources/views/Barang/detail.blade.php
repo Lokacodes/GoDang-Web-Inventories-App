@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 stretch-card grid-margin">
+        <div class="col-md-12 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
                     <p class="card-title"></p>
@@ -77,19 +77,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Supplier</label>:
+                                    <div class="col-sm-8">
+                                        {{ $det->kode_supplier }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 stretch-card grid-margin">
+        {{-- <div class="col-md-4 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Gambar</p>
                     <label class="col-sm-12">COMING SOON</label>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">

@@ -16,4 +16,6 @@ class SendingController extends Controller
         //Return Views
         return view('Send.send', ['send' => $send]);
     }
+
+    
 }
