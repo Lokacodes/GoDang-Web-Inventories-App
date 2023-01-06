@@ -5,7 +5,15 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Brand List</h4>
+                <div class="row">
+                    <div class="col-md-8 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold">Brand List</h3>
+                    </div>
+                    <!--Button Modal-->
+                    <div class="col-md-4 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary" id="modal">Tambah Brand</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -43,9 +51,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-primary" id="modal">Tambah Brand</button>
     </div>
 
     <div class="modal fade" id="addTodoModal" aria-hidden="true">
