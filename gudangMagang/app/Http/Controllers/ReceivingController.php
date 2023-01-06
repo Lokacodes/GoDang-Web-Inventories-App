@@ -11,32 +11,30 @@ class ReceivingController extends Controller
     public function index()
     {
         //Select Table
-        $receive = DB::table('barangs')->get();
+        $receive = DB::table('suppliers')->get();
 
         //Return Views
         return view('Receive.receive', ['receive'=>$receive]);
     }
 
     //Search
-    public function searchbarang(Request $request)
+    public function searchsupply(Request $request)
     {
         $search=$request->search;
         if($search==''){
-            $cari=DB::table('barangs')->orderBy('nama_barang', 'asc')
-                ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-                ->select('nama_barang', 'nama_brand', 'stok_barang')
+            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+                ->select('nama_supplier', 'kode_supplier', 'alamat')
                 ->get();
         }else{
-            $cari=DB::table('barangs')->orderBy('nama_barang', 'asc')
-                ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-                ->select('nama_barang', 'nama_brand', 'stok_barang')
-                ->where('nama_barang','like','%'.$search.'%')
+            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+                ->select('nama_supplier', 'kode_supplier', 'alamat')
+                ->where('nama_supplier','like','%'.$search.'%')
                 ->get();
         }
 
         $response = array();
-        foreach($cari as $barang){
-            $response[] = array("value"=>$barang->nama_barang, "brand"=>$barang->nama_brand, "stok"=>$barang->stok_barang);
+        foreach($cari as $suppli){
+            $response[] = array("value"=>$suppli->nama_supplier, "kode"=>$suppli->kode_supplier, "alamat"=>$suppli->alamat);
         }
         
          return response()->json($response);

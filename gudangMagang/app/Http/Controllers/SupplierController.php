@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\supplier;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +31,7 @@ class SupplierController extends Controller
             } 
             //Berhasil
             else {
-                $supplier = new supplier();
+                $supplier = new Supplier();
                 $supplier->kode_supplier = $request->kode_supplier;
                 $supplier->nama_supplier = $request->nama_supplier;
                 $supplier->alamat = $request->alamat;

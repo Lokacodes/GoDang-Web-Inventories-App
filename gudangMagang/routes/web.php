@@ -24,7 +24,7 @@ Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'stor
 
 //Receiving
 Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
-Route::post('/receiving/search', [\App\Http\Controllers\ReceivingController::class, 'searchbarang']);
+Route::post('/receiving/supply', [\App\Http\Controllers\ReceivingController::class, 'searchsupply']);
 
 //Supplier store data
 Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);

@@ -28,7 +28,7 @@
                         </div>
                         <!--Button Modal-->
                         <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-primary" id="modal">Tambah Barang</button>
+                            <button type="button" class="btn btn-primary" id="modal">Add Barang</button>
                         </div>
                     </div>
                     <div class="table-responsive">
