@@ -124,6 +124,16 @@
                                     <input type="text" onkeypress="return hanyaAngka(event)" class="form-control"
                                         id="harga_jual" name="harga_jual" placeholder="harga_jual">
                                 </div>
+                                <div class="form-group">
+                                    <label for="kode_brand">Supplier</label>
+                                    <select class="form-control" name="kode_supplier" id="kode_supplier">
+                                        <option selected value="-">-</option>
+                                        @foreach ($supplier as $s)
+                                            <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
                             </div>
                             <span id="taskError" class="alert-message"></span>
                         </div>
@@ -151,11 +161,12 @@
                     let kode_brand = $('#kode_brand').val();
                     let nama_barang = $('#nama_barang').val();
                     let harga_jual = $('#harga_jual').val();
+                    let kode_supplier = $('#kode_supplier').val();
                     var ver = $('#ver').val();
 
                     //Store Kategori
                     if (kode_barang != "" && kode_kategori != "" && kode_brand != "" && nama_barang != "" &&
-                        harga_jual != "" && ver == "0") {
+                        harga_jual != "" && kode_supplier != "" && ver == "0") {
                         $.ajax({
                             url: "/barang/store",
                             type: "POST",
@@ -166,6 +177,7 @@
                                 kode_brand: kode_brand,
                                 nama_barang: nama_barang,
                                 harga_jual: harga_jual,
+                                kode_supplier: kode_supplier,
                             },
                             success: function(data) {
                                 if (data)
@@ -176,6 +188,7 @@
                                 $('#kode_brand').val("");
                                 $('#nama_barang').val("");
                                 $('#harga_jual').val("");
+                                $('#kode_supplier').val("");
                             },
                             error: function(response) {
                                 let data = response.responseJSON.error;

@@ -39,6 +39,7 @@
                             </thead>
                             <tbody>
 
+                                
                             </tbody>
                         </table>
                     </div>
@@ -49,4 +50,106 @@
             <button type="button" class="btn btn-primary" id="modal">Tambah Supplier</button>
         </div>
     </div>
+
+    <div class="modal fade" id="addTodoModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Menambahkan Supplier</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="ver" id="ver" value="0">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                                
+                                <div class="form-group">
+                                    <label for="kode_supplier">Kode Supplier</label>
+                                    <input type="text" class="form-control" id="kode_supplier" name="kode_supplier"
+                                        placeholder="Kode Supplier">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_supplier">Nama supplier</label>
+                                    <input type="text" class="form-control" id="nama_supplier" name="nama_supplier"
+                                        placeholder="Nama Supplier">
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Alamat Supplier</label>
+                                    <input type="text" class="form-control"
+                                        id="alamat" name="alamat" placeholder="Alamat Supplier">
+                                </div>
+                                
+                                
+                            </div>
+                            <span id="taskError" class="alert-message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-user btn-block" id="tambah"
+                        type="submit">Save</button>
+                    <button type="button" class="btn btn-google btn-user btn-block" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--JS Modal-->
+    @push('page-script')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#modal').click(function() {
+                    $('#addTodoModal').modal('show');
+                    $('#ver').val("0");
+                });
+                $('#tambah').click(function() {
+                    let kode_supplier = $('#kode_supplier').val();
+                    let nama_supplier = $('#nama_supplier').val();
+                    let alamat = $('#alamat').val();
+                    var ver = $('#ver').val();
+
+                    //Store Kategori
+                    if (kode_supplier != "" && nama_supplier != "" && alamat != "" && ver == "0") {
+                        $.ajax({
+                            url: "/supplier/store",
+                            type: "POST",
+                            data: {
+                                _token: $("#csrf").val(),
+                                kode_supplier: kode_supplier,
+                                nama_supplier: nama_supplier,
+                                alamat: alamat,
+                            },
+                            success: function(data) {
+                                if (data)
+                                    alert(data.message);
+                                window.location = "/supplier";
+                                $('#kode_supplier').val("");
+                                $('#nama_supplier').val("");
+                                $('#alamat').val("");
+                                
+                            },
+                            error: function(response) {
+                                let data = response.responseJSON.error;
+                                $.each(data, function(key, value) {
+                                    alert(data.message);
+                                });
+                                alert(data.message);
+                            }
+                        });
+                    } else {
+                        alert('Lengkapi isian data !');
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            function hanyaAngka(event) {
+                var angka = (event.which) ? event.which : event.keyCode
+                if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+                    return false;
+                return true;
+            }
+        </script>
+    @endpush
 @endsection

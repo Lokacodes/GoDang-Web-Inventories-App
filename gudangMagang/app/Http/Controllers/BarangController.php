@@ -46,6 +46,7 @@ class BarangController extends Controller
                 $barang->kode_kategori = $request->kode_kategori;
                 $barang->kode_brand = $request->kode_brand;
                 $barang->harga_jual = $request->harga_jual;
+                $barang->kode_supplier = $request->kode_supplier;
                 $barang->save();
 
                 //View Alert
@@ -65,6 +66,7 @@ class BarangController extends Controller
         $det = Barang::whereKodeBarang($request->kode_barang)
             ->join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            ->join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
             ->first();
 
         //View Views
@@ -84,7 +86,7 @@ class BarangController extends Controller
         $det = Barang::whereKodeBarang($request->kode_barang)
             -> join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             -> join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-            -> join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
+            //-> join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
             -> first();
 
         //Return View

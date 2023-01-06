@@ -26,6 +26,9 @@ Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'stor
 Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
 Route::post('/receiving/search', [\App\Http\Controllers\ReceivingController::class, 'searchbarang']);
 
+//Supplier
+Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);
+
 //Route Group
 Route::group(['middleware' => ['auth']], function(){
     
