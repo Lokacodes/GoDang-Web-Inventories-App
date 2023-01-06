@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Barang</label>
-                            <input type="text" class="form-control form-control-user" id="inputbarang" name="inputbarang"
+                            <input type="text" class="form-control form-control-user" id="barang" name="barang"
                                 placeholder="Masukkan Nama Barang" aria-label="Search" aria-describedby="basic-addon2">
                             <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                         </div>
@@ -55,8 +55,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 grid-margin" id="">
+        <div class="row" id="barang">
+            <div class="col-12 grid-margin" >
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Masukkan Data Barang</h4>
@@ -189,11 +189,14 @@
                             }
                         });
                     },
-                    select: function(event, ui) { // Set selection
+                    select: function(event, ui) {
                         $('#barang').val(ui.item.value);
-                        $('#').val(ui.item.kode);
-                        $('#alamat').val(ui.item.alamat);
-                        detail.style.visibility = 'visible';
+                        $('#kode_barang').val(ui.item.kode);
+                        $('#harga_beli').val(ui.item.beli);
+                        $('#harga_jual').val(ui.item.jual);
+                        $('#stok_barang').val(ui.item.stok);
+                        $('#kode_supplier').val(ui.item.supply);
+                        barang.style.visibility = 'visible';
 
                         return false;
                     }
