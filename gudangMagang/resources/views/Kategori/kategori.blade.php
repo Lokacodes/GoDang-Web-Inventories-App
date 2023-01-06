@@ -2,42 +2,44 @@
 
 @section('content')
     <!--Tittle-->
-    <div class="col-md-12 grid-margin">
-        <div class="row">
-            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                <h3 class="font-weight-bold">Kategori List</h3>
+    <div class="row">
+        <div class="col-lg-12 grid-margin">
+            <div class="row">
+                <div class="col-md-8 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">Kategori List</h3>
+                </div>
+                <!--Button Modal-->
+                <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!--List Kategori-->
-    <div class="col-lg-12">
-        <div class="row">
-            @forelse ($kategori as $k)
-                <div class="col-lg-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <center>
-                                <h3 style="text-transform: capitalize; bold">{{ $k->nama_kategori }}</h3>
-                            </center>
+        <!--List Kategori-->
+        <div class="col-lg-12">
+            <div class="row">
+                @forelse ($kategori as $k)
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <center>
+                                    <h3 style="text-transform: capitalize; bold">{{ $k->nama_kategori }}</h3>
+                                </center>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <center>
-                                <h4 class="card-title">Kategori Kosong</h4>
-                            </center>
+                @empty
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <center>
+                                    <h4 class="card-title">Kategori Kosong</h4>
+                                </center>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforelse
+                @endforelse
+            </div>
         </div>
-    </div>
-    <!--Button Modal-->
-    <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
     </div>
 
     <!--Modal Kategori-->
