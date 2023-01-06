@@ -25,12 +25,26 @@ class BarangController extends Controller
         return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand]);
     }
 
+    // //Search
+    // public function search(Request $request)
+    // {
+    //     //Variable
+    //     $cari = $request->cari;
+
+    //     //Request To Table
+    //     $barang = DB::table('barangs')
+    //         ->where('kode_barang', 'like', "%" . $cari . "%");
+
+    //     //View File
+    //     return view('Barang.list', ['barang' => $barang]);
+    // }
+
     //Create Barang
     public function store(Request $request)
     {
         //Message Alert (X)
         $message = ['kode_barang.unique' => 'Kode Telah Tersedia', 'nama_barang.required' => 'Nama Barang Tidak Boleh Kosong'];
-        
+
         //Validasi
         if ($request->ajax()) {
             $validator = Validator($request->all(), ['kode_barang' => 'unique:barangs', 'nama_barang' => 'required'], $message);
@@ -82,10 +96,10 @@ class BarangController extends Controller
 
         //Show Detail Barang & Join Table
         $det = Barang::whereKodeBarang($request->kode_barang)
-            -> join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
-            -> join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-            -> join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
-            -> first();
+            ->join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
+            ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
+            ->join('suppliers', 'suppliers.kode_supplier', '=', 'barangs.kode_supplier')
+            ->first();
 
         //Return View
         return view('Barang.edit', ['barang' => $barang, 'det' => $det, 'kat' => $kat, 'brand' => $brand, 'supplier' => $supplier]);
@@ -123,15 +137,15 @@ class BarangController extends Controller
 
         //Update Process
         $data = Barang::updateOrCreate(['kode_barang' => $request->kode_barang]);
-        $data -> nama_barang = $nama_barang;
-        $data -> kode_kategori = $kode_kategori;
-        $data -> kode_brand = $kode_brand;
-        $data -> harga_beli = $harga_beli;
-        $data -> harga_jual = $harga_jual;
-        $data -> stok_barang = $stok_barang;
-        $data -> kode_supplier = $kode_supplier;
+        $data->nama_barang = $nama_barang;
+        $data->kode_kategori = $kode_kategori;
+        $data->kode_brand = $kode_brand;
+        $data->harga_beli = $harga_beli;
+        $data->harga_jual = $harga_jual;
+        $data->stok_barang = $stok_barang;
+        $data->kode_supplier = $kode_supplier;
         // $data -> foto = $path;
-        $data -> save();
+        $data->save();
 
         //Return View
         return redirect('/barang')->with('success', 'Data Telah Terupdate');

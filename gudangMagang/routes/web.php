@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     //View Barang
     Route::get('/barang', [\App\Http\Controllers\BarangController::class, 'index']);
+    // Route::get('/barang/search', [\App\Http\Controllers\BarangController::class, 'search']);
     Route::get('/barang/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'show']);
     Route::get('/barang/edit/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'form']);
 
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth']], function(){
     
     //View Supplier
     Route::get('/supplier', [\App\Http\Controllers\SupplierController::class, 'index']);
+    Route::get('/supplier/search', [\App\Http\Controllers\SupplierController::class, 'search']);
 
     //logout
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
