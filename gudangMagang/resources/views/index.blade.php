@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/s/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/search.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
     <link href="{{ asset('assets/jqueryui/jquery-ui.css') }}" rel="stylesheet" type="text/css">
 
@@ -105,6 +106,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/supplier">
+                                <i class="icon-head menu-icon"></i>
+                                <span class="menu-title">Supplier</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#master" aria-expanded="false"
                                 aria-controls="form-elements">
                                 <i class="ti-notepad menu-icon"></i>
@@ -151,6 +158,12 @@
                             <a class="nav-link" href="/sending">
                                 <i class="ti-truck menu-icon"></i>
                                 <span class="menu-title">Sending</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/supplier">
+                                <i class="icon-head menu-icon"></i>
+                                <span class="menu-title">Supplier</span>
                             </a>
                         </li>
                     @elseif (Auth::user()->role == 'user')
@@ -228,6 +241,7 @@
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
+    <script src="{{ asset('assets/js/search.js') }}"></script>
     <script src="{{ asset('assets/jqueryui/jquery-ui.js') }}"></script>
     <!-- End custom js for this page-->
     @stack('page-script')
