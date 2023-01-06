@@ -43,12 +43,15 @@ Route::group(['middleware' => ['auth']], function(){
     //View Brand
     Route::get('/brand', [\App\Http\Controllers\BrandController::class, 'index']);
 
-    //Receiving
+    //View Receiving
     Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
 
-    //Send
+    //View Send
     Route::get('/sending', [\App\Http\Controllers\SendingController::class, 'index']);
     
+    //View Supplier
+    Route::get('/supplier', [\App\Http\Controllers\SupplierController::class, 'index']);
+
     //logout
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
 });

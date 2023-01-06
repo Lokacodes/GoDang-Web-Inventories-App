@@ -2,79 +2,82 @@
 
 @section('content')
     <!--List Barang-->
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Barang List</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>No</center>
-                                </th>
-                                <th>
-                                    <center>Kode Barang</center>
-                                </th>
-                                <th>
-                                    <center>Nama Barang</center>
-                                </th>
-                                <th>
-                                    <center>Brand</center>
-                                </th>
-                                <th>
-                                    <center>Harga Jual</center>
-                                </th>
-                                <th>
-                                    <center>Deskripsi</center>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
-                            @forelse ($barang as $b)
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Barang List</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <center>{{ $no++ }}</center>
-                                    </td>
-                                    <td>
-                                        <center>{{ $b->kode_barang }}</center>
-                                    </td>
-                                    <td>
-                                        <center>{{ $b->nama_barang }}</center>
-                                    </td>
-                                    <td>
-                                        <center>{{ $b->nama_brand }}</center>
-                                    </td>
-                                    <td>
-                                        <center>{{ $b->harga_jual }}</center>
-                                    </td>
-                                    <td> 
-                                        <center>
-                                            <a href="/barang/{{ $b->kode_barang }}">
-                                                <button type="button" class="btn btn-link btn-fw">View More</button>
-                                            </a>
-                                        </center>
-                                    </td>
+                                    <th>
+                                        <center>No</center>
+                                    </th>
+                                    <th>
+                                        <center>Kode Barang</center>
+                                    </th>
+                                    <th>
+                                        <center>Nama Barang</center>
+                                    </th>
+                                    <th>
+                                        <center>Brand</center>
+                                    </th>
+                                    <th>
+                                        <center>Harga Jual</center>
+                                    </th>
+                                    <th>
+                                        <center>Deskripsi</center>
+                                    </th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7">
-                                        <center>Belum Ada Data</center>
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @forelse ($barang as $b)
+                                    <tr>
+                                        <td>
+                                            <center>{{ $no++ }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $b->kode_barang }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $b->nama_barang }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $b->nama_brand }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $b->harga_jual }}</center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a href="/barang/{{ $b->kode_barang }}">
+                                                    <button type="button" class="btn btn-link btn-fw">View More</button>
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7">
+                                            <center>Belum Ada Data</center>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
+        </div>
     </div>
-    <div class="col-lg-12 d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-primary" id="modal">ADD NEW!</button>
-    </div>
+
     <!--Modal Barang-->
     <div class="modal fade" id="addTodoModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -118,8 +121,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="harga_jual">Harga Jual</label>
-                                    <input type="text" onkeypress="return hanyaAngka(event)" class="form-control" id="harga_jual" name="harga_jual"
-                                        placeholder="harga_jual">
+                                    <input type="text" onkeypress="return hanyaAngka(event)" class="form-control"
+                                        id="harga_jual" name="harga_jual" placeholder="harga_jual">
                                 </div>
                             </div>
                             <span id="taskError" class="alert-message"></span>
@@ -188,7 +191,7 @@
                 });
             });
         </script>
-        
+
         <script>
             function hanyaAngka(event) {
                 var angka = (event.which) ? event.which : event.keyCode
