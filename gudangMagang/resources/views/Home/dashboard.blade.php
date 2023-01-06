@@ -55,8 +55,7 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    @if (Auth::user()->role == 'super')
+    @if (Auth::user()->role == 'super' || Auth::user()->role == 'kasir')
         <div class="container">
             <div class="card">
                 <div class="face hidden">
@@ -65,7 +64,10 @@
                             <center>Barang</center>
                         </h2>
                         <div class="price">{{ $barang }} <small>Barang</small></div><br>
-                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
+                        @if (Auth::user()->role == 'super')
+                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a>
+                            </center>
+                        @endif
                     </div>
                 </div>
                 <div class="face front">
@@ -80,7 +82,10 @@
                             <center>Receiving</center>
                         </h2>
                         <div class="price">{{ $receive }} <small>Receiving</small></div><br>
-                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
+                        @if (Auth::user()->role == 'super')
+                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a>
+                            </center>
+                        @endif
                     </div>
                 </div>
                 <div class="face front">
@@ -94,53 +99,15 @@
                         <h2>
                             <center>Sending</center>
                         </h2><br>
-                        <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
+                        @if (Auth::user()->role == 'super')
+                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a>
+                            </center>
+                        @endif
                     </div>
                 </div>
                 <div class="face front">
                     <i class="ti-truck"></i>
                     <h2>Sending</h2>
-=======
-    @if (Auth::user()->role== 'super' || Auth::user()->role== 'kasir')
-    <div class="container">
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Barang</center></h2>
-                    <div class="price">{{ $barang }} <small>Barang</small></div><br>
-                    @if (Auth::user()->role== 'super')
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/barang">Lihat</a></center>
-                    @endif
-                </div>
-            </div>
-            <div class="face front">
-                <i class="ti-bag"></i>
-                <h2>Barang</h2>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Receiving</center></h2>
-                    <div class="price">{{ $receive }} <small>Receiving</small></div><br>
-                    @if (Auth::user()->role== 'super')
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a></center>
-                    @endif
-                </div>
-            </div>
-            <div class="face front">
-                <i class="ti-shopping-cart"></i>
-                <h2>Receiving</h2>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face hidden">
-                <div class="content">
-                    <h2><center>Sending</center></h2><br>
-                    @if (Auth::user()->role== 'super')
-                    <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a></center>
-                    @endif
->>>>>>> f85367dd4f068627a973bae6d701fd303ef17aa6
                 </div>
             </div>
         </div>
