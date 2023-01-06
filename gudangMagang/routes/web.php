@@ -26,8 +26,11 @@ Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'stor
 Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
 Route::post('/receiving/search', [\App\Http\Controllers\ReceivingController::class, 'searchbarang']);
 
-//Supplier
+//Supplier store data
 Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);
+
+//ekspedisi store data
+Route::post('/ekspedisi/store', [\App\Http\Controllers\EkspedisiController::class, 'store']);
 
 //Route Group
 Route::group(['middleware' => ['auth']], function(){
@@ -59,4 +62,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     //logout
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
+
+    //view ekspedisi
+    Route::get('/ekspedisi', [\App\Http\Controllers\EkspedisiController::class, 'index']);
 });
