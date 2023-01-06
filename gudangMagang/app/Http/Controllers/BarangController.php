@@ -15,6 +15,7 @@ class BarangController extends Controller
         //Show Join In Form
         $kategori = DB::table('kategoris')->get();
         $brand = DB::table('brands')->get();
+        $supplier = DB::table('suppliers')->get();
 
         //Join
         $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
@@ -22,7 +23,7 @@ class BarangController extends Controller
             ->get();
 
         //View File
-        return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand]);
+        return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand, 'supplier' => $supplier]);
     }
 
     // //Search
