@@ -11,7 +11,7 @@ class BrandController extends Controller
     public function index()
     {
         //Select Table Brand
-        $brand = Brand::all();
+        $brand = Brand::paginate(5);
 
         //Return View File
         return view('Brand.brand', ['brand' => $brand]);

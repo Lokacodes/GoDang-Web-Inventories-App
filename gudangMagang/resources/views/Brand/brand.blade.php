@@ -48,6 +48,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div><br>
+                <div class="d-flex justify-content-center">
+                    {!! $brand->links('pagination::bootstrap-4') !!}
                 </div>
             </div>
         </div>
