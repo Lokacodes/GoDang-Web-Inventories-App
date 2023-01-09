@@ -59,7 +59,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="caribarang" id="caribarang" value=""/>
+                                        <input type="text" class="form-control form-control-user" id="caribarang" name="caribarang"
+                                placeholder="Masukkan Nama Barang" aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +182,7 @@
                     select: function(event, ui) {
                         // Set selection
                         $('#caribarang').val(ui.item.value); // display the selected text
-                        $('#kode_buku').val(ui.item.label1); // save selected id to input
+                        $('#kode_barang').val(ui.item.label1); // save selected id to input
                         $('#stok_barang').val(ui.item.label2); // save selected id to input
                         return false;
                     }
