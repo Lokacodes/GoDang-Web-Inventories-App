@@ -1,23 +1,11 @@
 @extends('index')
 @section('content')
     {{-- Search Box --}}
-    {{-- <br>
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="search-wrapper">
-                <div class="input-holder">
-                    <input type="text" class="search-input" placeholder="Type to search" />
-                    <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
-                </div>
-                <span class="close" onclick="searchToggle(this, event);"></span>
-            </div>
-        </div>
-    </div><br> --}}
-    <p>Cari Data Ekspedisi :</p>
+    {{-- <p>Cari Data Ekspedisi :</p>
 	<form action="/ekspedisi/search" method="GET">
 		<input type="text" name="cari" placeholder="Cari ekspedisi" value="{{ old('cari') }}">
 		<input type="submit" value="CARI">
-	</form>
+	</form> --}}
 
     {{-- Table ekspedisi --}}
     <div class="row">
@@ -72,7 +60,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                             <center>Belum Ada Data</center>
                                         </td>
                                     </tr>

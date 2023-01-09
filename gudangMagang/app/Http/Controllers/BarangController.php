@@ -20,7 +20,7 @@ class BarangController extends Controller
         //Join
         $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
-            ->get();
+            ->paginate(5);
 
         //View File
         return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand, 'supplier' => $supplier]);

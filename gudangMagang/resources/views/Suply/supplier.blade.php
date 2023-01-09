@@ -12,12 +12,7 @@
                 <span class="close" onclick="searchToggle(this, event);"></span>
             </div>
         </div>
-    </div><br> --}}
-    <p>Cari Data Pegawai :</p>
-	<form action="/supplier/search" method="GET">
-		<input type="text" name="cari" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
-		<input type="submit" value="CARI">
-	</form>
+    </div><br> --}} 
 
     {{-- Table Supplier --}}
     <div class="row">
