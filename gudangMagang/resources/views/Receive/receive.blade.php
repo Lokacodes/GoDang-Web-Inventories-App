@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 grid-margin stretch-card" id="detail">
+            <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Detail Informasi Supplier</h4>
@@ -45,46 +45,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Barang</label>
-                            <input type="text" class="form-control form-control-user" id="barang" name="barang"
-                                placeholder="Masukkan Nama Barang" aria-label="Search" aria-describedby="basic-addon2">
-                            <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="barang">
-            <div class="col-12 grid-margin" >
+        <div class="row" >
+            <div class="col-12 grid-margin " id="barang" >
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Masukkan Data Barang</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Kode Barang</label>
+                                    <label class="col-sm-3 col-form-label">Nama Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="kode_barang" name="kode_barang"
-                                            readonly />
+                                        <input type="text" class="form-control" name="caribarang" id="caribarang" value=""/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nama Barang</label>
+                                    <label class="col-sm-3 col-form-label">Kode Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" />
+                                        <input type="text" class="form-control" id="kode_barang" name="kode_barang" value=""/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Harga Beli</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="harga_beli" id="harga_beli" />
+                                        <input type="text" class="form-control" name="harga_beli" id="harga_beli" value=""/>
                                     </div>
                                 </div>
                             </div>
@@ -92,41 +85,40 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Harga Jual</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual" />
+                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual" value=""/>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Tanggal Terima</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="tanggal" id="tanggal" />
+                                        <input type="text" class="form-control" name="tanggal" id="tanggal" value="" />
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Stok Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="stok_barang"
-                                            id="stok_barang" readonly/>
+                                        <input type="text" class="form-control" name="stok_barang" id="stok_barang" value=""/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Supplier</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="kode_supplier"
-                                            id="kode_supplier" />
+                                            id="kode_supplier" value=""/>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -136,9 +128,6 @@
     @push('page-script')
         <script type="text/javascript">
             $(document).ready(function() {
-                //Detail Supplier
-                let detail = document.getElementById('detail');
-                detail.style.visibility = 'hidden';
                 //Input Barang Receive
                 let barang = document.getElementById('barang');
                 barang.style.visibility = 'hidden';
@@ -161,22 +150,22 @@
                             }
                         });
                     },
-                    select: function(event, ui) { // Set selection
+                    select: function(event, ui) {
                         $('#carisuppli').val(ui.item.value);
                         $('#kode_supplier').val(ui.item.kode);
                         $('#alamat').val(ui.item.alamat);
-                        detail.style.visibility = 'visible';
+                        barang.style.visibility = 'visible';
 
                         return false;
                     }
                 });
 
                 //Card Input 
-                $("#barang").autocomplete({
+                $("#caribarang").autocomplete({
                     source: function(request, response) {
                         // Fetch data
                         $.ajax({
-                            url: "/receiving/barang",
+                            url: "{{ route('barang') }}",
                             type: 'post',
                             dataType: "json",
                             data: {
@@ -185,22 +174,45 @@
                             },
                             success: function(data) {
                                 response(data);
-
                             }
                         });
                     },
                     select: function(event, ui) {
-                        $('#barang').val(ui.item.value);
-                        $('#kode_barang').val(ui.item.kode);
-                        $('#harga_beli').val(ui.item.beli);
-                        $('#harga_jual').val(ui.item.jual);
-                        $('#stok_barang').val(ui.item.stok);
-                        $('#kode_supplier').val(ui.item.supply);
-                        barang.style.visibility = 'visible';
-
+                        // Set selection
+                        $('#caribarang').val(ui.item.value); // display the selected text
+                        $('#kode_buku').val(ui.item.label1); // save selected id to input
+                        $('#stok_barang').val(ui.item.label2); // save selected id to input
                         return false;
                     }
                 });
+                // $("#barang").autocomplete({
+                //     source: function(request, response) {
+                //         // Fetch data
+                //         $.ajax({
+                //             url: "{{ route('barang') }}",
+                //             type: 'post',
+                //             dataType: "json",
+                //             data: {
+                //                 _token: $("#csrf").val(),
+                //                 search: request.term
+                //             },
+                //             success: function(data) {
+                //                 response(data);
+
+                //             }
+                //         });
+                //     },
+                //     select: function(event, ui) {
+                //         $('#barang').val(ui.item.value);
+                //         $('#kode_barang').val(ui.item.kode);
+                //         // $('#harga_beli').val(ui.item.beli);
+                //         // $('#harga_jual').val(ui.item.jual);
+                //         $('#stok_barang').val(ui.item.stok);
+                //         // $('#kode_supplier').val(ui.item.supply);
+
+                //         return false;
+                //     }
+                // });
             });
         </script>
     @endpush

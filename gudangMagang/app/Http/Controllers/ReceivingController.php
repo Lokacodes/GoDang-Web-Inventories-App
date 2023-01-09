@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Barang;
 
 class ReceivingController extends Controller
 {
@@ -41,23 +42,26 @@ class ReceivingController extends Controller
     }
 
     //Barang
-    public function inputbarang(Request $request)
+    public function barang(Request $request)
     {
         $search=$request->search;
         if($search==''){
-            $cari=DB::table('barang')->orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_supplier', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
+            $barang=Barang::orderBy('nama_barang', 'asc')
+                ->select('kode_barang', 'nama_barang', 'stok_barang')
+                // , 'harga_jual', 'harga_beli', 'kode_supplier'
                 ->get();
         }else{
-            $cari=DB::table('barang')->orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_supplier', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
+            $barang=Barang::orderBy('nama_barang', 'asc')
+                ->select('kode_barang', 'nama_barang', 'stok_barang')
+                // , 'harga_jual', 'harga_beli', 'kode_supplier'
                 ->where('nama_barang','like','%'.$search.'%')
                 ->get();
         }
 
         $response = array();
-        foreach($cari as $barang){
-            $response[] = array("value"=>$barang->nama_barang, "kode"=>$barang->kode_barang, "beli"=>$barang->harga_beli, "jual"=>$barang->harga_jual, "stok"=>$barang->stok_barang, "supply"=>$barang->kode_supplier);
+        foreach($barang as $barang){
+            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang);
+            // , "beli"=>$barang->harga_beli, "jual"=>$barang->harga_jual, "supply"=>$barang->kode_supplier
         }
         
          return response()->json($response);
