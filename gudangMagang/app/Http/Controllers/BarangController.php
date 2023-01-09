@@ -115,7 +115,6 @@ class BarangController extends Controller
         $nama_barang = $request->nama_barang;
         $kode_kategori = $request->kode_kategori;
         $kode_brand = $request->kode_brand;
-        $harga_beli = $request->harga_beli;
         $harga_jual = $request->harga_jual;
         $stok_barang = $request->stok_barang;
         $kode_supplier = $request->kode_supplier;
@@ -126,7 +125,6 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'kode_kategori' => 'required',
             'kode_brand' => 'required',
-            'harga_beli' => 'required',
             'harga_jual' => 'required',
             'stok_barang' => 'required',
             'kode_supplier' => 'required'
@@ -143,7 +141,6 @@ class BarangController extends Controller
         $data->nama_barang = $nama_barang;
         $data->kode_kategori = $kode_kategori;
         $data->kode_brand = $kode_brand;
-        $data->harga_beli = $harga_beli;
         $data->harga_jual = $harga_jual;
         $data->stok_barang = $stok_barang;
         $data->kode_supplier = $kode_supplier;

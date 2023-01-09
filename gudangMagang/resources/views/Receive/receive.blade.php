@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <form class="user" action="">
+    <form class="user" action="/receiving/gudang">
         <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
@@ -49,8 +49,8 @@
                 </div>
             </div>
         </div>
-        <div class="row" >
-            <div class="col-12 grid-margin " id="barang" >
+        <div class="row">
+            <div class="col-12 grid-margin " id="barang">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Masukkan Data Barang</h4>
@@ -59,9 +59,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-user" id="caribarang" name="caribarang"
-                                placeholder="Masukkan Nama Barang" aria-label="Search" aria-describedby="basic-addon2">
-                            <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                                        <input type="text" class="form-control form-control-user" id="caribarang"
+                                            name="caribarang" placeholder="Masukkan Nama Barang" aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                                     </div>
                                 </div>
                             </div>
@@ -69,58 +70,75 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kode Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="kode_barang" name="kode_barang" value=""/>
+                                        <input type="text" class="form-control" id="kode_barang" name="kode_barang"
+                                            value="" readonly />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Harga Beli</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="harga_beli" id="harga_beli" value=""/>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Harga Jual</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual" value=""/>
+                                        <input type="text" class="form-control" name="harga_jual" id="harga_jual"
+                                            value="" readonly />
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
-                        <div class="row">
-                            {{-- <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Tanggal Terima</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="tanggal" id="tanggal" value="" />
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Stok Barang</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="stok_barang" id="stok_barang" value=""/>
+                                        <input type="int" class="form-control" name="stok_barang" id="stok_barang"
+                                            value="" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Supplier</label>
+                                    <label class="col-sm-3 col-form-label">Terima</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="kode_supplier"
-                                            id="kode_supplier" value=""/>
+                                        <input type="date" class="form-control" name="tanggal" id="tanggal"
+                                            value="{{ date('Y-m-d') }}" />
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Jumlah Barang</label>
+                                    <div class="col-sm-9">
+                                        <input type="int" class="form-control" name="jumlah" id="jumlah"
+                                            value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-primary" id="keranjang">Tambah Keranjang</button>
+                        </div><br>
+                        <table id="keranjang" name="keranjang" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Jumlah Ditambah</th>
+                                    <th>Total Di Gudang</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="template">
+
+                            </tbody>
+                        </table>
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-info">
+                                Masukkan Gudang
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,40 +199,42 @@
                     },
                     select: function(event, ui) {
                         // Set selection
-                        $('#caribarang').val(ui.item.value); // display the selected text
-                        $('#kode_barang').val(ui.item.label1); // save selected id to input
-                        $('#stok_barang').val(ui.item.label2); // save selected id to input
+                        $('#caribarang').val(ui.item.value);
+                        $('#kode_barang').val(ui.item.label1);
+                        $('#stok_barang').val(ui.item.label2);
+                        $('#harga_jual').val(ui.item.label4);
                         return false;
                     }
                 });
-                // $("#barang").autocomplete({
-                //     source: function(request, response) {
-                //         // Fetch data
-                //         $.ajax({
-                //             url: "{{ route('barang') }}",
-                //             type: 'post',
-                //             dataType: "json",
-                //             data: {
-                //                 _token: $("#csrf").val(),
-                //                 search: request.term
-                //             },
-                //             success: function(data) {
-                //                 response(data);
+                var row = 1;
+                $('#keranjang').click(function() {
 
-                //             }
-                //         });
-                //     },
-                //     select: function(event, ui) {
-                //         $('#barang').val(ui.item.value);
-                //         $('#kode_barang').val(ui.item.kode);
-                //         // $('#harga_beli').val(ui.item.beli);
-                //         // $('#harga_jual').val(ui.item.jual);
-                //         $('#stok_barang').val(ui.item.stok);
-                //         // $('#kode_supplier').val(ui.item.supply);
+                    let barang = $("#caribarang").val();
+                    let kode_barang = $("#kode_barang").val();
+                    let jumlah = $("#jumlah").val();
+                    let total = parseInt($("#stok_barang").val()) + parseInt($("#jumlah").val());
 
-                //         return false;
-                //     }
-                // });
+                    let new_row = row - 1;
+                    $('#template').append(
+                        '<tr><td><input type="text" class="form-control form-control-user"name="nomor[]" value="' +
+                        row +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name=kode_barang[]" value="' +
+                        kode_barang +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
+                        barang +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah[]" value="' +
+                        jumlah +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
+                        total +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="status[]" value="1" readonly></td></tr>'
+
+                    );
+                    row++;
+                    document.getElementById("caribarang").value = "";
+                    document.getElementById("kode_barang").value = "";
+                    document.getElementById("jumlah").value = "";
+                    document.getElementById("total").value = "";
+                });
             });
         </script>
     @endpush

@@ -37,11 +37,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="harga_beli">Harga Beli</label>
-                        <input type="text" class="form-control form-control-user" id="harga_beli" name="harga_beli"
-                            value="{{ $det->harga_beli }}" placeholder="Harga Beli">
-                    </div>
-                    <div class="form-group">
                         <label for="harga_jual">Harga jual</label>
                         <input type="text" class="form-control form-control-user" id="harga_jual" name="harga_jual"
                             value="{{ $det->harga_jual }}" placeholder="Harga Jual">

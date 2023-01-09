@@ -50,16 +50,6 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group row">
-                                    <label class="col-sm-3">Harga Beli</label>:
-                                    <div class="col-sm-8">
-                                        {{ $det->harga_beli }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group row">
                                     <label class="col-sm-3">Harga Jual</label>:
                                     <div class="col-sm-8">
                                         {{ $det->harga_jual }}
