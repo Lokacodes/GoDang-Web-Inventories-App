@@ -6,8 +6,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Sending</h4>
                     <div class="form-group">
-                        <label for="nama_barang">Select Nama Barang</label>
-                        <select class="js-example-basic-single w-100" name="barang" id="nama_barang">
+                        <label for="cari_barang">Select Nama Barang</label>
+                        <select class="js-example-basic-single w-100" name="cari_barang" id="cari_barang">
                             <option selected value="-">-</option>
                             @foreach ($send as $s)
                                 <option value="{{ $s->kode_barang }}">{{ $s->nama_barang }}</option>
@@ -21,13 +21,13 @@
                         <div class="col">
                             <label>Stok</label>
                             <div id="the-basics">
-                                <input class="typeahead" type="text" placeholder="Brand" disabled>
+                                <input class="typeahead" type="text" placeholder="Stok" id="stok_barang" name="stok_barang" disabled>
                             </div>
                         </div>
                         <div class="col">
                             <label>Harga</label>
                             <div id="bloodhound">
-                                <input class="typeahead" type="text" placeholder="Stok" disabled>
+                                <input class="typeahead" type="text" placeholder="Harga" id="harga_jual" name="harga_jual" disabled>
                             </div>
                         </div>
                     </div>
@@ -37,11 +37,158 @@
                             <input type="text" class="form-control" />
                         </div>
                     </div>
-                    <a class="d-md-flex justify-content-md-end">
-                        <button type="button" id="modal" class="btn btn-primary">Tambah Keranjang</button>
-                    </a>
+                    <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary" id="keranjang">Tambah Keranjang</button>
+                    </div><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Detail Informasi Ekspedisi</h4>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Kode Ekspedisi</label>
+                            <div class="form-group">
+                                <input class="typeahead" type="text" id="kode_ekspedisi" name="kode_ekspedisi"
+                                    placeholder="Kode Ekspedisi" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Ongkos Kirim</label>
+                            <div class="form-group">
+                                <input class="typeahead" type="text" id="ongkir" name="ongkir"
+                                    placeholder="Ongkos Kirim" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card" id="keranjang_card">
+            <div class="card">
+                <div class="card-body">
+                    <table id="keranjang" name="keranjang" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Jumlah Ditambah</th>
+                                <th>Total Di Gudang</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="template">
+            
+                        </tbody>
+                    </table>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-info">
+                            Save
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('page-script')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                //Input Barang Receive
+                let keranjang = document.getElementById('keranjang_card');
+                keranjang.style.visibility = 'hidden';
+
+                //Card Detail Supplier
+                $("#cari_barang").autocomplete({
+                    source: function(request, response) {
+                        // Fetch data
+                        $.ajax({
+                            url: "/sending/barang",
+                            type: 'post',
+                            dataType: "json",
+                            data: {
+                                _token: $("#csrf").val(),
+                                search: request.term
+                            },
+                            success: function(data) {
+                                response(data);
+
+                            }
+                        });
+                    },
+                    select: function(event, ui) {
+                        $('#cari_barang').val(ui.item.value);
+                        $('#stok_barang').val(ui.item.kode);
+                        $('#alamat').val(ui.item.alamat);
+                        barang.style.visibility = 'visible';
+
+                        return false;
+                    }
+                });
+
+                //Card Input 
+                $("#caribarang").autocomplete({
+                    source: function(request, response) {
+                        // Fetch data
+                        $.ajax({
+                            url: "{{ route('barang') }}",
+                            type: 'post',
+                            dataType: "json",
+                            data: {
+                                _token: $("#csrf").val(),
+                                search: request.term
+                            },
+                            success: function(data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    select: function(event, ui) {
+                        // Set selection
+                        $('#caribarang').val(ui.item.value);
+                        $('#kode_barang').val(ui.item.label1);
+                        $('#stok_barang').val(ui.item.label2);
+                        $('#harga_jual').val(ui.item.label4);
+                        return false;
+                    }
+                });
+                var row = 1;
+                $('#keranjang').click(function() {
+
+                    let barang = $("#caribarang").val();
+                    let kode_barang = $("#kode_barang").val();
+                    let jumlah = $("#jumlah").val();
+                    let total = parseInt($("#stok_barang").val()) + parseInt($("#jumlah").val());
+
+                    let new_row = row - 1;
+                    $('#template').append(
+                        '<tr><td><input type="text" class="form-control form-control-user"name="nomor[]" value="' +
+                        row +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name=kode_barang[]" value="' +
+                        kode_barang +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
+                        barang +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah[]" value="' +
+                        jumlah +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
+                        total +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="status[]" value="1" readonly></td></tr>'
+
+                    );
+                    row++;
+                    document.getElementById("caribarang").value = "";
+                    document.getElementById("kode_barang").value = "";
+                    document.getElementById("jumlah").value = "";
+                    document.getElementById("total").value = "";
+                });
+            });
+        </script>
+    @endpush
 @endsection
