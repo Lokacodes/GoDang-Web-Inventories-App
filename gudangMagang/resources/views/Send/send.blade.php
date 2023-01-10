@@ -40,7 +40,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Jumlah</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" />
+                            <input id="jumlah" name="jumlah" type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
@@ -198,10 +198,9 @@
 
                     let barang = $("#cari_barang").val();
                     let jumlah = $("#jumlah").val();
-                    let harga = $("#harga_barang").val();
-                    let stok = $("#stok_barang").val();
-                    let kurir = $("#nama_kurir").val();
-                    let subtotal = parseInt($("#harga_barang").val())*parseInt($("#jumlah").val());
+                    let harga = $("#harga_jual").val();
+                    let kurir = $("#cari_kurir").val();
+                    let subtotal = $("#harga_barang").val() - $("#jumlah").val();
                     let ongkir = $("#ongkir").val();
                     let total = subtotal + ongkir;
 
@@ -209,15 +208,21 @@
                     $('#template').append(
                         '<tr><td><input type="text" class="form-control form-control-user"name="nomor[]" value="' +
                         row +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name=kode_barang[]" value="' +
-                        kode_barang +
-                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
                         barang +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah[]" value="' +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah_dibeli[]" value="' +
                         jumlah +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="harga[]" value="' +
+                        harga +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
+                        subtotal +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="ekspedisi[]" value="' +
+                        kurir +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="ongkir[]" value="' +
+                        ongkir +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
                         total +
-                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="status[]" value="1" readonly></td></tr>'
+                        '" readonly></td></tr>'
 
                     );
                     row++;
