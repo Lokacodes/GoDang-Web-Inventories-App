@@ -19,7 +19,7 @@ class CreateBarangsTable extends Migration
             $table->string('kode_brand')->nullable();
             $table->string('kode_kategori')->nullable();
             $table->string('nama_barang')->nullable();
-            $table->integer('stok_barang')->nullable();
+            $table->integer('stok_barang')->nullable()->default('0');
             $table->integer('harga_beli')->nullable();
             $table->integer('harga_jual')->nullable();
             $table->string('kode_supplier')->nullable();
