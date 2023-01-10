@@ -24,19 +24,19 @@ class ReceivingController extends Controller
     {
         $search=$request->search;
         if($search==''){
-            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+            $cari=DB::table('suppliers')->orderBy('kode_supplier', 'asc')
                 ->select('nama_supplier', 'kode_supplier', 'alamat')
                 ->get();
         }else{
-            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+            $cari=DB::table('suppliers')->orderBy('kode_supplier', 'asc')
                 ->select('nama_supplier', 'kode_supplier', 'alamat')
-                ->where('nama_supplier','like','%'.$search.'%')
+                ->where('kode_supplier','like','%'.$search.'%')
                 ->get();
         }
 
         $response = array();
         foreach($cari as $suppli){
-            $response[] = array("value"=>$suppli->nama_supplier, "kode"=>$suppli->kode_supplier, "alamat"=>$suppli->alamat);
+            $response[] = array("value"=>$suppli->kode_supplier, "nama"=>$suppli->nama_supplier, "alamat"=>$suppli->alamat);
         }
         
          return response()->json($response);
@@ -59,7 +59,7 @@ class ReceivingController extends Controller
 
         $response = array();
         foreach($barang as $barang){
-            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang, "label3"=>$barang->harga_beli, "label4"=>$barang->harga_jual, "label5"=>$barang->kode_supplier);
+            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang, "label3"=>$barang->kode_supplier, "label4"=>$barang->harga_jual);
         }
         
          return response()->json($response);

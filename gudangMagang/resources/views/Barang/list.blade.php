@@ -134,6 +134,15 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="kode_brand">Supplier</label>
+                                    <select class="form-control" name="kode_supplier" id="kode_supplier">
+                                        <option selected value="-">-</option>
+                                        @foreach ($supplier as $s)
+                                            <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
                                     <input type="text" class="form-control" id="kode_barang" name="kode_barang"
                                         placeholder="Kode Barang">
@@ -148,16 +157,6 @@
                                     <input type="text" onkeypress="return hanyaAngka(event)" class="form-control"
                                         id="harga_jual" name="harga_jual" placeholder="harga_jual">
                                 </div>
-                                <div class="form-group">
-                                    <label for="kode_brand">Supplier</label>
-                                    <select class="form-control" name="kode_supplier" id="kode_supplier">
-                                        <option selected value="-">-</option>
-                                        @foreach ($supplier as $s)
-                                            <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
                             </div>
                             <span id="taskError" class="alert-message"></span>
                         </div>

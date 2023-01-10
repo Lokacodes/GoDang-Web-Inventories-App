@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Receiving</h4>
                         <div class="form-group">
-                            <label for="carisuppli">Input Nama Supplier</label>
+                            <label for="carisuppli">Input Kode Supplier</label>
                             <input type="text" class="form-control form-control-user" id="carisuppli" name="carisuppli"
                                 placeholder="Masukkan Nama Supplier" aria-label="Search" aria-describedby="basic-addon2">
                             <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
@@ -31,10 +31,10 @@
                         <h4 class="card-title">Detail Informasi Supplier</h4>
                         <div class="form-group row">
                             <div class="col">
-                                <label>Kode Supplier</label>
+                                <label>Nama Supplier</label>
                                 <div class="form-group">
-                                    <input class="typeahead" type="text" id="kode_supplier" name="kode_supplier"
-                                        placeholder="Kode Supplier" disabled>
+                                    <input class="typeahead" type="text" id="nama_supplier" name="nama_supplier"
+                                        placeholder="Nama Supplier" disabled>
                                 </div>
                             </div>
                             <div class="col">
@@ -91,12 +91,21 @@
                                     <label class="col-sm-3 col-form-label">Stok Barang</label>
                                     <div class="col-sm-9">
                                         <input type="int" class="form-control" name="stok_barang" id="stok_barang"
-                                            value="" />
+                                            value="" readonly   />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kode Supplier</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="supplier" id="supplier"
+                                            value="" readonly/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Terima</label>
@@ -106,6 +115,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Jumlah Barang</label>
@@ -133,8 +144,8 @@
                             <tbody id="template">
 
                             </tbody>
-                        </table>
-                        <div class="card-body">
+                        </table><br>
+                        <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-info">
                                 Masukkan Gudang
                             </button>
@@ -172,7 +183,7 @@
                     },
                     select: function(event, ui) {
                         $('#carisuppli').val(ui.item.value);
-                        $('#kode_supplier').val(ui.item.kode);
+                        $('#nama_supplier').val(ui.item.nama);
                         $('#alamat').val(ui.item.alamat);
                         barang.style.visibility = 'visible';
 
@@ -185,7 +196,7 @@
                     source: function(request, response) {
                         // Fetch data
                         $.ajax({
-                            url: "{{ route('barang') }}",
+                            url: "/receiving/barang",
                             type: 'post',
                             dataType: "json",
                             data: {
@@ -202,6 +213,7 @@
                         $('#caribarang').val(ui.item.value);
                         $('#kode_barang').val(ui.item.label1);
                         $('#stok_barang').val(ui.item.label2);
+                        $('#supplier').val(ui.item.label3);
                         $('#harga_jual').val(ui.item.label4);
                         return false;
                     }

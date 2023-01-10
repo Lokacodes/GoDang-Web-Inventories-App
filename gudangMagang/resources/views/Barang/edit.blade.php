@@ -7,17 +7,6 @@
                 <h4 class="card-title">Edit Barang</h4>
                 <form class="forms-sample" action="/barang/update/{kode_barang}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                        <label for="kode_barang">Kode Barang</label>
-                        <input type="text" readonly class="form-control form-control-user" id="kode_barang"
-                            name="kode_barang" value="{{ $det->kode_barang }}" placeholder="Kode Barang">
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control form-control-user" id="nama_barang" name="nama_barang"
-                            value="{{ $det->nama_barang }}" placeholder="Nama Barang">
-                    </div>
-                    <div class="form-group">
                         <label for="kode_kategori">kategori barang</label>
                         <select class="form-control" name="kode_kategori" id="kode_kategori"
                             value="{{ $det->kode_kategori }}">
@@ -37,6 +26,26 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Supplier</label>
+                        <select class="form-control" name="kode_supplier" id="kode_supplier" value="{{ $det->kode_supplier }}">
+                            <option selected="{{ $det->kode_supplier }}">{{ $det->kode_supplier }}</option>
+                            @foreach ($supplier as $s)
+                                <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                        <label for="kode_barang">Kode Barang</label>
+                        <input type="text" readonly class="form-control form-control-user" id="kode_barang"
+                            name="kode_barang" value="{{ $det->kode_barang }}" placeholder="Kode Barang">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_barang">Nama Barang</label>
+                        <input type="text" class="form-control form-control-user" id="nama_barang" name="nama_barang"
+                            value="{{ $det->nama_barang }}" placeholder="Nama Barang">
+                    </div>
+                    <div class="form-group">
                         <label for="harga_jual">Harga jual</label>
                         <input type="text" class="form-control form-control-user" id="harga_jual" name="harga_jual"
                             value="{{ $det->harga_jual }}" placeholder="Harga Jual">
@@ -45,15 +54,6 @@
                         <label for="stok_barang">Stok Barang</label>
                         <input type="text" class="form-control form-control-user" id="stok_barang" name="stok_barang"
                             value="{{ $det->stok_barang }}" placeholder="Stok Barang">
-                    </div>
-                    <div class="form-group">
-                        <label>Supplier</label>
-                        <select class="form-control" name="kode_supplier" id="kode_supplier" value="{{ $det->kode_supplier }}">
-                            <option selected="{{ $det->kode_supplier }}">{{ $det->kode_supplier }}</option>
-                            @foreach ($supplier as $s)
-                                <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
-                            @endforeach
-                        </select>
                     </div>
                     {{-- <div class="form-group">
                         <label for="foto">Foto Barang</label>

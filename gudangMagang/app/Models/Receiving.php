@@ -14,8 +14,7 @@ class Receiving extends Model
         'kode_receive',
         'tanggal_receive',
         'kode_barang',
-        'supplier',
+        'kode_supplier',
         'jumlah_barang'
-
     ];
 }
