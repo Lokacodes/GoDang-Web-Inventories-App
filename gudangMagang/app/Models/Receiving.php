@@ -17,4 +17,10 @@ class Receiving extends Model
         'kode_supplier',
         'jumlah_barang'
     ];
+
+    //Relasi
+    public function receive()
+    {
+        return $this -> belongsTo(Barang::class, 'kode_barang');
+    }
 }
