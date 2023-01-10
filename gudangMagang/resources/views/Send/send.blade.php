@@ -88,10 +88,8 @@
                                 {{-- <th>Kode Barang</th> --}}
                                 <th>Nama Barang</th>
                                 <th>Jumlah Dibeli</th>
-                                <th>Harga</th>
                                 <th>Sub Total</th>
-                                <th>Ekspedisi</th>
-                                <th>Ongkir</th>
+                                <th>Ongkos Kirim</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -200,9 +198,9 @@
                     let jumlah = $("#jumlah").val();
                     let harga = $("#harga_jual").val();
                     let kurir = $("#cari_kurir").val();
-                    let subtotal = $("#harga_barang").val() - $("#jumlah").val();
+                    let subtotal = parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val());
                     let ongkir = $("#ongkir").val();
-                    let total = subtotal + ongkir;
+                    let total = parseInt(subtotal) + parseInt(ongkir);
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -212,12 +210,8 @@
                         barang +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah_dibeli[]" value="' +
                         jumlah +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="harga[]" value="' +
-                        harga +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
                         subtotal +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="ekspedisi[]" value="' +
-                        kurir +
                         '" readonly></td><td><input type="text" class="form-control form-control-user" name="ongkir[]" value="' +
                         ongkir +
                         '" readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
