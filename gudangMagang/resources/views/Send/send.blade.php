@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Jumlah</label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-9">
                             <input id="jumlah" name="jumlah" type="text" class="form-control" />
                         </div>
                     </div>
