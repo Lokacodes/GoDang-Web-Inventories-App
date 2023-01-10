@@ -6,8 +6,14 @@
                 <div class="card-body">
                     <h4 class="card-title">Sending</h4>
                     <div class="form-group">
-                        <label for="cari_barang">Select Nama Barang</label>
-                        <select class="js-example-basic-single w-100" name="cari_barang" id="cari_barang">
+                        <div class="form-group">
+                            <label for="cari_barang">Input Nama Barang</label>
+                            <input type="text" class="form-control form-control-user" id="cari_barang" name="cari_barang"
+                                placeholder="Masukkan Nama Barang" aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                        </div>
+                        <label for="caribarang">Select Nama Barang</label>
+                        <select class="js-example-basic-single w-100" name="caribarang" id="caribarang">
                             <option selected value="-">-</option>
                             @foreach ($send as $s)
                                 <option value="{{ $s->kode_barang }}">{{ $s->nama_barang }}</option>
@@ -38,7 +44,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-primary" id="keranjang">Tambah Keranjang</button>
+                        <button type="button" class="btn btn-primary" id="tambah_keranjang">Tambah Keranjang</button>
                     </div><br>
                 </div>
             </div>
@@ -49,10 +55,11 @@
                     <h4 class="card-title">Detail Informasi Ekspedisi</h4>
                     <div class="form-group row">
                         <div class="col">
-                            <label>Kode Ekspedisi</label>
                             <div class="form-group">
-                                <input class="typeahead" type="text" id="kode_ekspedisi" name="kode_ekspedisi"
-                                    placeholder="Kode Ekspedisi" disabled>
+                                <label for="cari_kurir">Input Nama Ekspedisi</label>
+                                <input type="text" class="form-control form-control-user" id="cari_kurir" name="cari_kurir"
+                                    placeholder="Masukkan Nama Ekspedisi" aria-label="Search" aria-describedby="basic-addon2">
+                                <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                             </div>
                         </div>
                         <div class="col">
@@ -78,11 +85,14 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
+                                {{-- <th>Kode Barang</th> --}}
                                 <th>Nama Barang</th>
-                                <th>Jumlah Ditambah</th>
-                                <th>Total Di Gudang</th>
-                                <th>Status</th>
+                                <th>Jumlah Dibeli</th>
+                                <th>Harga</th>
+                                <th>Sub Total</th>
+                                <th>Ekspedisi</th>
+                                <th>Ongkir</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody id="template">
@@ -106,39 +116,37 @@
                 keranjang.style.visibility = 'hidden';
 
                 //Card Detail Supplier
-                $("#cari_barang").autocomplete({
+                // $("#cari_barang").autocomplete({
+                //     source: function(request, response) {
+                //         // Fetch data
+                //         $.ajax({
+                //             url: "/sending/barang",
+                //             type: 'post',
+                //             dataType: "json",
+                //             data: {
+                //                 _token: $("#csrf").val(),
+                //                 search: request.term
+                //             },
+                //             success: function(data) {
+                //                 response(data);
+
+                //             }
+                //         });
+                //     },
+                //     select: function(event, ui) {
+                //         $('#cari_barang').val(ui.item.value);
+                //         $('#stok_barang').val(ui.item.stok);
+                //         $('#harga_jual').val(ui.item.harga);
+                //         barang.style.visibility = 'visible';
+
+                //         return false;
+                //     }
+                // });
+                $("#cari_kurir").autocomplete({
                     source: function(request, response) {
                         // Fetch data
                         $.ajax({
-                            url: "/sending/barang",
-                            type: 'post',
-                            dataType: "json",
-                            data: {
-                                _token: $("#csrf").val(),
-                                search: request.term
-                            },
-                            success: function(data) {
-                                response(data);
-
-                            }
-                        });
-                    },
-                    select: function(event, ui) {
-                        $('#cari_barang').val(ui.item.value);
-                        $('#stok_barang').val(ui.item.kode);
-                        $('#alamat').val(ui.item.alamat);
-                        barang.style.visibility = 'visible';
-
-                        return false;
-                    }
-                });
-
-                //Card Input 
-                $("#caribarang").autocomplete({
-                    source: function(request, response) {
-                        // Fetch data
-                        $.ajax({
-                            url: "{{ route('barang') }}",
+                            url: "/sending/kurir",
                             type: 'post',
                             dataType: "json",
                             data: {
@@ -152,20 +160,50 @@
                     },
                     select: function(event, ui) {
                         // Set selection
-                        $('#caribarang').val(ui.item.value);
-                        $('#kode_barang').val(ui.item.label1);
+                        $('#cari_kurir').val(ui.item.value);
+                        $('#ongkir').val(ui.item.ongkir);
+                        keranjang.style.visibility = 'visible';
+                        return false;
+                    }
+                });
+
+                //Card Input 
+                $("#cari_barang").autocomplete({
+                    source: function(request, response) {
+                        // Fetch data
+                        $.ajax({
+                            url: "/sending/barang",
+                            type: 'post',
+                            dataType: "json",
+                            data: {
+                                _token: $("#csrf").val(),
+                                search: request.term
+                            },
+                            success: function(data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    select: function(event, ui) {
+                        // Set selection
+                        $('#cari_barang').val(ui.item.value);
                         $('#stok_barang').val(ui.item.label2);
                         $('#harga_jual').val(ui.item.label4);
                         return false;
                     }
                 });
-                var row = 1;
-                $('#keranjang').click(function() {
 
-                    let barang = $("#caribarang").val();
-                    let kode_barang = $("#kode_barang").val();
+                var row = 1;
+                $('#tambah_keranjang').click(function() {
+
+                    let barang = $("#cari_barang").val();
                     let jumlah = $("#jumlah").val();
-                    let total = parseInt($("#stok_barang").val()) + parseInt($("#jumlah").val());
+                    let harga = $("#harga_barang").val();
+                    let stok = $("#stok_barang").val();
+                    let kurir = $("#nama_kurir").val();
+                    let subtotal = parseInt($("#harga_barang").val())*parseInt($("#jumlah").val());
+                    let ongkir = $("#ongkir").val();
+                    let total = subtotal + ongkir;
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -183,10 +221,10 @@
 
                     );
                     row++;
-                    document.getElementById("caribarang").value = "";
-                    document.getElementById("kode_barang").value = "";
-                    document.getElementById("jumlah").value = "";
-                    document.getElementById("total").value = "";
+                    document.getElementById("cari_barang").value = "";
+                    document.getElementById("harga_jual").value = "";
+                    document.getElementById("stok").value = "";
+                    // document.getElementById("total").value = "";
                 });
             });
         </script>

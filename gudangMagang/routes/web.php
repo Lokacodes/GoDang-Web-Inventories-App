@@ -15,7 +15,7 @@ Route::post('/registrasi', [\App\Http\Controllers\LoginController::class, 'regis
 //Barang
 Route::post('/barang/update/{kode_barang}', [\App\Http\Controllers\BarangController::class, 'update']);
 Route::post('/barang/store', [\App\Http\Controllers\BarangController::class, 'store']);
-
+ 
 //Kategori
 Route::post('/kategori/store', [\App\Http\Controllers\KategoriController::class, 'store']);
 
@@ -27,6 +27,10 @@ Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'ind
 Route::post('/receiving/supply', [\App\Http\Controllers\ReceivingController::class, 'searchsupply']);
 Route::post('/receiving/barang', [\App\Http\Controllers\ReceivingController::class, 'barang'])->name('barang');
 Route::get('/receiving/gudang', [\App\Http\Controllers\ReceivingController::class, 'table']);
+
+//sending
+Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
+Route::post('/sending/kurir', [\App\Http\Controllers\SendingController::class, 'kurir']);
 
 //Supplier store data
 Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);
