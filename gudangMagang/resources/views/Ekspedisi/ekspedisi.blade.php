@@ -71,7 +71,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <div class="modal fade" id="addTodoModal" aria-hidden="true">
