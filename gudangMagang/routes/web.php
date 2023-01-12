@@ -27,10 +27,14 @@ Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'ind
 Route::post('/receiving/supply', [\App\Http\Controllers\ReceivingController::class, 'searchsupply']);
 Route::post('/receiving/barang', [\App\Http\Controllers\ReceivingController::class, 'barang'])->name('barang');
 Route::get('/receiving/gudang', [\App\Http\Controllers\ReceivingController::class, 'table']);
+Route::get('/receiving/save', [\App\Http\Controllers\ReceivingController::class, 'receivingStore']);
+
+
 
 //sending
 Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
 Route::post('/sending/kurir', [\App\Http\Controllers\SendingController::class, 'kurir']);
+Route::get('/sending/save', [\App\Http\Controllers\SendingController::class, 'sendingStore']);
 
 //Supplier store data
 Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);

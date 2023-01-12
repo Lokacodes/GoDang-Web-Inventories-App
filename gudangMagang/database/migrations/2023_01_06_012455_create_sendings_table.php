@@ -10,7 +10,7 @@ class CreateSendingsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
         Schema::create('sendings', function (Blueprint $table) {
@@ -18,7 +18,6 @@ class CreateSendingsTable extends Migration
             $table->string('kode_pengiriman')->nullable();
             $table->string('kode_barang')->nullable();
             $table->integer('jumlah_barang')->nullable();
-            $table->integer('fee_ekspedisi')->nullable();
             $table->timestamps();
         });
     }

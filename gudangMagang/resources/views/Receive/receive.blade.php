@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <form class="user" action="/receiving/gudang">
+    <form class="user" action="/receiving/save">
         <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
@@ -110,7 +110,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Terima</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" name="tanggal" id="tanggal"
+                                        <input type="text" class="form-control" name="tanggal" id="tanggal"
                                             value="{{ date('Y-m-d') }}" />
                                     </div>
                                 </div>
@@ -135,7 +135,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
+                                    <th>Nama Barang</th>\
+                                    <th>Kode Supplier</th>
                                     <th>Jumlah Ditambah</th>
                                     <th>Total Di Gudang</th>
                                     <th>Status</th>
@@ -225,6 +226,8 @@
                     let kode_barang = $("#kode_barang").val();
                     let jumlah = $("#jumlah").val();
                     let total = parseInt($("#stok_barang").val()) + parseInt($("#jumlah").val());
+                    let kode_supplier = $("#carisuppli").val();
+                    let tanggal = $("#tanggal").val();
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -234,6 +237,8 @@
                         kode_barang +
                         '" readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
                         barang +
+                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="kode_supplier[]" value="' +
+                        kode_supplier +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah[]" value="' +
                         jumlah +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
@@ -244,8 +249,10 @@
                     row++;
                     document.getElementById("nama_barang").value = "";
                     document.getElementById("kode_barang").value = "";
+                    document.getElementById("kode_supplier").value = "";
                     document.getElementById("jumlah").value = "";
                     document.getElementById("total").value = "";
+                    document.getElementById("tanggal").value = "";
                 });
             });
         </script>

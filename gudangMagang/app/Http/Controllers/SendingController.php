@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\ekspedisi;
+use App\Models\sending;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SendingController extends Controller
@@ -62,6 +65,40 @@ class SendingController extends Controller
         }
         
          return response()->json($response);
+    }
+
+    public function sendingStore(Request $request)
+    {
+        if($request->kode_barang == null){
+
+            $errorNotice = array(
+                'message'=>'Sorry, You Do not select any item',
+                'alert-type'=>'error',
+            );
+            dd($request);
+            return redirect()->back()->with($errorNotice);
+        }
+        else{
+            $count_barang = count($request->kode_barang);
+            for ($i=0; $i < $count_barang; $i++) {
+                $sending = new sending();
+                $sending->kode_pengiriman = $request->nomor[$i];
+                $sending->kode_barang = $request->kode_barang[$i];
+                $sending->jumlah_barang = $request->jumlah_dibeli[$i];
+                // dd($sending);
+                $sending->save();
+                
+
+
+            // /* To send Notification in admin notice board after purchase */
+            // $user = User::where('username','admin')->get();
+            // Notification::send($user,new PurchaseComplete($request->product_name));
+
+            }
+
+           
+            return redirect('/sending');
+        }
     }
 
     
