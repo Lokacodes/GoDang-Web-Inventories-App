@@ -13,8 +13,8 @@
                             <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                         </div>
                         <div class="form-group">
-                            <label for="carisuppli">Daftar Nama Supplier</label>
-                            <select class="js-example-basic-single w-100" name="carisuppli" id="carisuppli"
+                            <label for="supply">Daftar Nama Supplier</label>
+                            <select class="js-example-basic-single w-100" name="supply" id="supply"
                                 aria-label="Search" aria-describedby="basic-addon2">
                                 <option selected value="-">-</option>
                                 @foreach ($receive as $r)
@@ -242,7 +242,7 @@
 
                     );
                     row++;
-                    document.getElementById("caribarang").value = "";
+                    document.getElementById("nama_barang").value = "";
                     document.getElementById("kode_barang").value = "";
                     document.getElementById("jumlah").value = "";
                     document.getElementById("total").value = "";
