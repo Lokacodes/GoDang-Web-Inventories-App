@@ -72,10 +72,10 @@ class ReceivingController extends Controller
         $kode_barang = $request->input('kode_barang', []);
         $jumlah = $request->input('jumlah', []);
         $total = $request->input('total', []);
-
+        //  dd($request);
         for ($i=0; $i < count($kode_barang); $i++) {
             if ($kode_barang[$i] != '') {
-                $receive->detil()->attach($kode_barang[$i],['jumlah' => $jumlah[$i],'total' => $total[$i]]);
+                $receive->receive()->attach($kode_barang[$i],['jumlah' => $jumlah[$i]]);
                 Barang::updateOrCreate(['kode_barang' => $kode_barang],['stok_barang'=> $total[$i]]);
             }
         }
