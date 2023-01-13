@@ -94,7 +94,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah Dibeli</th>
                                 <th>Sub Total</th>
@@ -218,7 +217,7 @@
                     $('#template').append(
                         '<tr><td><input type="text" class="form-control form-control-user"name="nomor[]" value="' +
                         row +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="kode_barang[]" value="' +
+                        '"readonly></td><td style="display:none;"><input type="text" class="form-control form-control-user" name="kode_barang[]" value="' +
                         kode_barang +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
                         barang +

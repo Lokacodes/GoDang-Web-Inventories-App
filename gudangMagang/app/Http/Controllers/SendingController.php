@@ -81,21 +81,27 @@ class SendingController extends Controller
         else{
             $count_barang = count($request->kode_barang);
             for ($i=0; $i < $count_barang; $i++) {
-                $sending = new sending();
+                $sending = new Sending();
                 $sending->kode_pengiriman = $request->nomor[$i];
                 $sending->kode_barang = $request->kode_barang[$i];
                 $sending->jumlah_barang = $request->jumlah_dibeli[$i];
                 // dd($sending);
                 $sending->save();
-                
 
+                //$cari = $request->kode_barang[$i];
 
-            // /* To send Notification in admin notice board after purchase */
+                $sendingFind = $sending->kode_barang;
+                $barang = Barang::where('kode_barang',$sendingFind)->first();
+                $jumlahSend = ((float)($barang->stok_barang))-((float)($sending->jumlah_barang));
+                $barang->stok_barang = $jumlahSend;
+                //dd($barang);
+
+                $barang->save();
+            // /* To send Notification in admin notice board after sending */
             // $user = User::where('username','admin')->get();
-            // Notification::send($user,new PurchaseComplete($request->product_name));
+            // Notification::send($user,new sendingComplete($request->product_name));
 
             }
-
            
             return redirect('/sending');
         }

@@ -87,6 +87,14 @@ class ReceivingController extends Controller
                 $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
                 $receive->save();
+
+                $sendingFind = $receive->kode_barang;
+                $barang = Barang::where('kode_barang',$sendingFind)->first();
+                $jumlahReceive = ((float)($barang->stok_barang))+((float)($receive->jumlah_barang));
+                $barang->stok_barang = $jumlahReceive;
+                //dd($barang);
+
+                $barang->save();
                 
 
 
