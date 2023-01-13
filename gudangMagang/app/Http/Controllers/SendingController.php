@@ -93,9 +93,11 @@ class SendingController extends Controller
                 $sendingFind = $sending->kode_barang;
                 $barang = Barang::where('kode_barang',$sendingFind)->first();
                 $jumlahSend = ((float)($barang->stok_barang))-((float)($sending->jumlah_barang));
+                if ($jumlahSend <= 0){
+                    return redirect()->back()->with('alert','Stok Habis!');
+                }
                 $barang->stok_barang = $jumlahSend;
                 //dd($barang);
-
                 $barang->save();
             // /* To send Notification in admin notice board after sending */
             // $user = User::where('username','admin')->get();
