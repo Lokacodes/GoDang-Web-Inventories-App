@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\ekspedisi;
 use App\Models\sending;
+use App\Models\sent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,22 @@ class SendingController extends Controller
     {
         //Select Table
         $send = DB::table('barangs')->get();
+        $stokKurang = 0;
 
         //Return Views
-        return view('Send.send', ['send' => $send]);
+
+        $autoId = DB::table('sendings')->select(DB::raw('MAX(RIGHT(kode_pengiriman,4)) as autoId'));
+        $kd = "";
+        if($autoId->count()>0){
+            foreach($autoId->get() as $a){
+                $tmp = ((int)$a->autoId)+1;
+                $kd = sprintf("%04s",$tmp);
+            }
+        }   else{
+            $kd = "0001";
+        }
+
+        return view('Send.send', compact('kd','send','stokKurang'));
     }
 
     //Barang
@@ -82,11 +96,20 @@ class SendingController extends Controller
             $count_barang = count($request->kode_barang);
             for ($i=0; $i < $count_barang; $i++) {
                 $sending = new Sending();
-                $sending->kode_pengiriman = $request->nomor[$i];
+                $sending->kode_pengiriman = $request->kode_sending[$i];
                 $sending->kode_barang = $request->kode_barang[$i];
                 $sending->jumlah_barang = $request->jumlah_dibeli[$i];
+                $sending->kode_ekspedisi = $request->kurir[$i];
                 // dd($sending);
                 $sending->save();
+
+                $sent = new sent();
+                $sent->kode_pengiriman = $request->kode_sending[$i];
+                $sent->kode_barang = $request->kode_barang[$i];
+                $sent->jumlah_barang = $request->jumlah_dibeli[$i];
+                $sent->kode_ekspedisi = $request->kurir[$i];
+                // dd($sending);
+                $sent->save();
 
                 //$cari = $request->kode_barang[$i];
 
@@ -94,7 +117,8 @@ class SendingController extends Controller
                 $barang = Barang::where('kode_barang',$sendingFind)->first();
                 $jumlahSend = ((float)($barang->stok_barang))-((float)($sending->jumlah_barang));
                 if ($jumlahSend <= 0){
-                    return redirect()->back()->with('alert','Stok Habis!');
+                    $stokKurang = 1;
+                    return view('Send.send', compact('stokKurang'));
                 }
                 $barang->stok_barang = $jumlahSend;
                 //dd($barang);

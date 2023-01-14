@@ -13,6 +13,7 @@ class Sending extends Model
         'kode_pengiriman',
         'kode_barang',
         'jumlah_barang',
+        'kode_ekspedisi'
     ];
 
     public function update_stok(){

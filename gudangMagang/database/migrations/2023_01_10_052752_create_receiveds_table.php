@@ -15,8 +15,11 @@ class CreateReceivedsTable extends Migration
     {
         Schema::create('receiveds', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_received');
-            $table->string('kode_receive');
+            $table->string('kode_receive')->nullable();
+            $table->date('tanggal_receive')->nullable();
+            $table->string('kode_barang')->nullable();
+            $table->string('kode_supplier')->nullable();
+            $table->integer('jumlah_barang')->nullable();
             $table->timestamps();
         });
     }

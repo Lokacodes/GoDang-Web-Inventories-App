@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
+use App\Models\Received;
 use App\Models\Receiving;
 
 class ReceivingController extends Controller
@@ -15,8 +16,19 @@ class ReceivingController extends Controller
         //Select Table
         $receive = DB::table('suppliers')->get();
 
+        $autoId = DB::table('receivings')->select(DB::raw('MAX(RIGHT(kode_receive,4)) as autoId'));
+        $kd = "";
+        if($autoId->count()>0){
+            foreach($autoId->get() as $a){
+                $tmp = ((int)$a->autoId)+1;
+                $kd = sprintf("%04s",$tmp);
+            }
+        }   else{
+            $kd = "0001";
+        }
+
         //Return Views
-        return view('Receive.receive', ['receive'=>$receive]);
+        return view('Receive.receive', compact('receive','kd'));
     }
 
     //Search
@@ -45,7 +57,7 @@ class ReceivingController extends Controller
     //Barang
     public function barang(Request $request)
     {
-        $search=$request->search;
+        $search=$request->search; 
         if($search==''){
             $barang=Barang::orderBy('nama_barang', 'asc')
                 ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
@@ -80,13 +92,22 @@ class ReceivingController extends Controller
             $count_barang = count($request->kode_barang);
             for ($i=0; $i < $count_barang; $i++) {
                 $receive = new Receiving();
-                $receive->kode_receive = $request->nomor[$i];
+                $receive->kode_receive = $request->kode_receiving[$i];
                 $receive->kode_barang = $request->kode_barang[$i];
                 $receive->kode_supplier = $request->kode_supplier[$i];
                 $receive->jumlah_barang = $request->jumlah[$i];
                 $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
                 $receive->save();
+
+                $received = new Received();
+                $received->kode_receive = $request->kode_receiving[$i];
+                $received->kode_barang = $request->kode_barang[$i];
+                $received->kode_supplier = $request->kode_supplier[$i];
+                $received->jumlah_barang = $request->jumlah[$i];
+                $received->tanggal_receive = $request->tanggal;
+                //dd($request);
+                $received->save();
 
                 $sendingFind = $receive->kode_barang;
                 $barang = Barang::where('kode_barang',$sendingFind)->first();

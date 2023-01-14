@@ -10,7 +10,10 @@ class Received extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode_received',
-        'kode_receive'
+        'kode_receive',
+        'tanggal_receive',
+        'kode_barang',
+        'kode_supplier',
+        'jumlah_barang'
     ];
 }

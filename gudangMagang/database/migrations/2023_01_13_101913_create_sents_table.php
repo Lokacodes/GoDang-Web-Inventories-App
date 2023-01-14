@@ -15,6 +15,10 @@ class CreateSentsTable extends Migration
     {
         Schema::create('sents', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_pengiriman')->nullable();
+            $table->string('kode_barang')->nullable();
+            $table->integer('jumlah_barang')->nullable();
+            $table->string('kode_ekspedisi')->nullable();
             $table->timestamps();
         });
     }

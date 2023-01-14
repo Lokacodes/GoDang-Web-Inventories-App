@@ -7,6 +7,13 @@
                     <div class="card-body">
                         <h4 class="card-title">Receiving</h4>
                         <div class="form-group">
+                            <label>Kode Receiving</label>
+                            <div class="form-group">
+                                <input value="{{'IN-'.date('dmy').'-'.$kd}}" class="typeahead" type="text" id="kode_receiving" name="kode_receiving"
+                                    placeholder="Kode Receiving" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="carisuppli">Input Kode Supplier</label>
                             <input type="text" class="form-control form-control-user" id="carisuppli" name="carisuppli"
                                 placeholder="Masukkan Nama Supplier" aria-label="Search" aria-describedby="basic-addon2">
@@ -28,6 +35,7 @@
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        
                         <h4 class="card-title">Detail Informasi Supplier</h4>
                         <div class="form-group row">
                             <div class="col">
@@ -133,13 +141,12 @@
                         <table id="keranjang" name="keranjang" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode Barang</th>
+                                    <th width="250px">Kode Receiving</th>
+                                    <th width="95px">Kode Barang</th>
                                     <th>Nama Barang</th>\
                                     <th>Kode Supplier</th>
-                                    <th>Jumlah Ditambah</th>
-                                    <th>Total Di Gudang</th>
-                                    <th>Status</th>
+                                    <th width="60px">Jumlah Ditambah</th>
+                                    <th width="60px">Total Di Gudang</th>
                                 </tr>
                             </thead>
                             <tbody id="template">
@@ -223,6 +230,7 @@
                 $('#keranjang').click(function() {
 
                     let barang = $("#caribarang").val();
+                    let kode_receiving = $("#kode_receiving").val();
                     let kode_barang = $("#kode_barang").val();
                     let jumlah = $("#jumlah").val();
                     let total = parseInt($("#stok_barang").val()) + parseInt($("#jumlah").val());
@@ -231,8 +239,8 @@
 
                     let new_row = row - 1;
                     $('#template').append(
-                        '<tr><td><input type="text" class="form-control form-control-user"name="nomor[]" value="' +
-                        row +
+                        '<tr><td><input type="text" class="form-control form-control-user"name="kode_receiving[]" value="' +
+                        kode_receiving +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name=kode_barang[]" value="' +
                         kode_barang +
                         '" readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
@@ -243,7 +251,7 @@
                         jumlah +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
                         total +
-                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="status[]" value="1" readonly></td></tr>'
+                        '" readonly></td><td style="display:none;"><input type="text" class="form-control form-control-user" name="status[]" value="1" readonly></td></tr>'
 
                     );
                     row++;
