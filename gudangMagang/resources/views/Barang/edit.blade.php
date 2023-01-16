@@ -51,6 +51,11 @@
                             value="{{ $det->harga_jual }}" placeholder="Harga Jual">
                     </div>
                     <div class="form-group">
+                        <label for="harga_jual">Berat Barang</label>
+                        <input type="text" class="form-control form-control-user" id="berat_barang" name="berat_barang"
+                            value="{{ $det->berat_barang }}" placeholder="Berat Barang">
+                    </div>
+                    <div class="form-group">
                         <label for="stok_barang">Stok Barang</label>
                         <input type="text" class="form-control form-control-user" id="stok_barang" name="stok_barang"
                             value="{{ $det->stok_barang }}" placeholder="Stok Barang">
@@ -73,7 +78,7 @@
                     </div> --}}
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
-                </form>
+                </form> 
             </div>
         </div>
     </div>

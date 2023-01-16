@@ -42,18 +42,18 @@ class SendingController extends Controller
         $search=$request->search;
         if($search==''){
             $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier','berat_barang')
                 ->get();
         }else{
             $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier','berat_barang')
                 ->where('nama_barang','like','%'.$search.'%')
                 ->get();
         }
 
         $response = array();
         foreach($barang as $barang){
-            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang, "label3"=>$barang->harga_beli, "label4"=>$barang->harga_jual, "label5"=>$barang->kode_supplier);
+            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang, "label3"=>$barang->harga_beli, "label4"=>$barang->harga_jual, "label5"=>$barang->kode_supplier,"berat"=>$barang->berat_barang);
         }
         
          return response()->json($response);
@@ -89,7 +89,6 @@ class SendingController extends Controller
                 'message'=>'Sorry, You Do not select any item',
                 'alert-type'=>'error',
             );
-            dd($request);
             return redirect()->back()->with($errorNotice);
         }
         else{
@@ -103,13 +102,13 @@ class SendingController extends Controller
                 // dd($sending);
                 $sending->save();
 
-                $sent = new sent();
-                $sent->kode_pengiriman = $request->kode_sending[$i];
-                $sent->kode_barang = $request->kode_barang[$i];
-                $sent->jumlah_barang = $request->jumlah_dibeli[$i];
-                $sent->kode_ekspedisi = $request->kurir[$i];
-                // dd($sending);
-                $sent->save();
+                // $sent = new sent();
+                // $sent->kode_pengiriman = $request->kode_sending[$i];
+                // $sent->kode_barang = $request->kode_barang[$i];
+                // $sent->jumlah_barang = $request->jumlah_dibeli[$i];
+                // $sent->kode_ekspedisi = $request->kurir[$i];
+                // // dd($sending);
+                // $sent->save();
 
                 //$cari = $request->kode_barang[$i];
 

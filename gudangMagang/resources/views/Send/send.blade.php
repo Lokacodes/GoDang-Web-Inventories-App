@@ -2,65 +2,69 @@
 @section('content')
     <form action="/sending/save">
         <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Sending</h4>
+                        <h4 class="card-title">SENDING</h4>
                         <div class="form-group">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Kode Sending</label>
-                                <div class="col-sm-9">
+                            <div class="row">
+                                <label class="col-md-12">Kode Sending</label>
+                                <div class="col-md-6">
                                     <input type="text" class="form-control" name="kode_sending" id="kode_sending"
-                                        value="{{'OUT-'.date('dmy').'-'.$kd}}" placeholder="Kode Sending" readonly />
+                                        value="{{ 'OUT-' . date('dmy') . '-' . $kd }}" placeholder="Kode Sending"
+                                        readonly />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="caribarang">Input Nama Barang</label>
-                                <input type="text" class="form-control form-control-user" id="caribarang"
-                                    name="caribarang" placeholder="Masukkan Nama Barang" aria-label="Search"
-                                    aria-describedby="basic-addon2">
-                                <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                            </div>
-
-                            {{-- <label for="caribarang">Select Nama Barang</label>
-                        <select class="js-example-basic-single w-100" name="caribarang" id="caribarang">
-                            <option selected value="-">-</option>
-                            @foreach ($send as $s)
-                                <option value="{{ $s->kode_barang }}">{{ $s->nama_barang }}</option>
-                            @endforeach
-                        </select> --}}
                         </div>
+                        <br>
                         <p class="card-description">
                             Detail Informasi Barang
                         </p>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="caribarang">Input Nama Barang</label>
+                                        <input type="text" class="form-control form-control-user" id="caribarang"
+                                            name="caribarang" placeholder="Masukkan Nama Barang" aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Kode Barang</label>
+                                        <input class="typeahead" type="text" placeholder="Kode Barang" id="kode_barang"
+                                            name="kode_barang" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
-                            <div class="col">
+                            <div class="col-md-3">
                                 <label>Stok</label>
-                                <div id="the-basics">
+                                <div>
                                     <input class="typeahead" type="text" placeholder="Stok" id="stok_barang"
                                         name="stok_barang" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-3">
                                 <label>Harga</label>
-                                <div id="bloodhound">
+                                <div>
                                     <input class="typeahead" type="text" placeholder="Harga" id="harga_jual"
                                         name="harga_jual" disabled>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label>Kode Barang</label>
-                                <div id="the-basics">
-                                    <input class="typeahead" type="text" placeholder="Kode Barang" id="kode_barang"
-                                        name="kode_barang" disabled>
+                            <div class="col-md-3">
+                                <label>Berat</label>
+                                <div>
+                                    <input class="typeahead" type="text" placeholder="Berat Barang" id="berat_barang"
+                                        name="berat_barang" disabled>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jumlah</label>
-                            <div class="col-sm-9">
+                            <div class="col-md-3">
+                                <label>Jumlah Beli</label>
                                 <input id="jumlah" name="jumlah" type="text" class="form-control" />
                             </div>
                         </div>
@@ -71,10 +75,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 grid-margin stretch-card">
+            {{-- <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Detail Informasi Ekspedisi</h4>
+
+                        <div class="form-group">
+                            <label for="nama_pel">Nama Pelanggan</label>
+                            <input type="text" class="form-control form-control-user" id="nama_pel"
+                                name="nama_pel" placeholder="Nama Pelanggan">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alamat_pel">Alamat Pelanggan</label>
+                            <input type="textarea" class="form-control form-control-user" id="alamat_pel"
+                                name="alamat_pel" placeholder="Alamat Pelanggan">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="catatan">Catatan</label>
+                            <input type="textarea" class="form-control form-control-user" id="catatan"
+                                name="catatan" placeholder="Catatan">
+                        </div>
+                        
                         <div class="form-group row">
                             <div class="col">
                                 <div class="form-group">
@@ -95,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
         </div>
@@ -107,29 +130,22 @@
                         <table id="keranjang" name="keranjang" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Kode Sending</th>
-                                    <th>Nama Barang</th>
+                                    <th width="250px">Kode Sending</th>
+                                    <th width="250px">Nama Barang</th>
+                                    <th id="berat_brg">Berat Barang</th>
                                     <th>Jumlah Dibeli</th>
-                                    <th>Sub Total</th>
-                                    <th>Ongkos Kirim</th>
-                                    <th>Total</th>
+                                    <th width="250px">Sub Total</th>
                                 </tr>
                             </thead>
                             <tbody id="template">
 
                             </tbody>
+                            <tfoot id="footerTemplate">
+                                <tr>
+                                    
+                                </tr>
+                            </tfoot>
                         </table>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Total</label>
-                                <div class="form-group">
-                                    <input class="typeahead" type="text" id="totalTransaksi" name="totalTransaksi"
-                                        placeholder="Total" disabled>
-                                </div>
-                            </div>
-                        </div>
-
-
                         <div class="card-body">
                             <button id="save_bt" type="submit" class="btn btn-info">
                                 Save
@@ -143,7 +159,6 @@
     </form>
     @push('page-script')
         <script type="text/javascript">
-        
             $(document).ready(function() {
                 //Input Barang Receive
                 let keranjang = document.getElementById('keranjang_card');
@@ -198,13 +213,14 @@
                         $('#cari_kurir').val(ui.item.value);
                         $('#ongkir').val(ui.item.ongkir);
 
-                        keranjang.style.visibility = 'visible';
+
                         return false;
                     }
                 });
 
                 //Card Input 
                 $("#caribarang").autocomplete({
+
                     source: function(request, response) {
                         // Fetch data
                         $.ajax({
@@ -226,15 +242,20 @@
                         $('#kode_barang').val(ui.item.label1);
                         $('#stok_barang').val(ui.item.label2);
                         $('#harga_jual').val(ui.item.label4);
+                        $('#berat_barang').val(ui.item.berat);
                         return false;
                     }
                 });
 
-                
+
 
 
                 var row = 1;
+                let total_berat = 0;
+                let total_beli = 0;
+                let total_harga = 0;
                 $('#tambah_keranjang').click(function() {
+                    keranjang.style.visibility = 'visible';
                     let kode_sending = $("#kode_sending").val();
                     let barang = $("#caribarang").val();
                     let kode_barang = $("#kode_barang").val();
@@ -244,6 +265,7 @@
                     let subtotal = parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val());
                     let ongkir = $("#ongkir").val();
                     let total = parseInt(subtotal) + parseInt(ongkir);
+                    let berat = $("#berat_barang").val();
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -253,22 +275,43 @@
                         kode_barang +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="nama_barang[]" value="' +
                         barang +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="berat_barang[]" value="' +
+                        berat +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah_dibeli[]" value="' +
                         jumlah +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
                         subtotal +
-                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="ongkir[]" value="' +
-                        ongkir +
-                        '" readonly></td><td><input type="text" class="form-control form-control-user" name="total[]" value="' +
-                        total +
                         '" readonly></td><td style="display:none;"><input type="text" class="form-control form-control-user" name="kurir[]" value="' +
                         kurir +
                         '" ></td></tr>'
+                    );
+                    row++;
 
+                    let berat_brg_ini = parseInt(berat);
+                    total_berat += berat_brg_ini;
+
+                    let jumlah_brg_ini = parseInt(jumlah);
+                    total_beli += jumlah_brg_ini;
+
+                    let harga_brg_ini = parseInt(subtotal);
+                    total_harga += harga_brg_ini;
+
+                    $('#footerTemplate').append(
+                        '<tr><td colspan="2">TOTAL</td><td><input type="text" class="form-control form-control-user" name="total_berat" value="' +
+                        total_berat +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total_beli" value="' +
+                        total_beli +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total_harga" value="' +
+                        total_harga +
+                        '" ></td></tr>'
                     );
 
-                    row++;
+
+
+
                     
+
+
                     //         alert($(this).closest("tr").find("#total").val());
                     //         var unit_price = $(this).closest("tr").find("input.total").val();
                     //         console.log(unit_price);
@@ -280,7 +323,9 @@
                     document.getElementById("caribarang").value = "";
                     document.getElementById("kode_barang").value = "";
                     document.getElementById("harga_jual").value = "";
-                    // document.getElementById("stok").value = "";
+                    document.getElementById("berat_barang").value = "";
+                    document.getElementById("jumlah").value = "";
+                    document.getElementById("stok_barang").value = "";
                     // document.getElementById("total").value = "";
 
                 });

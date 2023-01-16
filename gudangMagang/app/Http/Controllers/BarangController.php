@@ -117,7 +117,9 @@ class BarangController extends Controller
         $kode_brand = $request->kode_brand;
         $harga_jual = $request->harga_jual;
         $stok_barang = $request->stok_barang;
+        $berat_barang = $request->berat_barang;
         $kode_supplier = $request->kode_supplier;
+
 
         //Validate Data
         $validate = $request->validate([
@@ -127,6 +129,7 @@ class BarangController extends Controller
             'kode_brand' => 'required',
             'harga_jual' => 'required',
             'stok_barang' => 'required',
+            'berat_barang' => 'required',
             'kode_supplier' => 'required'
             //'foto' => 'image|max:2048',
         ]);
@@ -144,6 +147,7 @@ class BarangController extends Controller
         $data->harga_jual = $harga_jual;
         $data->stok_barang = $stok_barang;
         $data->kode_supplier = $kode_supplier;
+        $data->berat_barang = $berat_barang;
         // $data -> foto = $path;
         $data->save();
 

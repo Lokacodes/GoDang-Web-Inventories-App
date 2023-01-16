@@ -70,6 +70,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group row">
+                                    <label class="col-sm-3">Berat Barang</label>:
+                                    <div class="col-sm-8">
+                                        {{ $det->berat_barang}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
                                     <label class="col-sm-3">Supplier</label>:
                                     <div class="col-sm-8">
                                         {{ $det->kode_supplier }}
