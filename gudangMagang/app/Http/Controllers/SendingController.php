@@ -19,8 +19,6 @@ class SendingController extends Controller
     {
         //Select Table
         $send = DB::table('barangs')->get();
-        $transaksiKirim = new TransaksiKirim;
-        $transaksi = $transaksiKirim->newTransaction()->all();
         $stokKurang = 0;
 
         //Return Views
