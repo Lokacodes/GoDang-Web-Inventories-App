@@ -243,6 +243,7 @@
     <script src="{{ asset('assets/js/select2.js') }}"></script>
     <script src="{{ asset('assets/js/search.js') }}"></script>
     <script src="{{ asset('assets/jqueryui/jquery-ui.js') }}"></script>
+    <script src="http://api.iksgroup.co.id/apijs/lokasiapi.js"></script>
     <!-- End custom js for this page-->
     @stack('page-script')
 

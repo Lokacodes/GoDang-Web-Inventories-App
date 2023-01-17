@@ -75,54 +75,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Detail Informasi Ekspedisi</h4>
-
-                        <div class="form-group">
-                            <label for="nama_pel">Nama Pelanggan</label>
-                            <input type="text" class="form-control form-control-user" id="nama_pel"
-                                name="nama_pel" placeholder="Nama Pelanggan">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="alamat_pel">Alamat Pelanggan</label>
-                            <input type="textarea" class="form-control form-control-user" id="alamat_pel"
-                                name="alamat_pel" placeholder="Alamat Pelanggan">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="catatan">Catatan</label>
-                            <input type="textarea" class="form-control form-control-user" id="catatan"
-                                name="catatan" placeholder="Catatan">
-                        </div>
-                        
-                        <div class="form-group row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="cari_kurir">Input Nama Ekspedisi</label>
-                                    <input type="text" class="form-control form-control-user" id="cari_kurir"
-                                        name="cari_kurir" placeholder="Masukkan Nama Ekspedisi" aria-label="Search"
-                                        aria-describedby="basic-addon2">
-                                    <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label>Ongkos Kirim</label>
-                                <div class="form-group">
-                                    <input class="typeahead" type="text" id="ongkir" name="ongkir"
-                                        placeholder="Ongkos Kirim" disabled>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-
         </div>
-
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card" id="keranjang_card">
                 <div class="card">
@@ -142,11 +95,67 @@
                             </tbody>
                             <tfoot id="footerTemplate">
                                 <tr>
-                                    
+                                    <th class="text-center bg_total" colspan="2"><b>TOTAL</b></th>
+                                    <th><input class="form-control form-control-user" readonly type="text"
+                                            name="total_berat" id="total_berat" value=""></th>
+                                    <th><input class="form-control form-control-user" readonly type="text"
+                                            name="total_beli" id="total_beli" value=""></th>
+                                    <th><input class="form-control form-control-user" readonly type="text"
+                                            name="total_harga" id="total_harga" value=""></th>
                                 </tr>
                             </tfoot>
                         </table>
-                        <div class="card-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="info_pengiriman" class="col-md-6 grid-margin stretch-card">
+            <div class="card" >
+                <div class="card-body">
+                    <h4 class="card-title">Detail Informasi Ekspedisi</h4>
+
+                    <div class="form-group">
+                        <label for="nama_pel">Nama Pelanggan</label>
+                        <input type="text" class="form-control form-control-user" id="nama_pel" name="nama_pel"
+                            placeholder="Nama Pelanggan">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alamat_pel">Alamat Pelanggan</label>
+                        <input type="textarea" class="form-control" id="alamat_pel" name="alamat_pel"
+                            placeholder="Alamat Pelanggan">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="catatan">Catatan</label>
+                        <input type="textarea" class="form-control form-control-user" id="catatan" name="catatan"
+                            placeholder="Catatan">
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="cari_kurir">Input Nama Ekspedisi</label>
+                                <input type="text" class="form-control form-control-user" id="cari_kurir"
+                                    name="cari_kurir" placeholder="Masukkan Nama Ekspedisi" aria-label="Search"
+                                    aria-describedby="basic-addon2">
+                                <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Ongkos Kirim</label>
+                            <div class="form-group">
+                                <input class="typeahead" type="text" id="ongkir" name="ongkir"
+                                    placeholder="Ongkos Kirim" disabled>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
                             <button id="save_bt" type="submit" class="btn btn-info">
                                 Save
                             </button>
@@ -155,42 +164,21 @@
                 </div>
             </div>
         </div>
-
     </form>
     @push('page-script')
         <script type="text/javascript">
             $(document).ready(function() {
                 //Input Barang Receive
                 let keranjang = document.getElementById('keranjang_card');
+                let pengiriman = document.getElementById('info_pengiriman');
                 keranjang.style.visibility = 'hidden';
+                pengiriman.style.visibility = 'hidden';
 
-                //Card Detail Supplier
-                // $("#caribarang").autocomplete({
-                //     source: function(request, response) {
-                //         // Fetch data
-                //         $.ajax({
-                //             url: "/sending/barang",
-                //             type: 'post',
-                //             dataType: "json",
-                //             data: {
-                //                 _token: $("#csrf").val(),
-                //                 search: request.term
-                //             },
-                //             success: function(data) {
-                //                 response(data);
+                var render=createwidgetlokasi("provinsi","kotaKab","kecamatan","kelurahan");
 
-                //             }
-                //         });
-                //     },
-                //     select: function(event, ui) {
-                //         $('#caribarang').val(ui.item.value);
-                //         $('#stok_barang').val(ui.item.stok);
-                //         $('#harga_jual').val(ui.item.harga);
-                //         barang.style.visibility = 'visible';
-
-                //         return false;
-                //     }
-                // });
+                $("#show").click(function() {
+                    $("#output").html(trackdatalokasi);
+                });
 
                 $("#cari_kurir").autocomplete({
                     source: function(request, response) {
@@ -212,8 +200,6 @@
                         // Set selection
                         $('#cari_kurir').val(ui.item.value);
                         $('#ongkir').val(ui.item.ongkir);
-
-
                         return false;
                     }
                 });
@@ -247,15 +233,13 @@
                     }
                 });
 
-
-
-
                 var row = 1;
-                let total_berat = 0;
-                let total_beli = 0;
-                let total_harga = 0;
+                let sumberat = 0;
+                let sumbeli = 0;
+                let sumharga = 0;
                 $('#tambah_keranjang').click(function() {
                     keranjang.style.visibility = 'visible';
+                    pengiriman.style.visibility = 'visible';
                     let kode_sending = $("#kode_sending").val();
                     let barang = $("#caribarang").val();
                     let kode_barang = $("#kode_barang").val();
@@ -285,74 +269,61 @@
                         kurir +
                         '" ></td></tr>'
                     );
+                    totalberat();
+                    totalbeli();
+                    totalharga();
                     row++;
 
-                    let berat_brg_ini = parseInt(berat);
-                    total_berat += berat_brg_ini;
+                    function totalberat() {
+                        $("#berat_barang").each(function() {
 
-                    let jumlah_brg_ini = parseInt(jumlah);
-                    total_beli += jumlah_brg_ini;
-
-                    let harga_brg_ini = parseInt(subtotal);
-                    total_harga += harga_brg_ini;
-
-                    $('#footerTemplate').append(
-                        '<tr><td colspan="2">TOTAL</td><td><input type="text" class="form-control form-control-user" name="total_berat" value="' +
-                        total_berat +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total_beli" value="' +
-                        total_beli +
-                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="total_harga" value="' +
-                        total_harga +
-                        '" ></td></tr>'
-                    );
+                            let totalValue = $(this).val();
 
 
+                            if (!isNaN(totalValue) && totalValue.length != 0) {
+                                sumberat += parseFloat(totalValue);
+                            }
+                            // console.log(sumberat);
+                        })
+                        $('#total_berat').val(sumberat);
+                    }
+
+                    function totalbeli() {
+                        $("#jumlah").each(function() {
+
+                            let totalValue = $(this).val();
 
 
-                    
+                            if (!isNaN(totalValue) && totalValue.length != 0) {
+                                sumbeli += parseFloat(totalValue);
+                            }
+                            // console.log(sumbeli);
+                        })
+                        $('#total_beli').val(sumbeli);
+                    }
+
+                    function totalharga() {
+                        $("#harga_jual").each(function() {
+
+                            let totalValue = $(this).val();
+                            let jumlah_this = $("#jumlah").val();
 
 
-                    //         alert($(this).closest("tr").find("#total").val());
-                    //         var unit_price = $(this).closest("tr").find("input.total").val();
-                    //         console.log(unit_price);
-                    //         var buying_qty = $(this).closest("td").find("input.buying_qty").val();
-                    //         var total = buying_qty * unit_price;
-                    //         $(this).closest('td').find('input.total').val(unit_price);
-                    //         totalHarga();
-                    //         totalHarga();
+                            if (!isNaN(totalValue) && totalValue.length != 0) {
+                                sumharga += (parseFloat(totalValue) * parseFloat(jumlah_this));
+                            }
+                            // console.log(sumharga);
+                            // console.log(jumlah_this);
+                        })
+                        $('#total_harga').val(sumharga);
+                    }
                     document.getElementById("caribarang").value = "";
                     document.getElementById("kode_barang").value = "";
                     document.getElementById("harga_jual").value = "";
                     document.getElementById("berat_barang").value = "";
                     document.getElementById("jumlah").value = "";
                     document.getElementById("stok_barang").value = "";
-                    // document.getElementById("total").value = "";
-
                 });
-                //     $(document).on('click','.tambah', function(){
-                //     alert('ok');
-                //     var unit_price = $(this).closest("td").find("input.total").val();
-                //     console.log(unit_price);
-                //     var buying_qty = $(this).closest("td").find("input.buying_qty").val();
-                //     var total = buying_qty * unit_price;
-                //     $(this).closest('td').find('input.total').val(allTotal);
-                //     totalHarga();
-                //  });
-
-                // function totalHarga(){
-                // let sum = 0;
-                // $(".total").each(function(){
-
-                //     let totalValue = $(this).val();
-                //     console.log(totalValue);
-
-                //     if(!isNaN(totalValue) && totalValue.length != 0){
-                //         sum += parseFloat(totalValue);
-                //         // console.log(sum);
-                //     }
-                // })
-                // $('#totalTransaksi').val(sum);
-                // }
             });
         </script>
     @endpush
