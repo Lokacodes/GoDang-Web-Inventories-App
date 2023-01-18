@@ -65,18 +65,18 @@ class SendingController extends Controller
         $search=$request->search;
         if($search==''){
             $kurir=ekspedisi::orderBy('nama_ekspedisi', 'asc')
-                ->select('kode_ekspedisi', 'nama_ekspedisi', 'ongkir')
+                ->select('kode_ekspedisi', 'nama_ekspedisi')
                 ->get();
         }else{
             $kurir=ekspedisi::orderBy('nama_ekspedisi', 'asc')
-                ->select('kode_ekspedisi', 'nama_ekspedisi', 'ongkir')
+                ->select('kode_ekspedisi', 'nama_ekspedisi')
                 ->where('nama_ekspedisi','like','%'.$search.'%')
                 ->get();
         }
 
         $response = array();
         foreach($kurir as $kurir){
-            $response[] = array("value"=>$kurir->nama_ekspedisi, "kode"=>$kurir->kode_ekspedisi, "ongkir"=>$kurir->ongkir);
+            $response[] = array("value"=>$kurir->nama_ekspedisi, "kode"=>$kurir->kode_ekspedisi);
         }
         
          return response()->json($response);
@@ -99,10 +99,10 @@ class SendingController extends Controller
                 $sending->kode_pengiriman = $request->kode_sending[$i];
                 $sending->kode_barang = $request->kode_barang[$i];
                 $sending->jumlah_barang = $request->jumlah_dibeli[$i];
-                $sending->kode_ekspedisi = $request->kurir[$i];
                 // dd($sending);
                 $sending->save();
 
+                
                 // $sent = new sent();
                 // $sent->kode_pengiriman = $request->kode_sending[$i];
                 // $sent->kode_barang = $request->kode_barang[$i];
@@ -116,18 +116,34 @@ class SendingController extends Controller
                 $sendingFind = $sending->kode_barang;
                 $barang = Barang::where('kode_barang',$sendingFind)->first();
                 $jumlahSend = ((float)($barang->stok_barang))-((float)($sending->jumlah_barang));
-                if ($jumlahSend <= 0){
-                    $stokKurang = 1;
-                    return view('Send.send', compact('stokKurang'));
-                }
+                // if ($jumlahSend <= 0){
+                //     $stokKurang = 1;
+                //     return view('Send.send');
+                // }
                 $barang->stok_barang = $jumlahSend;
                 //dd($barang);
                 $barang->save();
+
+
             // /* To send Notification in admin notice board after sending */
             // $user = User::where('username','admin')->get();
             // Notification::send($user,new sendingComplete($request->product_name));
 
             }
+
+            $transaksi = new TransaksiKirim();
+                $transaksi->kode_pengiriman = $request->kode_send;
+                $transaksi->tanggal_transaksi = $request->tanggal;
+                $transaksi->nama_pelanggan = $request->nama_pel;
+                $transaksi->alamat_pelanggan = $request->alamat_pel;
+                $transaksi->catatan = $request->catatan;
+                $transaksi->kode_ekspedisi = $request->cari_kurir;
+                $transaksi->berat_total = $request->total_berat;
+                $transaksi->beli_total = $request->total_beli;
+                $transaksi->harga_total = $request->total_harga;
+                $transaksi->ongkir = $request->ongkir;
+
+                $transaksi->save();
            
             return redirect('/sending');
         }

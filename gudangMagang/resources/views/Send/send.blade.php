@@ -8,13 +8,31 @@
                         <h4 class="card-title">SENDING</h4>
                         <div class="form-group">
                             <div class="row">
-                                <label class="col-md-12">Kode Sending</label>
                                 <div class="col-md-6">
+                                    <label>Kode Sending</label>
+                                
                                     <input type="text" class="form-control" name="kode_sending" id="kode_sending"
                                         value="{{ 'OUT-' . date('dmy') . '-' . $kd }}" placeholder="Kode Sending"
                                         readonly />
                                 </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <label>Tanggal</label>
+                                
+                                    <input type="text" class="form-control" name="tanggal" id="tanggal"
+                                        value="{{ date('d-m-y') }}" placeholder="Tanggal"/>
+                                </div>                                
+                            </div>                            
+                        </div>
+                        <div class="form-group">
+                            <div class="row">    
+                                <div style="display:none;" class="col-md-6">
+                                    <label>Kode Sending</label>
+                                
+                                    <input type="text" class="form-control" name="kode_send" id="kode_send"
+                                        value="{{ 'OUT-' . date('dmy') . '-' . $kd }}" placeholder="Kode Sending"
+                                        readonly />
+                                </div>                            
+                            </div>                            
                         </div>
                         <br>
                         <p class="card-description">
@@ -40,7 +58,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <label>Stok</label>
@@ -91,7 +108,6 @@
                                 </tr>
                             </thead>
                             <tbody id="template">
-
                             </tbody>
                             <tfoot id="footerTemplate">
                                 <tr>
@@ -110,7 +126,6 @@
                 </div>
             </div>
         </div>
-
         <div id="info_pengiriman" class="col-md-6 grid-margin stretch-card">
             <div class="card" >
                 <div class="card-body">
@@ -121,19 +136,16 @@
                         <input type="text" class="form-control form-control-user" id="nama_pel" name="nama_pel"
                             placeholder="Nama Pelanggan">
                     </div>
-
                     <div class="form-group">
                         <label for="alamat_pel">Alamat Pelanggan</label>
                         <input type="textarea" class="form-control" id="alamat_pel" name="alamat_pel"
                             placeholder="Alamat Pelanggan">
                     </div>
-
                     <div class="form-group">
                         <label for="catatan">Catatan</label>
                         <input type="textarea" class="form-control form-control-user" id="catatan" name="catatan"
                             placeholder="Catatan">
                     </div>
-
                     <div class="form-group row">
                         <div class="col">
                             <div class="form-group">
@@ -148,7 +160,7 @@
                             <label>Ongkos Kirim</label>
                             <div class="form-group">
                                 <input class="typeahead" type="text" id="ongkir" name="ongkir"
-                                    placeholder="Ongkos Kirim" disabled>
+                                    placeholder="Ongkos Kirim" >
                             </div>
                         </div>
                         
@@ -199,7 +211,6 @@
                     select: function(event, ui) {
                         // Set selection
                         $('#cari_kurir').val(ui.item.value);
-                        $('#ongkir').val(ui.item.ongkir);
                         return false;
                     }
                 });
@@ -250,6 +261,7 @@
                     let ongkir = $("#ongkir").val();
                     let total = parseInt(subtotal) + parseInt(ongkir);
                     let berat = $("#berat_barang").val();
+                    let sending_kode = $("#kode_sending").val();
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -265,8 +277,6 @@
                         jumlah +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
                         subtotal +
-                        '" readonly></td><td style="display:none;"><input type="text" class="form-control form-control-user" name="kurir[]" value="' +
-                        kurir +
                         '" ></td></tr>'
                     );
                     totalberat();
@@ -278,10 +288,11 @@
                         $("#berat_barang").each(function() {
 
                             let totalValue = $(this).val();
+                            let jumlah_this = $("#jumlah").val();
 
 
                             if (!isNaN(totalValue) && totalValue.length != 0) {
-                                sumberat += parseFloat(totalValue);
+                                sumberat += (parseFloat(totalValue)*parseFloat(jumlah_this));
                             }
                             // console.log(sumberat);
                         })
@@ -290,6 +301,7 @@
 
                     function totalbeli() {
                         $("#jumlah").each(function() {
+                            
 
                             let totalValue = $(this).val();
 

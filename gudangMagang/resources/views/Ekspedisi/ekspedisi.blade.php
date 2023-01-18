@@ -34,9 +34,6 @@
                                     <th>
                                         <center>Nama Ekspedisi</center>
                                     </th>
-                                    <th>
-                                        <center>Ongkos Kirim</center>
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,9 +50,6 @@
                                         </td>
                                         <td>
                                             <center>{{ $ek->nama_ekspedisi }}</center>
-                                        </td>
-                                        <td>
-                                            <center>{{ $ek->ongkir }}</center>
                                         </td>
                                     </tr>
                                 @empty
@@ -96,12 +90,6 @@
                                     <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi"
                                         placeholder="Nama ekspedisi">
                                 </div>
-                                <div class="form-group">
-                                    <label for="ongkir">Ongkos Kirim</label>
-                                    <input type="text" class="form-control"
-                                        id="ongkir" name="ongkir" placeholder="Ongkos Kirim">
-                                </div>
-                                
                                 
                             </div>
                             <span id="taskError" class="alert-message"></span>
@@ -127,11 +115,10 @@
                 $('#tambah').click(function() {
                     let kode_ekspedisi = $('#kode_ekspedisi').val();
                     let nama_ekspedisi = $('#nama_ekspedisi').val();
-                    let ongkir = $('#ongkir').val();
                     var ver = $('#ver').val();
 
                     //Store Kategori
-                    if (kode_ekspedisi != "" && nama_ekspedisi != "" && ongkir != "" && ver == "0") {
+                    if (kode_ekspedisi != "" && nama_ekspedisi != "" && ver == "0") {
                         $.ajax({
                             url: "/ekspedisi/store",
                             type: "POST",
@@ -139,7 +126,6 @@
                                 _token: $("#csrf").val(),
                                 kode_ekspedisi: kode_ekspedisi,
                                 nama_ekspedisi: nama_ekspedisi,
-                                ongkir: ongkir,
                             },
                             success: function(data) {
                                 if (data)
@@ -147,7 +133,6 @@
                                 window.location = "/ekspedisi";
                                 $('#kode_ekspedisi').val("");
                                 $('#nama_ekspedisi').val("");
-                                $('#ongkir').val("");
                                 
                             },
                             error: function(response) {

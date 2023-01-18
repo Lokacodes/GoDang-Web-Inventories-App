@@ -12,6 +12,5 @@ class ekspedisi extends Model
     protected $fillable = [
         'kode_ekspedisi',
         'nama_ekspedisi',
-        'ongkir',
     ];
 }

@@ -17,10 +17,10 @@ class EkspedisiController extends Controller
     public function store(Request $request)
     {
         //Message Alert (X)
-        $message = ['kode_ekspedisi.unique' => 'Kode ekspedisi Sudah Ada', 'nama_ekspedisi.required' => 'Nama ekspedisi Tidak Boleh Kosong', 'ongkir.required' => 'ongkir Tidak Boleh Kosong'];
+        $message = ['kode_ekspedisi.unique' => 'Kode ekspedisi Sudah Ada', 'nama_ekspedisi.required' => 'Nama ekspedisi Tidak Boleh Kosong'];
         //Validasi
         if ($request->ajax()) {
-            $validator = Validator($request->all(), ['kode_ekspedisi' => 'unique:ekspedisis', 'nama_ekspedisi' => 'required','ongkir' => 'required'], $message);
+            $validator = Validator($request->all(), ['kode_ekspedisi' => 'unique:ekspedisis', 'nama_ekspedisi' => 'required'], $message);
             //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
@@ -30,7 +30,6 @@ class EkspedisiController extends Controller
                 $ekspedisi = new ekspedisi;
                 $ekspedisi->kode_ekspedisi = $request->kode_ekspedisi;
                 $ekspedisi->nama_ekspedisi = $request->nama_ekspedisi;
-                $ekspedisi->ongkir = $request->ongkir;
                 $ekspedisi->save();
 
                 //View Alert

@@ -17,7 +17,6 @@ class CreateEkspedisisTable extends Migration
             $table->id();
             $table->string('kode_ekspedisi')->nullable();
             $table->string('nama_ekspedisi')->nullable();
-            $table->integer('ongkir')->nullable();
             $table->timestamps();
         });
     }

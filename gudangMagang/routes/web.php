@@ -29,7 +29,8 @@ Route::post('/receiving/barang', [\App\Http\Controllers\ReceivingController::cla
 Route::get('/receiving/gudang', [\App\Http\Controllers\ReceivingController::class, 'table']);
 Route::get('/receiving/save', [\App\Http\Controllers\ReceivingController::class, 'receivingStore']);
 
-
+//laporan sending detail
+Route::get('/sent/{kode_pengiriman}', [\App\Http\Controllers\lapSendingController::class, 'detail']);
 
 //sending
 Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
@@ -44,6 +45,9 @@ Route::post('/ekspedisi/store', [\App\Http\Controllers\EkspedisiController::clas
 
 //Route Group
 Route::group(['middleware' => ['auth']], function(){
+
+    //laporan Sending
+    Route::get('/sent', [\App\Http\Controllers\lapSendingController::class, 'index']);
     
     //Dashboard
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
