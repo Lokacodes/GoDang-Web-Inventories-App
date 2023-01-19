@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth']], function(){
 
     //laporan Sending
     Route::get('/sent', [\App\Http\Controllers\lapSendingController::class, 'index']);
+
+    //laporan Receiving
+    Route::get('/received', [\App\Http\Controllers\lapReceivingController::class, 'index']);
     
     //Dashboard
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);

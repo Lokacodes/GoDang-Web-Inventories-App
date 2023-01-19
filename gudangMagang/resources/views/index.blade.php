@@ -137,7 +137,7 @@
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"><a class="nav-link" href="/sent">Sent</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/received">Received</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li>
+                                    {{-- <li class="nav-item"><a class="nav-link" href="/stok">Stok</a></li> --}}
                                 </ul>
                             </div>
                         </li>

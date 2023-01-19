@@ -12,14 +12,17 @@
             <div class="card ">
                 <div class="card-body">
                     <p>
-                        <center><b>{{ $transaksi->kode_pengiriman }}</b></center>
+                        <center><b>{{ $receive->kode_pengiriman }}</b></center>
+                    </p>
+                    <p>
+                        <center><b>{{ $receive->tanggal_receive }}</b></center>
                     </p>
                     <div class="row">
                         <div class="col-sm-3">
-                            <p>Penerima :</p>
+                            <p>Supplier : </p>
                         </div>
                         <div class="col-sm-9">
-                            <p class = "text-justify">{{$transaksi->nama_pelanggan}}</p>
+                            <p>{{ $receive->nama_supplier }} | {{ $receive->nama_supplier }}</p>
                         </div>
                     </div>
 
@@ -40,74 +43,34 @@
                                             <center>Nama Produk</center>
                                         </th>
                                         <th>
+                                            <center>Kode Produk</center>
+                                        </th>
+                                        <th>
                                             <center>Jumlah</center>
-                                        </th>
-                                        <th>
-                                            <center>Harga</center>
-                                        </th>
-                                        <th>
-                                            <center>Subtotal</center>
                                         </th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($sending as $s)
+                                    @foreach ($receivings as $r)
                                         <tr>
                                             <td>
                                                 <center>{{ $no++ }}</center>
                                             </td>
                                             <td>
-                                                <center>{{ $s->nama_barang }}</center>
+                                                <center>{{ $r->nama_barang }}</center>
                                             </td>
                                             <td>
-                                                <center>{{ $s->jumlah_barang }}</center>
+                                                <center>{{ $r->kode_barang }}</center>
                                             </td>
                                             <td>
-                                                <center>{{ $s->harga_jual }}</center>
-                                            </td>
-                                            <td>
-                                                <center>{{ $s->harga_jual * $s->jumlah_barang }}</center>
+                                                <center>{{ $r->jumlah_barang }}</center>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th><center>Jumlah Barang</center></th>
-                                        <th><center>{{$transaksi->beli_total}}</center></th>
-                                        <th><center>Total Harga</center></th>
-                                        <th>
-                                            <center> {{$transaksi->harga_total}} </center>
-                                        </th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>Catatan : {{$transaksi->catatan}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>Kurir : {{$transaksi->nama_ekspedisi}} (Rp {{$transaksi->ongkir}},-)</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4><center>TOTAL : Rp {{$transaksi->ongkir + $transaksi->harga_total}},-</center></h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button id="print-button">Print</button>
                         </div>
                     </div>
                 </div>

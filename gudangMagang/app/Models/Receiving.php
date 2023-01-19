@@ -12,7 +12,6 @@ class Receiving extends Model
     //Yang Diisi
     protected $fillable = [
         'kode_receive',
-        'tanggal_receive',
         'kode_barang',
         'kode_supplier',
         'jumlah_barang'

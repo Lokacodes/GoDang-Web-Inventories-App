@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 use App\Models\Received;
 use App\Models\Receiving;
+use App\Models\TransaksiKirim;
+use App\Models\TransaksiTerima;
 
 class ReceivingController extends Controller
 {
@@ -104,7 +106,13 @@ class ReceivingController extends Controller
                 $receive->jumlah_barang = $request->jumlah[$i];
                 $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
-                $receive->save();
+                $receive->save(); 
+
+                $transaksiTerima = new TransaksiTerima();
+                $transaksiTerima->kode_receive = $request->kode_receiving;
+                $transaksiTerima->tanggal_receive = $request->tanggal;
+                $transaksiTerima->kode_supplier = $request->kode_supplier;
+                $transaksiTerima->save();
 
                 // $received = new Received();
                 // $received->kode_receive = $request->kode_receiving[$i];

@@ -198,7 +198,7 @@
                         $.ajax({
                             url: "/sending/kurir",
                             type: 'post',
-                            dataType: "json",
+                            dataType: "json", 
                             data: {
                                 _token: $("#csrf").val(),
                                 search: request.term
@@ -210,7 +210,7 @@
                     },
                     select: function(event, ui) {
                         // Set selection
-                        $('#cari_kurir').val(ui.item.value);
+                        $('#cari_kurir').val(ui.item.kode);
                         return false;
                     }
                 });
