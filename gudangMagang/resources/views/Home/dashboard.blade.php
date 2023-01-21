@@ -79,11 +79,11 @@
                 <div class="face hidden">
                     <div class="content">
                         <h2>
-                            <center>Receiving</center>
+                            <center>Receiving</center> 
                         </h2>
                         <div class="price">{{ $receive }} <small>Receiving</small></div><br>
                         @if (Auth::user()->role == 'super')
-                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/receive">Lihat</a>
+                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/received">Lihat</a>
                             </center>
                         @endif
                     </div>
@@ -99,8 +99,9 @@
                         <h2>
                             <center>Sending</center>
                         </h2><br>
+                        <div class="price">{{ $sending }} <small>Sending</small></div><br>
                         @if (Auth::user()->role == 'super')
-                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sending">Lihat</a>
+                            <center><a type="button" class="btn btn-outline-primary btn-fw" href="/sent">Lihat</a>
                             </center>
                         @endif
                     </div>

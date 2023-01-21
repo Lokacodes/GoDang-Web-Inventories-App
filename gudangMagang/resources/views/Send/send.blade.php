@@ -235,11 +235,29 @@
                     },
                     select: function(event, ui) {
                         // Set selection
+
+                        
                         $('#caribarang').val(ui.item.value);
                         $('#kode_barang').val(ui.item.label1);
-                        $('#stok_barang').val(ui.item.label2);
                         $('#harga_jual').val(ui.item.label4);
                         $('#berat_barang').val(ui.item.berat);
+
+                        if(ui.item.label2 <= 0){
+                            $('#stok_barang').val("Stok Habis!");
+                            document.getElementById("tambah_keranjang").disabled = true;
+                            alert('Stok habis!');
+
+                            // document.getElementById("caribarang").value = "";
+                            // document.getElementById("kode_barang").value = "";
+                            // document.getElementById("harga_jual").value = "";
+                            // document.getElementById("berat_barang").value = "";
+                            // document.getElementById("jumlah").value = "";
+                            // document.getElementById("stok_barang").value = "";
+                        }
+                        else{
+                            $('#stok_barang').val(ui.item.label2);
+                        }
+                        
                         return false;
                     }
                 });
@@ -262,6 +280,7 @@
                     let total = parseInt(subtotal) + parseInt(ongkir);
                     let berat = $("#berat_barang").val();
                     let sending_kode = $("#kode_sending").val();
+                    let sisa = $("#stok_barang").val() - $("#jumlah").val();
 
                     let new_row = row - 1;
                     $('#template').append(
@@ -275,6 +294,8 @@
                         berat +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="jumlah_dibeli[]" value="' +
                         jumlah +
+                        '"readonly></td><td style="display: none;"><input type="text" class="form-control form-control-user" name="sisa[]" value="' +
+                        sisa +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
                         subtotal +
                         '" ></td></tr>'
@@ -338,5 +359,13 @@
                 });
             });
         </script>
+
+<script>
+    var msg = '{{ Session::get('alert') }}';
+    var exist = '{{ Session::has('alert') }}';
+    if (exist) {
+        alert(msg);
+    }
+</script>
     @endpush
 @endsection

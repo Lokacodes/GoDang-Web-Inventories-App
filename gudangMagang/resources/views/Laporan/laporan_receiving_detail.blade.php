@@ -12,17 +12,17 @@
             <div class="card ">
                 <div class="card-body">
                     <p>
-                        <center><b>{{ $receive->kode_pengiriman }}</b></center>
+                        <center><b>{{ $receive->kode_receive }}</b></center>
                     </p>
                     <p>
                         <center><b>{{ $receive->tanggal_receive }}</b></center>
                     </p>
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3"> 
                             <p>Supplier : </p>
                         </div>
                         <div class="col-sm-9">
-                            <p>{{ $receive->nama_supplier }} | {{ $receive->nama_supplier }}</p>
+                            <p>{{ $receiveSupplier->kode_supplier }} | {{ $receiveSupplier->nama_supplier }}</p>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
             window.print();
             document.body.innerHTML = originalContents;
         });
-    });
+    });
 
     </script>
 @endpush

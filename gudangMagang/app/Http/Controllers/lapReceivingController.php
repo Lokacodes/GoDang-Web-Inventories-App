@@ -17,14 +17,14 @@ class lapReceivingController extends Controller
         return view('Laporan.laporan_receiving', ['receivings' => $receivings]);
     }
 
-    public function detail(){
+    public function detail(Request $request){
         $receive = new Receiving();
-        $receivings = $receive
+        $receiveSupplier = $receive->where('kode_receive','=',$request->kode_receive)->join('suppliers', 'receivings.kode_supplier' ,'=' ,'suppliers.kode_supplier')->first();
+        $receivings = $receive->where('kode_receive' ,'=', $request->kode_receive)
         ->join('barangs', 'receivings.kode_barang' ,'=' ,'barangs.kode_barang')
-        ->join('suppliers', 'receivings.kode_supplier' ,'=' ,'suppliers.kode_supplier')
         ->paginate(5);
 
-        return view('Laporan.laporan_receiving_detail', ['receivings' => $receivings,'receive' => $receive]);
+        return view('Laporan.laporan_receiving_detail', ['receiveSupplier'=>$receiveSupplier,'receivings' => $receivings,'receive' => $receive]);
     }
 
     

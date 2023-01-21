@@ -32,6 +32,9 @@ Route::get('/receiving/save', [\App\Http\Controllers\ReceivingController::class,
 //laporan sending detail
 Route::get('/sent/{kode_pengiriman}', [\App\Http\Controllers\lapSendingController::class, 'detail']);
 
+//laporan sending detail
+Route::get('/received/{kode_receive}', [\App\Http\Controllers\lapReceivingController::class, 'detail']);
+
 //sending
 Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
 Route::post('/sending/kurir', [\App\Http\Controllers\SendingController::class, 'kurir']);

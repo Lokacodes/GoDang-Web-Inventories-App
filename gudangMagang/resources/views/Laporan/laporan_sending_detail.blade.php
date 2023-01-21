@@ -22,6 +22,14 @@
                             <p class = "text-justify">{{$transaksi->nama_pelanggan}}</p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p>Alamat :</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class = "text-justify">{{$transaksi->alamat_pelanggan}}</p>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">

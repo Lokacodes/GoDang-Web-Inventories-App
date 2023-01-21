@@ -13,6 +13,14 @@
                                     placeholder="Kode Receiving" disabled>
                             </div>
                         </div>
+
+                        <div style="display: none;" class=" form-group">
+                            <label>Kode Receiving</label>
+                            <div class="form-group">
+                                <input value="{{'IN-'.date('dmy').'-'.$kd}}" class="typeahead" type="text" id="receives" name="receives"
+                                    placeholder="Kode Receiving" readonly>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="carisuppli">Input Kode Supplier</label>
                             <input type="text" class="form-control form-control-user" id="carisuppli" name="carisuppli"
@@ -43,6 +51,13 @@
                                 <div class="form-group">
                                     <input class="typeahead" type="text" id="kode_supplier" name="kode_supplier"
                                         placeholder="Kode Supplier" disabled>
+                                </div>
+                            </div>
+                            <div style="display: none;" class="col">
+                                <label>Kode Supplier</label>
+                                <div class="form-group">
+                                    <input class="typeahead" type="text" id="kode_suppliers" name="kode_suppliers"
+                                        placeholder="Kode Supplier" readonly>
                                 </div>
                             </div>
                             <div class="col">
@@ -206,6 +221,7 @@
                     select: function(event, ui) {
                         $('#carisuppli').val(ui.item.value);
                         $('#kode_supplier').val(ui.item.kode);
+                        $('#kode_suppliers').val(ui.item.kode);
                         $('#alamat').val(ui.item.alamat);
                         barang.style.visibility = 'visible';
 
@@ -284,5 +300,13 @@
                 });
             });
         </script>
+
+<script>
+    var msg = '{{ Session::get('alert') }}';
+    var exist = '{{ Session::has('alert') }}';
+    if (exist) {
+        alert(msg);
+    }
+</script>
     @endpush
 @endsection

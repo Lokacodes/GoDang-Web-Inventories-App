@@ -108,11 +108,7 @@ class ReceivingController extends Controller
                 //dd($request);
                 $receive->save(); 
 
-                $transaksiTerima = new TransaksiTerima();
-                $transaksiTerima->kode_receive = $request->kode_receiving;
-                $transaksiTerima->tanggal_receive = $request->tanggal;
-                $transaksiTerima->kode_supplier = $request->kode_supplier;
-                $transaksiTerima->save();
+                
 
                 // $received = new Received();
                 // $received->kode_receive = $request->kode_receiving[$i];
@@ -139,8 +135,14 @@ class ReceivingController extends Controller
 
             }
 
+            $transaksiTerima = new TransaksiTerima();
+                $transaksiTerima->kode_receive = $request->receives;
+                $transaksiTerima->tanggal_receive = $request->tanggal;
+                $transaksiTerima->kode_supplier = $request->kode_suppliers;
+                $transaksiTerima->save();
+
            
-            return redirect('/receiving');
+            return redirect('/receiving')->with('alert', 'Data Penerimaan Barang Telah Disimpan');
         }
     }
 

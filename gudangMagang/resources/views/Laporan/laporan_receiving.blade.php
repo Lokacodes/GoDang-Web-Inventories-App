@@ -69,7 +69,7 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <a href="/received/{{ $r->kode_pengiriman }}">
+                                                <a href="/received/{{ $r->kode_receive }}">
                                                     <button type="button" class="btn btn-link btn-fw">View More</button>
                                                 </a>
                                             </center>

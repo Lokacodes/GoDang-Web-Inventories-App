@@ -95,13 +95,17 @@ class SendingController extends Controller
         else{
             $count_barang = count($request->kode_barang);
             for ($i=0; $i < $count_barang; $i++) {
+                if($request->sisa[$i] <= 0 ){
+                    // dd($request);
+                    return redirect('/sending')->with('alert', 'Stok Habis!');;
+                }else {
                 $sending = new Sending();
                 $sending->kode_pengiriman = $request->kode_sending[$i];
                 $sending->kode_barang = $request->kode_barang[$i];
                 $sending->jumlah_barang = $request->jumlah_dibeli[$i];
                 // dd($sending);
                 $sending->save();
-
+                }
                 
                 // $sent = new sent();
                 // $sent->kode_pengiriman = $request->kode_sending[$i];
@@ -145,7 +149,7 @@ class SendingController extends Controller
 
                 $transaksi->save();
            
-            return redirect('/sending');
+            return redirect('/sending')->with('alert', 'Data Pengiriman telah Disimpan');
         }
     }
 
