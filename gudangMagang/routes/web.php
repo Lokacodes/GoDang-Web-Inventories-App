@@ -35,6 +35,9 @@ Route::get('/sent/{kode_pengiriman}', [\App\Http\Controllers\lapSendingControlle
 //laporan sending detail
 Route::get('/received/{kode_receive}', [\App\Http\Controllers\lapReceivingController::class, 'detail']);
 
+//laporan sending detail
+Route::post('/lapSupplier/supplier', [\App\Http\Controllers\laporanSupplierController::class, 'cariSupplier']);
+
 //sending
 Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
 Route::post('/sending/kurir', [\App\Http\Controllers\SendingController::class, 'kurir']);
@@ -72,6 +75,9 @@ Route::group(['middleware' => ['auth']], function(){
 
     //View Receiving
     Route::get('/receive', [\App\Http\Controllers\ReceivingController::class, 'index']);
+    
+    //View Receiving
+    Route::get('/lapSupplier', [\App\Http\Controllers\LaporanSupplierController::class, 'index']);
 
     //View Send
     Route::get('/sending', [\App\Http\Controllers\SendingController::class, 'index']);
