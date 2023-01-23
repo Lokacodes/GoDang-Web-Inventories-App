@@ -13,6 +13,7 @@ class TransaksiKirim extends Model
         'tanggal_transaksi',
         'nama_pelanggan',
         'alamat_pelanggan',
+        'no_telp',
         'catatan',
         'kode_ekspedisi',
         'berat_total',

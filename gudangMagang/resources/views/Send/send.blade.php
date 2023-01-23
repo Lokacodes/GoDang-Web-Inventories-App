@@ -142,6 +142,11 @@
                             placeholder="Alamat Pelanggan">
                     </div>
                     <div class="form-group">
+                        <label for="no_telp">Nomor Telepon</label>
+                        <input type="textarea" class="form-control" id="no_telp" name="no_telp"
+                            placeholder="Nomor Telepon">
+                    </div>
+                    <div class="form-group">
                         <label for="catatan">Catatan</label>
                         <input type="textarea" class="form-control form-control-user" id="catatan" name="catatan"
                             placeholder="Catatan">
@@ -171,7 +176,7 @@
                             <button id="save_bt" type="submit" class="btn btn-info">
                                 Save
                             </button>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

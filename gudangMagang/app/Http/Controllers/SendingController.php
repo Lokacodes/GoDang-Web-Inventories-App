@@ -117,7 +117,7 @@ class SendingController extends Controller
 
                 //$cari = $request->kode_barang[$i];
 
-                $sendingFind = $sending->kode_barang;
+                $sendingFind = $sending->kode_barang; 
                 $barang = Barang::where('kode_barang',$sendingFind)->first();
                 $jumlahSend = ((float)($barang->stok_barang))-((float)($sending->jumlah_barang));
                 // if ($jumlahSend <= 0){
@@ -140,6 +140,7 @@ class SendingController extends Controller
                 $transaksi->tanggal_transaksi = $request->tanggal;
                 $transaksi->nama_pelanggan = $request->nama_pel;
                 $transaksi->alamat_pelanggan = $request->alamat_pel;
+                $transaksi->no_telp = $request->no_telp;
                 $transaksi->catatan = $request->catatan;
                 $transaksi->kode_ekspedisi = $request->cari_kurir;
                 $transaksi->berat_total = $request->total_berat;

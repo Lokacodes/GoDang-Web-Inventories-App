@@ -19,6 +19,7 @@ class CreateTransaksiKirimsTable extends Migration
             $table->date('tanggal_transaksi')->nullable();
             $table->string('nama_pelanggan')->nullable();
             $table->string('alamat_pelanggan')->nullable();
+            $table->string('no_telp')->nullable();
             $table->string('catatan')->nullable();
             $table->string('kode_ekspedisi')->nullable();
             $table->string('berat_total')->nullable();
