@@ -104,7 +104,7 @@ class ReceivingController extends Controller
                 $receive->kode_barang = $request->kode_barang[$i];
                 $receive->kode_supplier = $request->kode_supplier[$i];
                 $receive->jumlah_barang = $request->jumlah[$i];
-                $receive->tanggal_receive = $request->tanggal;
+                // $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
                 $receive->save(); 
 

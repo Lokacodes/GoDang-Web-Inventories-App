@@ -147,7 +147,7 @@
                                     nama_barang = data[key].nama_barang;
                                     stok_barang = data[key].stok_barang;
                                     harga_jual = data[key].harga_jual;
-                                    jumlah_barang = data[key].total;
+                                    jumlah_barang = data[key].jumlah_barang;
                                     // fee = 0.25;
                                     // keuntungan = nanti isi keuntungan;
                                     $('tbody').append('<tr>\
