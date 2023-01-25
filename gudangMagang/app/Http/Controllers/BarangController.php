@@ -13,9 +13,15 @@ class BarangController extends Controller
     public function Index()
     {
         //Show Join In Form
-        $kategori = DB::table('kategoris')->get();
-        $brand = DB::table('brands')->get();
-        $supplier = DB::table('suppliers')->get();
+        $kategori = DB::table('kategoris')
+            ->where('status', '=', '1')
+            ->get();
+        $brand = DB::table('brands')
+            ->where('status', '=', '1')
+            ->get();
+        $supplier = DB::table('suppliers')
+            ->where('status', '=', '1')
+            ->get();
 
         //Join
         $barang = Barang::join('kategoris', 'kategoris.kode_kategori', '=', 'barangs.kode_kategori')
@@ -153,5 +159,19 @@ class BarangController extends Controller
 
         //Return View
         return redirect('/barang')->with('success', 'Data Telah Terupdate');
+    }
+
+    //Status
+    public function status($status, $kode_barang)
+    {
+        $model = Barang::findOrFail($kode_barang);
+        $model->status = $status;
+
+        //dd($model);
+        if ($model->save()) {
+
+            $notice = ['alert' => 'Status Telah Diganti'];
+        }
+        return redirect()->back()->with($notice);
     }
 }

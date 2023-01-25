@@ -12,6 +12,8 @@ class Brand extends Model
     //Yang Diisi
     protected $fillable = [
         'kode_brand',
-        'nama_brand'
+        'nama_brand',
+        'status',
+
     ];
 }

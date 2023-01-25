@@ -13,22 +13,20 @@ class SupplierController extends Controller
     {
         $supplier = DB::table('suppliers')->get();
         //Retrun Views
-        return view('Suply.supplier',['supplier'=>$supplier]);
+        return view('Suply.supplier', ['supplier' => $supplier]);
     }
-
-
 
     public function store(Request $request)
     {
         //Message Alert (X)
-        $message = ['kode_supplier.unique' => 'Kode supplier Sudah Ada', 'nama_supplier.required' => 'Nama supplier Tidak Boleh Kosong','alamat.required' => 'Alamat supplier Tidak Boleh Kosong'];
+        $message = ['kode_supplier.unique' => 'Kode supplier Sudah Ada', 'nama_supplier.required' => 'Nama supplier Tidak Boleh Kosong', 'alamat.required' => 'Alamat supplier Tidak Boleh Kosong'];
         //Validasi
         if ($request->ajax()) {
-            $validator = Validator($request->all(), ['kode_supplier' => 'unique:suppliers', 'nama_supplier' => 'required','alamat' => 'required'], $message);
+            $validator = Validator($request->all(), ['kode_supplier' => 'unique:suppliers', 'nama_supplier' => 'required', 'alamat' => 'required'], $message);
             //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-            } 
+            }
             //Berhasil
             else {
                 $supplier = new Supplier();
@@ -51,7 +49,7 @@ class SupplierController extends Controller
 
         //Request To Table
         $supplier = DB::table('suppliers')
-                ->where('nama_supplier', 'like', "%" . $cari . "%");
+            ->where('nama_supplier', 'like', "%" . $cari . "%");
 
         //Retrun Views
         return view('Suply.supplier', ['supplier' => $supplier]);

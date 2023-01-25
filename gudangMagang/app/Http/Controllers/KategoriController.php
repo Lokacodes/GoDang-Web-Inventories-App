@@ -25,7 +25,7 @@ class KategoriController extends Controller
             //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-            } 
+            }
             //Berhasil
             else {
                 $kategori = new Kategori;
@@ -37,5 +37,19 @@ class KategoriController extends Controller
                 return response()->json(['success' => true, 'message' => 'Kategori Baru Telah Ditambahkan'], 200);
             }
         }
+    }
+
+    //Status
+    public function status($status, $kode_kategori)
+    {
+        $model = Kategori::findOrFail($kode_kategori);
+        $model->status = $status;
+
+        //dd($model);
+        if ($model->save()) {
+
+            $notice = ['alert' => 'Status Telah Diganti'];
+        }
+        return redirect()->back()->with($notice);
     }
 }

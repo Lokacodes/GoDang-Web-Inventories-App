@@ -35,22 +35,22 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th width="100px">
                                         <center>No</center>
                                     </th>
-                                    <th>
+                                    <th style="display: none">
                                         <center>Kode Barang</center>
                                     </th>
                                     <th>
                                         <center>Nama Barang</center>
                                     </th>
-                                    <th>
-                                        <center>Brand</center>
+                                    <th width="200px">
+                                        <center>Stok</center>
                                     </th>
                                     <th>
-                                        <center>Harga Jual</center>
+                                        <center>Status</center>
                                     </th>
-                                    <th>
+                                    <th width="200px">
                                         <center>Deskripsi</center>
                                     </th>
                                 </tr>
@@ -71,10 +71,19 @@
                                             <center>{{ $b->nama_barang }}</center>
                                         </td>
                                         <td>
-                                            <center>{{ $b->nama_brand }}</center>
+                                            <center>{{ $b->stok_barang }}</center>
                                         </td>
                                         <td>
-                                            <center>{{ $b->harga_jual }}</center>
+                                            <center>
+                                                @if ($b->status == 1)
+                                                    <a href="/barang/status/0/{{ $b->kode_barang }}">
+                                                        <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
+                                                    </a>
+                                                @elseif ($b->status == 0)
+                                                    <a href="/barang/status/1/{{ $b->kode_barang }}"><span
+                                                            class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
+                                                @endif
+                                            </center>
                                         </td>
                                         <td>
                                             <center>
@@ -86,7 +95,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="5">
                                             <center>Belum Ada Data</center>
                                         </td>
                                     </tr>
@@ -118,7 +127,7 @@
                                 <div class="form-group">
                                     <label for="kode_kategori">Kategori</label>
                                     <select class="form-control" name="kode_kategori" id="kode_kategori">
-                                        <option selected value="-">-</option>
+                                        <option selected value="-">-- Pilih Kategori --</option>
                                         @foreach ($kat as $k)
                                             <option value="{{ $k->kode_kategori }}">{{ $k->nama_kategori }}</option>
                                         @endforeach
@@ -127,7 +136,7 @@
                                 <div class="form-group">
                                     <label for="kode_brand">Brand</label>
                                     <select class="form-control" name="kode_brand" id="kode_brand">
-                                        <option selected value="-">-</option>
+                                        <option selected value="-">-- Pilih Brand --</option>
                                         @foreach ($brand as $b)
                                             <option value="{{ $b->kode_brand }}">{{ $b->nama_brand }}</option>
                                         @endforeach
@@ -136,7 +145,7 @@
                                 <div class="form-group">
                                     <label for="kode_brand">Supplier</label>
                                     <select class="form-control" name="kode_supplier" id="kode_supplier">
-                                        <option selected value="-">-</option>
+                                        <option selected value="-">-- Pilih Supplier --</option>
                                         @foreach ($supplier as $s)
                                             <option value="{{ $s->kode_supplier }}">{{ $s->nama_supplier }}</option>
                                         @endforeach

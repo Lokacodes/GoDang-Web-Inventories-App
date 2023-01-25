@@ -17,6 +17,7 @@ class CreateKategorisTable extends Migration
             $table->id();
             $table->string('kode_kategori');
             $table->string('nama_kategori');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

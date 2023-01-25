@@ -32,14 +32,17 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th width="100px">
                                         <center>No</center>
                                     </th>
-                                    <th>
+                                    <th style="display: none">
                                         <center>Kode Supplier</center>
                                     </th>
                                     <th>
                                         <center>Nama Supplier</center>
+                                    </th>
+                                    <th width="250px">
+                                        <center>Status</center>
                                     </th>
                                 </tr>
                             </thead>
@@ -57,6 +60,18 @@
                                         </td>
                                         <td>
                                             <center>{{ $s->nama_supplier }}</center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                @if ($s->status == 1)
+                                                    <a href="/supplier/status/0/{{ $s->kode_supplier }}">
+                                                        <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
+                                                    </a>
+                                                @elseif ($s->status == 0)
+                                                    <a href="/supplier/status/1/{{ $s->kode_supplier }}"><span
+                                                            class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
+                                                @endif
+                                            </center>
                                         </td>
                                     </tr>
                                 @empty

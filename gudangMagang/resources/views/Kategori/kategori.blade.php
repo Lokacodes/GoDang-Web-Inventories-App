@@ -22,8 +22,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <center>
+                                    <h3 style="display: none">{{ $k->kode_kategori }}</h3>
                                     <h3 style="text-transform: capitalize; bold">{{ $k->nama_kategori }}</h3>
                                 </center>
+                                @if ($k->status == 1)
+                                    <a href="/kategori/status/0/{{ $k->kode_kategori }}">
+                                        <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
+                                    </a>
+                                @elseif ($k->status == 0)
+                                    <a href="/kategori/status/1/{{ $k->kode_kategori }}"><span
+                                            class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
+                                @endif
                             </div>
                         </div>
                     </div>

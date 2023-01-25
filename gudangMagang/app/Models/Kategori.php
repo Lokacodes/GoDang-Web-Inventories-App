@@ -12,6 +12,8 @@ class Kategori extends Model
     //Yang Diisi
     protected $fillable = [
         'kode_kategori',
-        'nama_kategori'
+        'nama_kategori',
+        'status',
+
     ];
 }

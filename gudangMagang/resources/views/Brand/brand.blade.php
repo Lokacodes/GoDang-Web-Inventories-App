@@ -18,11 +18,17 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>
+                                <th width="100px">
                                     <center>No</center>
+                                </th>
+                                <th style="display: none">
+                                    <center>Kode Brand</center>
                                 </th>
                                 <th>
                                     <center>Nama Brand</center>
+                                </th>
+                                <th width="250px">
+                                    <center>Status</center>
                                 </th>
                             </tr>
                         </thead>
@@ -35,13 +41,28 @@
                                     <td>
                                         <center>{{ $no++ }}</center>
                                     </td>
+                                    <td style="display: none">
+                                        <center>{{ $br->kode_brand }}</center>
+                                    </td>
                                     <td>
                                         <center>{{ $br->nama_brand }}</center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            @if ($br->status == 1)
+                                                <a href="/brand/0/{{ $br->kode_brand }}">
+                                                    <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
+                                                </a>
+                                            @elseif ($br->status == 0)
+                                                <a href="/brand/1/{{ $br->kode_brand }}"><span
+                                                        class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
+                                            @endif
+                                        </center>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <center>Belum Ada Data</center>
                                     </td>
                                 </tr>

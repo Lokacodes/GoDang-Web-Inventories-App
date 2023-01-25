@@ -22,7 +22,4 @@ class TransaksiKirim extends Model
         'ongkir'
     ];
 
-    public function newTransaction(){
-        return $this->hasMany(Sending::class,'kode_pengiriman','kode_pengiriman');
-    }
 }

@@ -6,7 +6,7 @@ use App\Models\Receiving;
 use App\Models\TransaksiTerima;
 use Illuminate\Http\Request;
 
-class lapReceivingController extends Controller
+class LapReceivingController extends Controller
 {
     public function index()
     {

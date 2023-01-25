@@ -17,6 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('kode_brand');
             $table->string('nama_brand');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

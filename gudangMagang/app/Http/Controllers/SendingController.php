@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\ekspedisi;
 use App\Models\sending;
-use App\Models\sent;
 use App\Models\TransaksiKirim;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SendingController extends Controller

@@ -11,7 +11,8 @@ class BrandController extends Controller
     public function index()
     {
         //Select Table Brand
-        $brand = Brand::paginate(5);
+        $brand = Brand::select('*')
+        ->paginate(5);
 
         //Return View File
         return view('Brand.brand', ['brand' => $brand]);
@@ -40,5 +41,19 @@ class BrandController extends Controller
                 return response()->json(['success' => true, 'message' => 'Brand Baru Telah Ditambahkan'], 200);
             }
         }
+    }
+
+    //Status
+    public function status($status, $kode_brand)
+    {
+        $model = Brand::findOrFail($kode_brand);
+        $model->status = $status;
+
+        dd($model);
+        // if ($model->save()) {
+
+        //     $notice = ['alert' => 'Status Telah Diganti'];
+        // }
+        // return redirect()->back()->with($notice);
     }
 }
