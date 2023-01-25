@@ -18,11 +18,11 @@ Route::get('/barang/status/{status}/{kode_barang}', [\App\Http\Controllers\Baran
 
 //Kategori
 Route::post('/kategori/store', [\App\Http\Controllers\KategoriController::class, 'store']);
-Route::get('/kategori/status/{status}/{kode_kategori}', [\App\Http\Controllers\KategoriController::class, 'status']);
+Route::get('/kategori/status/{status}/{id}', [\App\Http\Controllers\KategoriController::class, 'status']);
 
 //Brand
 Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store']);
-Route::post('/brand/{status}/{kode_brand}', [\App\Http\Controllers\BrandController::class, 'status']);
+Route::get('/brand/{status}/{id}', [\App\Http\Controllers\BrandController::class, 'status']);
 
 //Receiving
 Route::get('/receiving', [\App\Http\Controllers\ReceivingController::class, 'index']);
@@ -48,11 +48,11 @@ Route::get('/sending/save', [\App\Http\Controllers\SendingController::class, 'se
 
 //Supplier store data
 Route::post('/supplier/store', [\App\Http\Controllers\SupplierController::class, 'store']);
-Route::get('/supplier/status/{status}/{kode_supplier}', [\App\Http\Controllers\SupplierController::class, 'status']);
+Route::get('/supplier/status/{status}/{id}', [\App\Http\Controllers\SupplierController::class, 'status']);
 
 //ekspedisi store data
 Route::post('/ekspedisi/store', [\App\Http\Controllers\EkspedisiController::class, 'store']);
-Route::post('/ekspedisi/status/{status}/{kode_ekspedisi}', [\App\Http\Controllers\EkspedisiController::class, 'status']);
+Route::get('/ekspedisi/status/{status}/{id}', [\App\Http\Controllers\EkspedisiController::class, 'status']);
 
 //Route Group
 Route::group(['middleware' => ['auth']], function () {

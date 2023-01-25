@@ -50,11 +50,11 @@
                                     <td>
                                         <center>
                                             @if ($br->status == 1)
-                                                <a href="/brand/0/{{ $br->kode_brand }}">
+                                                <a href="/brand/0/{{ $br->id }}">
                                                     <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
                                                 </a>
                                             @elseif ($br->status == 0)
-                                                <a href="/brand/1/{{ $br->kode_brand }}"><span
+                                                <a href="/brand/1/{{ $br->id }}""><span
                                                         class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
                                             @endif
                                         </center>
@@ -157,6 +157,14 @@
                     }
                 });
             });
+        </script>
+
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
+            }
         </script>
     @endpush
 @endsection

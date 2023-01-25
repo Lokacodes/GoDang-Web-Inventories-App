@@ -12,7 +12,7 @@
                 <span class="close" onclick="searchToggle(this, event);"></span>
             </div>
         </div>
-    </div><br> --}} 
+    </div><br> --}}
 
     {{-- Table Supplier --}}
     <div class="row">
@@ -55,7 +55,7 @@
                                         <td>
                                             <center>{{ $no++ }}</center>
                                         </td>
-                                        <td>
+                                        <td style="display:none">
                                             <center>{{ $s->kode_supplier }}</center>
                                         </td>
                                         <td>
@@ -64,11 +64,11 @@
                                         <td>
                                             <center>
                                                 @if ($s->status == 1)
-                                                    <a href="/supplier/status/0/{{ $s->kode_supplier }}">
+                                                    <a href="/supplier/status/0/{{ $s->id }}">
                                                         <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
                                                     </a>
                                                 @elseif ($s->status == 0)
-                                                    <a href="/supplier/status/1/{{ $s->kode_supplier }}"><span
+                                                    <a href="/supplier/status/1/{{ $s->id }}"><span
                                                             class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
                                                 @endif
                                             </center>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <div class="modal fade" id="addTodoModal" aria-hidden="true">
@@ -102,7 +102,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                                
+
                                 <div class="form-group">
                                     <label for="kode_supplier">Kode Supplier</label>
                                     <input type="text" class="form-control" id="kode_supplier" name="kode_supplier"
@@ -115,11 +115,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat Supplier</label>
-                                    <input type="text" class="form-control"
-                                        id="alamat" name="alamat" placeholder="Alamat Supplier">
+                                    <input type="text" class="form-control" id="alamat" name="alamat"
+                                        placeholder="Alamat Supplier">
                                 </div>
-                                
-                                
+
+
                             </div>
                             <span id="taskError" class="alert-message"></span>
                         </div>
@@ -165,7 +165,7 @@
                                 $('#kode_supplier').val("");
                                 $('#nama_supplier').val("");
                                 $('#alamat').val("");
-                                
+
                             },
                             error: function(response) {
                                 let data = response.responseJSON.error;
@@ -183,11 +183,10 @@
         </script>
 
         <script>
-            function hanyaAngka(event) {
-                var angka = (event.which) ? event.which : event.keyCode
-                if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
-                    return false;
-                return true;
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
             }
         </script>
     @endpush

@@ -39,9 +39,9 @@ class EkspedisiController extends Controller
     }
 
     //Status
-    public function status($status, $kode_ekspedisi)
+    public function status($status, $id)
     {
-        $model = Ekspedisi::findOrFail($kode_ekspedisi);
+        $model = Ekspedisi::findOrFail($id);
         $model->status = $status;
 
         //dd($model);

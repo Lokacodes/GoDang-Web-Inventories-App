@@ -40,11 +40,13 @@ class SendingController extends Controller
         $search=$request->search;
         if($search==''){
             $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier','berat_barang')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'status_barang', 'kode_supplier','berat_barang')
+                ->where('status_barang', '=', '1')
                 ->get();
         }else{
             $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier','berat_barang')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'status_barang', 'kode_supplier','berat_barang')
+                ->where('status_barang', '=', '1')
                 ->where('nama_barang','like','%'.$search.'%')
                 ->get();
         }
@@ -62,11 +64,13 @@ class SendingController extends Controller
         $search=$request->search;
         if($search==''){
             $kurir=ekspedisi::orderBy('nama_ekspedisi', 'asc')
-                ->select('kode_ekspedisi', 'nama_ekspedisi')
+                ->select('kode_ekspedisi', 'nama_ekspedisi', 'status')
+                ->where('status', '=', '1')
                 ->get();
         }else{
             $kurir=ekspedisi::orderBy('nama_ekspedisi', 'asc')
-                ->select('kode_ekspedisi', 'nama_ekspedisi')
+                ->select('kode_ekspedisi', 'nama_ekspedisi', 'status')
+                ->where('status', '=', '1')
                 ->where('nama_ekspedisi','like','%'.$search.'%')
                 ->get(); 
         }

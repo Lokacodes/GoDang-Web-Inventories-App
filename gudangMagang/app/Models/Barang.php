@@ -18,7 +18,10 @@ class Barang extends Model
         'stok_barang',
         'harga_jual',
         'kode_supplier',
-        'status',
+        'status_barang',
         //'foto'
     ];
+
+    protected $primaryKey = 'kode_barang';
+    public $incrementing = false;
 }

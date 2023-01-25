@@ -99,9 +99,15 @@ class BarangController extends Controller
     {
         //Select Table
         $barang = DB::table('barangs')->get();
-        $kat = DB::table('kategoris')->get();
-        $brand = DB::table('brands')->get();
-        $supplier = DB::table('suppliers')->get();
+        $kat = DB::table('kategoris')
+            ->where('status', '=', '1')
+            ->get();
+        $brand = DB::table('brands')
+            ->where('status', '=', '1')
+            ->get();
+        $supplier = DB::table('suppliers')
+            ->where('status', '=', '1')
+            ->get();
 
         //Show Detail Barang & Join Table
         $det = Barang::whereKodeBarang($request->kode_barang)
@@ -165,9 +171,9 @@ class BarangController extends Controller
     public function status($status, $kode_barang)
     {
         $model = Barang::findOrFail($kode_barang);
-        $model->status = $status;
+        $model->status_barang = $status;
 
-        //dd($model);
+        //dd($status);
         if ($model->save()) {
 
             $notice = ['alert' => 'Status Telah Diganti'];

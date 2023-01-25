@@ -26,11 +26,11 @@
                                     <h3 style="text-transform: capitalize; bold">{{ $k->nama_kategori }}</h3>
                                 </center>
                                 @if ($k->status == 1)
-                                    <a href="/kategori/status/0/{{ $k->kode_kategori }}">
+                                    <a href="/kategori/status/0/{{ $k->id }}">
                                         <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
                                     </a>
                                 @elseif ($k->status == 0)
-                                    <a href="/kategori/status/1/{{ $k->kode_kategori }}"><span
+                                    <a href="/kategori/status/1/{{ $k->id }}"><span
                                             class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
                                 @endif
                             </div>
@@ -132,6 +132,14 @@
                     }
                 });
             });
+        </script>
+
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
+            }
         </script>
     @endpush
 @endsection

@@ -18,85 +18,88 @@ class ReceivingController extends Controller
 
         $autoId = DB::table('receivings')->select(DB::raw('MAX(RIGHT(kode_receive,4)) as autoId'));
         $kd = "";
-        if($autoId->count()>0){
-            foreach($autoId->get() as $a){
-                $tmp = ((int)$a->autoId)+1;
-                $kd = sprintf("%04s",$tmp);
+        if ($autoId->count() > 0) {
+            foreach ($autoId->get() as $a) {
+                $tmp = ((int)$a->autoId) + 1;
+                $kd = sprintf("%04s", $tmp);
             }
-        }   else{
+        } else {
             $kd = "0001";
         }
 
         //Return Views
-        return view('Receive.receive', compact('receive','kd'));
+        return view('Receive.receive', compact('receive', 'kd'));
     }
 
     //Search
     public function searchsupply(Request $request)
     {
-        $search=$request->search;
-        if($search==''){
-            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
-                ->select('nama_supplier', 'kode_supplier', 'alamat')
+        $search = $request->search;
+        if ($search == '') {
+            $cari = DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+                ->select('nama_supplier', 'kode_supplier', 'alamat', 'status')
+                ->where('status', '=', '1')
                 ->get();
-        }else{
-            $cari=DB::table('suppliers')->orderBy('nama_supplier', 'asc')
-                ->select('nama_supplier', 'kode_supplier', 'alamat')
-                ->where('nama_supplier','like','%'.$search.'%')
+        } else {
+            $cari = DB::table('suppliers')->orderBy('nama_supplier', 'asc')
+                ->select('nama_supplier', 'kode_supplier', 'alamat', 'status')
+                ->where('status', '=', '1')
+                ->where('nama_supplier', 'like', '%' . $search . '%')
                 ->get();
         }
 
         $response = array();
-        foreach($cari as $suppli){
-            $response[] = array("value"=>$suppli->nama_supplier, "kode"=>$suppli->kode_supplier, "alamat"=>$suppli->alamat);
+        foreach ($cari as $suppli) {
+            $response[] = array("value" => $suppli->nama_supplier, "kode" => $suppli->kode_supplier, "alamat" => $suppli->alamat);
         }
-        
-         return response()->json($response);
+
+        return response()->json($response);
     }
 
     //Barang
     public function barang(Request $request)
     {
-        $search=$request->search;
+        $search = $request->search;
         $supplier = $request->supplier;
 
 
 
-        if($search==''){
-            $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
-                ->where('kode_supplier','=',$supplier)
+        if ($search == '') {
+            $barang = Barang::orderBy('nama_barang', 'asc')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier', 'status_barang')
+                ->where('status_barang', '=', '1')
+                ->where('kode_supplier', '=', $supplier)
                 ->get();
-        }else{
-            $barang=Barang::orderBy('nama_barang', 'asc')
-                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier')
-                ->where('kode_supplier','=',$supplier)
-                ->where('nama_barang','like','%'.$search.'%')
+        } else {
+            $barang = Barang::orderBy('nama_barang', 'asc')
+                ->select('kode_barang', 'nama_barang', 'stok_barang', 'harga_jual', 'harga_beli', 'kode_supplier', 'status_barang')
+                ->where('status_barang', '=', '1')
+                ->where('kode_supplier', '=', $supplier)
+                ->where('nama_barang', 'like', '%' . $search . '%')
                 ->get();
         }
 
 
         $response = array();
-        foreach($barang as $barang){
-            $response[] = array("value"=>$barang->nama_barang, "label1"=>$barang->kode_barang, "label2"=>$barang->stok_barang, "label3"=>$barang->kode_supplier, "label4"=>$barang->harga_jual);
+        foreach ($barang as $barang) {
+            $response[] = array("value" => $barang->nama_barang, "label1" => $barang->kode_barang, "label2" => $barang->stok_barang, "label3" => $barang->kode_supplier, "label4" => $barang->harga_jual);
         }
         // dd($supplier);
-         return response()->json($response);
+        return response()->json($response);
     }
 
     public function receivingStore(Request $request)
     {
-        if($request->kode_barang == null){
+        if ($request->kode_barang == null) {
 
             $errorNotice = array(
-                'message'=>'Sorry, You Do not select any item',
-                'alert-type'=>'error',
+                'message' => 'Sorry, You Do not select any item',
+                'alert-type' => 'error',
             );
             return redirect()->back()->with($errorNotice);
-        }
-        else{
+        } else {
             $count_barang = count($request->kode_barang);
-            for ($i=0; $i < $count_barang; $i++) {
+            for ($i = 0; $i < $count_barang; $i++) {
                 $receive = new Receiving();
                 $receive->kode_receive = $request->kode_receiving[$i];
                 $receive->kode_barang = $request->kode_barang[$i];
@@ -104,9 +107,9 @@ class ReceivingController extends Controller
                 $receive->jumlah_barang = $request->jumlah[$i];
                 $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
-                $receive->save(); 
+                $receive->save();
 
-                
+
 
                 // $received = new Received();
                 // $received->kode_receive = $request->kode_receiving[$i];
@@ -118,28 +121,28 @@ class ReceivingController extends Controller
                 // $received->save();
 
                 $sendingFind = $receive->kode_barang;
-                $barang = Barang::where('kode_barang',$sendingFind)->first();
-                $jumlahReceive = ((float)($barang->stok_barang))+((float)($receive->jumlah_barang));
+                $barang = Barang::where('kode_barang', $sendingFind)->first();
+                $jumlahReceive = ((float)($barang->stok_barang)) + ((float)($receive->jumlah_barang));
                 $barang->stok_barang = $jumlahReceive;
                 //dd($barang);
 
                 $barang->save();
-                
 
 
-            // /* To send Notification in admin notice board after purchase */
-            // $user = User::where('username','admin')->get();
-            // Notification::send($user,new PurchaseComplete($request->product_name));
+
+                // /* To send Notification in admin notice board after purchase */
+                // $user = User::where('username','admin')->get();
+                // Notification::send($user,new PurchaseComplete($request->product_name));
 
             }
 
             $transaksiTerima = new TransaksiTerima();
-                $transaksiTerima->kode_receive = $request->receives;
-                $transaksiTerima->tanggal_receive = $request->tanggal;
-                $transaksiTerima->kode_supplier = $request->kode_suppliers;
-                $transaksiTerima->save();
+            $transaksiTerima->kode_receive = $request->receives;
+            $transaksiTerima->tanggal_receive = $request->tanggal;
+            $transaksiTerima->kode_supplier = $request->kode_suppliers;
+            $transaksiTerima->save();
 
-           
+
             return redirect('/receiving')->with('alert', 'Data Penerimaan Barang Telah Disimpan');
         }
     }
@@ -158,7 +161,7 @@ class ReceivingController extends Controller
     //             Barang::updateOrCreate(['kode_barang' => $kode_barang],['stok_barang'=> $total[$i]]);
     //         }
     //     }
-    
+
     //     return \redirect('/receiving');
 
     // }

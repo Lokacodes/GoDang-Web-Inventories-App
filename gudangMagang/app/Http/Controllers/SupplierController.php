@@ -54,4 +54,18 @@ class SupplierController extends Controller
         //Retrun Views
         return view('Suply.supplier', ['supplier' => $supplier]);
     }
+
+    //Status
+    public function status($status, $id)
+    {
+        $model = Supplier::findOrFail($id);
+        $model->status = $status;
+
+        //dd($model);
+        if ($model->save()) {
+
+            $notice = ['alert' => 'Status Telah Diganti'];
+        }
+        return redirect()->back()->with($notice);
+    }
 }

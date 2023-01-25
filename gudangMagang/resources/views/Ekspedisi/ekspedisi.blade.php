@@ -48,7 +48,7 @@
                                         <td>
                                             <center>{{ $no++ }}</center>
                                         </td>
-                                        <td>
+                                        <td style="display: none">
                                             <center>{{ $ek->kode_ekspedisi }}</center>
                                         </td>
                                         <td>
@@ -57,11 +57,11 @@
                                         <td>
                                             <center>
                                                 @if ($ek->status == 1)
-                                                    <a href="/ekspedisi/status/0/{{ $ek->kode_ekspedisi }}">
+                                                    <a href="/ekspedisi/status/0/{{ $ek->id }}">
                                                         <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
                                                     </a>
                                                 @elseif ($ek->status == 0)
-                                                    <a href="/ekspedisi/status/1/{{ $ek->kode_ekspedisi }}"><span
+                                                    <a href="/ekspedisi/status/1/{{ $ek->id }}"><span
                                                             class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
                                                 @endif
                                             </center>
@@ -171,6 +171,14 @@
                 if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
                     return false;
                 return true;
+            }
+        </script>
+
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
             }
         </script>
     @endpush

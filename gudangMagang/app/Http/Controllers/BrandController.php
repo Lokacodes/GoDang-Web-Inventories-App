@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
@@ -44,16 +45,16 @@ class BrandController extends Controller
     }
 
     //Status
-    public function status($status, $kode_brand)
+    public function status($status, $id)
     {
-        $model = Brand::findOrFail($kode_brand);
+        $model = Brand::findOrFail($id);
         $model->status = $status;
 
-        dd($model);
-        // if ($model->save()) {
+        //dd($model);
+        if ($model->save()) {
 
-        //     $notice = ['alert' => 'Status Telah Diganti'];
-        // }
-        // return redirect()->back()->with($notice);
+            $notice = ['alert' => 'Status Telah Diganti'];
+        }
+        return redirect()->back()->with($notice);
     }
 }

@@ -64,7 +64,7 @@
                                         <td>
                                             <center>{{ $no++ }}</center>
                                         </td>
-                                        <td>
+                                        <td style="display: none">
                                             <center>{{ $b->kode_barang }}</center>
                                         </td>
                                         <td>
@@ -75,11 +75,11 @@
                                         </td>
                                         <td>
                                             <center>
-                                                @if ($b->status == 1)
+                                                @if ($b->status_barang == 1)
                                                     <a href="/barang/status/0/{{ $b->kode_barang }}">
                                                         <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
                                                     </a>
-                                                @elseif ($b->status == 0)
+                                                @elseif ($b->status_barang == 0)
                                                     <a href="/barang/status/1/{{ $b->kode_barang }}"><span
                                                             class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
                                                 @endif
@@ -243,6 +243,14 @@
                 if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
                     return false;
                 return true;
+            }
+        </script>
+
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
             }
         </script>
     @endpush
