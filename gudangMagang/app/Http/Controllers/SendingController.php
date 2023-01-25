@@ -71,7 +71,7 @@ class SendingController extends Controller
             $kurir=ekspedisi::orderBy('nama_ekspedisi', 'asc')
                 ->select('kode_ekspedisi', 'nama_ekspedisi')
                 ->where('nama_ekspedisi','like','%'.$search.'%')
-                ->get();
+                ->get(); 
         }
 
         $response = array();

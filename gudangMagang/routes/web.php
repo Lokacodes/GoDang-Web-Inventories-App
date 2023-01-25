@@ -38,6 +38,8 @@ Route::get('/received/{kode_receive}', [\App\Http\Controllers\lapReceivingContro
 //laporan sending detail
 Route::post('/lapSupplier/supplier', [\App\Http\Controllers\laporanSupplierController::class, 'cariSupplier']);
 
+Route::get('/lapSupplier/{kode_supplier}', [\App\Http\Controllers\laporanSupplierController::class, 'tampilBarang']);
+
 //sending
 Route::post('/sending/barang', [\App\Http\Controllers\SendingController::class, 'barang']);
 Route::post('/sending/kurir', [\App\Http\Controllers\SendingController::class, 'kurir']);

@@ -48,4 +48,22 @@ public function index(){
         
          return response()->json($response);
     }
+
+    public function tampilBarang(Request $request){
+            $supplier=DB::table('sendings')
+            // ->where('kode_supplier','=',$request->kode_supplier)
+            // ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
+            
+            ->select('kode_barang',DB::raw('SUM(jumlah_barang) as total'))
+            ->groupBy('kode_barang')
+            
+                // ->where('kode_supplier','=',$request->kode_supplier)
+            // ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
+                //->sum('jumlah_barang')
+            ->get();
+                
+                //dd($supplier);
+        
+         return response()->json($supplier);
+    }
 }

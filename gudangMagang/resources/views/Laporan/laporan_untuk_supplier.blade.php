@@ -26,7 +26,6 @@
                                 <label for="kode_supplier">Kode Supplier</label>
                                 <input readonly type="text" class="form-control form-control-user" id="kode_supplier"
                                     name="kode_supplier" placeholder="Kode Supplier">
-                                <input type="hidden" name="_token2" id="csrf2" value="{{ Session::token() }}">
                             </div>
                         </div>
                     </div>
@@ -70,11 +69,11 @@
                                 <center>Fee</center>
                             </th>
                             <th>
-                                <center>Keuntungan</center>
+                                <center>Penghasilan</center>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         {{-- @php
                             $no = 1;
                         @endphp
@@ -125,9 +124,49 @@
                     }
                 });
 
-                $('#tampilkan').click(function(){
+                $("#tampilkan").click(function(){
+                    
                     tabel.style.visibility = 'visible';
+                    let kode_supp = $("#kode_supplier").val();
+                    tampilBarang(kode_supp);
                 });
+
+                function tampilBarang(kode_supplier){
+                    $('tbody').html("");
+                    $.ajax({
+                            url: "/lapSupplier/"+kode_supplier,
+                            type: 'get',
+                            dataType: "json",
+                            // data: {
+                            //     kode_supplier : kode_supplier
+                            // },
+                            success: function(data) {
+                                let no = 1 ;
+                                $.each(data, function(key,values){
+                                    kode_barang = data[key].kode_barang;
+                                    nama_barang = data[key].nama_barang;
+                                    stok_barang = data[key].stok_barang;
+                                    harga_jual = data[key].harga_jual;
+                                    jumlah_barang = data[key].total;
+                                    // fee = 0.25;
+                                    // keuntungan = nanti isi keuntungan;
+                                    $('tbody').append('<tr>\
+                                        <td>'+ parseInt(key+1) +'</td>\
+                                        <td>'+ kode_barang +'</td>\
+                                        <td>'+ nama_barang +'</td>\
+                                        <td>'+ stok_barang +'</td>\
+                                        <td>'+ harga_jual +'</td>\
+                                        <td>'+ jumlah_barang +'</td>\
+                                        <td>2,5%</td>\
+                                        <td>'+ (parseInt(harga_jual)-(parseInt(harga_jual)*0.025))*jumlah_barang+'</td>\
+                                    </tr>');
+                                })
+                                response(data);
+                                // <td>'+ fee +'</td>\
+                                //         <td>'+ keuntungan +'</td>\
+                            }
+                        });
+                }
             });
         </script>
     @endpush

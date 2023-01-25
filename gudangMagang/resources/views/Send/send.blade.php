@@ -8,6 +8,7 @@
                         <h4 class="card-title">SENDING</h4>
                         <div class="form-group">
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <label>Kode Sending</label>
                                 
@@ -192,6 +193,8 @@
                 pengiriman.style.visibility = 'hidden';
 
                 var render=createwidgetlokasi("provinsi","kotaKab","kecamatan","kelurahan");
+
+            
 
                 $("#show").click(function() {
                     $("#output").html(trackdatalokasi);
