@@ -50,7 +50,6 @@ class LaporanSupplierController extends Controller
         return response()->json($response);
     }
 
-<<<<<<< HEAD
     public function tampilBarang(Request $request){
             $supplier=DB::table('sendings')
             ->where('kode_supplier','=',$request->kode_supplier)
@@ -60,18 +59,6 @@ class LaporanSupplierController extends Controller
             // ->groupBy('kode_barang')
             
                 // ->where('kode_supplier','=',$request->kode_supplier)
-=======
-    public function tampilBarang(Request $request)
-    {
-        $supplier = DB::table('sendings')
-            // ->where('kode_supplier','=',$request->kode_supplier)
-            // ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
-
-            ->select('kode_barang', DB::raw('SUM(jumlah_barang) as total'))
-            ->groupBy('kode_barang')
-
-            // ->where('kode_supplier','=',$request->kode_supplier)
->>>>>>> 1c5e2f1d6a733bbdee72b10faf6290d5dd21484b
             // ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
             //->sum('jumlah_barang')
             ->get();
