@@ -7,7 +7,7 @@ use App\Models\TransaksiKirim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
  
-class lapSendingController extends Controller
+class LapSendingController extends Controller
 {
     public function index()
     {

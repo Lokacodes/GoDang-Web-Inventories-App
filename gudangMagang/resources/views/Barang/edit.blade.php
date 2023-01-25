@@ -7,7 +7,7 @@
                 <h4 class="card-title">Edit Barang</h4>
                 <form class="forms-sample" action="/barang/update/{kode_barang}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="kode_kategori">kategori barang</label>
+                        <label for="kode_kategori">Kategori Barang</label>
                         <select class="form-control" name="kode_kategori" id="kode_kategori"
                             value="{{ $det->kode_kategori }}">
                             <option selected="{{ $det->kode_kategori }}">{{ $det->kode_kategori }}</option>
@@ -38,7 +38,7 @@
                         <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
                         <label for="kode_barang">Kode Barang</label>
                         <input type="text" readonly class="form-control form-control-user" id="kode_barang"
-                            name="kode_barang" value="{{ $det->kode_barang }}" placeholder="Kode Barang">
+                            name="kode_barang" value="{{ $det->kode_barang }}" placeholder="Kode Barang" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label for="stok_barang">Stok Barang</label>
                         <input type="text" class="form-control form-control-user" id="stok_barang" name="stok_barang"
-                            value="{{ $det->stok_barang }}" placeholder="Stok Barang">
+                            value="{{ $det->stok_barang }}" placeholder="Stok Barang" readonly>
                     </div>
                     {{-- <div class="form-group">
                         <label for="foto">Foto Barang</label>

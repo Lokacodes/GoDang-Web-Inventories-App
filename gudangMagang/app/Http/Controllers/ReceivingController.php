@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
-use App\Models\Received;
 use App\Models\Receiving;
-use App\Models\TransaksiKirim;
 use App\Models\TransaksiTerima;
 
 class ReceivingController extends Controller

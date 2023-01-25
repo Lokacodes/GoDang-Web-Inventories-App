@@ -45,7 +45,7 @@ class LoginController extends Controller
         ]);
 
         //Return Views
-        return redirect('/login');
+        return redirect('/login')->with('alert', 'Pendaftaran Berhasil');
     }
 
     //Log Out Process

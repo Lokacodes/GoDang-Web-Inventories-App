@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ekspedisi;
+use App\Models\Ekspedisi;
 use Illuminate\Http\Request;
 
 class EkspedisiController extends Controller
 {
     public function index()
     {
-        $ekspedisi = ekspedisi::all();
+        $ekspedisi = Ekspedisi::all();
         return view('Ekspedisi.ekspedisi', ['ekspedisi' => $ekspedisi]);
     }
 
@@ -24,10 +24,10 @@ class EkspedisiController extends Controller
             //Gagal
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-            } 
+            }
             //Berhasil
             else {
-                $ekspedisi = new ekspedisi;
+                $ekspedisi = new Ekspedisi;
                 $ekspedisi->kode_ekspedisi = $request->kode_ekspedisi;
                 $ekspedisi->nama_ekspedisi = $request->nama_ekspedisi;
                 $ekspedisi->save();
@@ -36,5 +36,19 @@ class EkspedisiController extends Controller
                 return response()->json(['success' => true, 'message' => 'Ekspedisi Baru Telah Ditambahkan'], 200);
             }
         }
+    }
+
+    //Status
+    public function status($status, $kode_ekspedisi)
+    {
+        $model = Ekspedisi::findOrFail($kode_ekspedisi);
+        $model->status = $status;
+
+        //dd($model);
+        if ($model->save()) {
+
+            $notice = ['alert' => 'Status Telah Diganti'];
+        }
+        return redirect()->back()->with($notice);
     }
 }

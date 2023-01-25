@@ -25,14 +25,17 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th width="100px">
                                         <center>No</center>
                                     </th>
-                                    <th>
+                                    <th style="display: none">
                                         <center>Kode Ekspedisi</center>
                                     </th>
                                     <th>
                                         <center>Nama Ekspedisi</center>
+                                    </th>
+                                    <th width="250px">
+                                        <center>Status</center>
                                     </th>
                                 </tr>
                             </thead>
@@ -51,10 +54,22 @@
                                         <td>
                                             <center>{{ $ek->nama_ekspedisi }}</center>
                                         </td>
+                                        <td>
+                                            <center>
+                                                @if ($ek->status == 1)
+                                                    <a href="/ekspedisi/status/0/{{ $ek->kode_ekspedisi }}">
+                                                        <span class="btn btn-sm btn-success btn-icon-text">Unblock</span>
+                                                    </a>
+                                                @elseif ($ek->status == 0)
+                                                    <a href="/ekspedisi/status/1/{{ $ek->kode_ekspedisi }}"><span
+                                                            class="btn btn-sm btn-danger btn-icon-text">Block</span></a>
+                                                @endif
+                                            </center>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4">
+                                        <td colspan="3">
                                             <center>Belum Ada Data</center>
                                         </td>
                                     </tr>
@@ -79,7 +94,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
-                                
+
                                 <div class="form-group">
                                     <label for="kode_ekspedisi">Kode ekspedisi</label>
                                     <input type="text" class="form-control" id="kode_ekspedisi" name="kode_ekspedisi"
@@ -90,7 +105,7 @@
                                     <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi"
                                         placeholder="Nama ekspedisi">
                                 </div>
-                                
+
                             </div>
                             <span id="taskError" class="alert-message"></span>
                         </div>
@@ -133,7 +148,7 @@
                                 window.location = "/ekspedisi";
                                 $('#kode_ekspedisi').val("");
                                 $('#nama_ekspedisi').val("");
-                                
+
                             },
                             error: function(response) {
                                 let data = response.responseJSON.error;

@@ -18,6 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->string('kode_supplier')->nullable();
             $table->string('nama_supplier')->nullable();
             $table->string('alamat')->nullable();
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

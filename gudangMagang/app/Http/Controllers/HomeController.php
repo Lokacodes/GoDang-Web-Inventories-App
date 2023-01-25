@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Receiving;
 use App\Models\TransaksiKirim;
 use App\Models\TransaksiTerima;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
