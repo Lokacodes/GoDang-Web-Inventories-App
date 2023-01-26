@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class LaporanSupplierController extends Controller
 {
+    //View Laporan Supplier
     public function index()
     {
         return view('Laporan.laporan_untuk_supplier');
     }
 
+    //Search Barang
     public function search(Request $request)
     {
         $barang = Barang::select('nama_barang', 'kode_supplier', 'kode_barang');
@@ -27,7 +29,7 @@ class LaporanSupplierController extends Controller
         return view('Laporan.laporan_untuk_supplier', ['barang' => $barang, 'barangSupp' => $barangSupp]);
     }
 
-
+    //Search Supplier
     public function cariSupplier(Request $request)
     {
         $search = $request->search;
@@ -50,17 +52,12 @@ class LaporanSupplierController extends Controller
         return response()->json($response);
     }
 
-    public function tampilBarang(Request $request){
-            $supplier=DB::table('sendings')
-            ->where('kode_supplier','=',$request->kode_supplier)
-            ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
-            
-            // ->select('kode_barang',DB::raw('SUM(jumlah_barang) as total'))
-            // ->groupBy('kode_barang')
-            
-                // ->where('kode_supplier','=',$request->kode_supplier)
-            // ->join('barangs','sendings.kode_barang','=','barangs.kode_barang')
-            //->sum('jumlah_barang')
+    //Tampil Detail
+    public function tampilBarang(Request $request)
+    {
+        $supplier = DB::table('sendings')
+            ->where('kode_supplier', '=', $request->kode_supplier)
+            ->join('barangs', 'sendings.kode_barang', '=', 'barangs.kode_barang')
             ->get();
 
         //dd($supplier);

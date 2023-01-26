@@ -19,5 +19,4 @@ class HomeController extends Controller
         //Return Views
         return view('Home.dashboard', ['barang'=>$barang, 'receive'=>$receive,'sending'=>$sending]);
     }
-
 }

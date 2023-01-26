@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     use HasFactory;
+
+    //Yang Diisi
     protected $fillable = [
         'kode_supplier',
         'nama_supplier',

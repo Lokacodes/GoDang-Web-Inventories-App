@@ -1,11 +1,5 @@
 @extends('index')
 @section('content')
-    {{-- Search Box --}}
-    {{-- <p>Cari Data Ekspedisi :</p>
-	<form action="/ekspedisi/search" method="GET">
-		<input type="text" name="cari" placeholder="Cari ekspedisi" value="{{ old('cari') }}">
-		<input type="submit" value="CARI">
-	</form> --}}
 
     {{-- Table ekspedisi --}}
     <div class="row">

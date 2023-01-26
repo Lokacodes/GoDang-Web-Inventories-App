@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class EkspedisiController extends Controller
 {
+    //View List Ekspedisi
     public function index()
     {
         $ekspedisi = Ekspedisi::all();
@@ -38,7 +39,7 @@ class EkspedisiController extends Controller
         }
     }
 
-    //Status
+    //Status Ekspedisi
     public function status($status, $id)
     {
         $model = Ekspedisi::findOrFail($id);

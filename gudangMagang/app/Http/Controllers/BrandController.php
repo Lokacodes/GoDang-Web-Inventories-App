@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
@@ -44,7 +43,7 @@ class BrandController extends Controller
         }
     }
 
-    //Status
+    //Status Brand
     public function status($status, $id)
     {
         $model = Brand::findOrFail($id);

@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="row justify-content-center">
-        {{-- <div class="col-md-6 stretch-card grid-margin ">
-            <div class="card ">
-                <div class="card-body">
-                </div>
-            </div>
-        </div> --}}
         <div id="print_out" class="col-md-6 stretch-card grid-margin ">
             <div class="card ">
                 <div class="card-body">
@@ -73,18 +67,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody >
-                        {{-- @php
-                            $no = 1;
-                        @endphp
-                        @foreach ($barangSupp as $b)
-
-                        <tr>
-                            <td> {{$no++}} </td>
-                            <td> {{$b->kode_barang}} </td>
-                        </tr>
-                            
-                        @endforeach --}}
+                    <tbody>
 
                     </tbody>
                 </table>
@@ -118,54 +101,49 @@
                     select: function(event, ui) {
                         $('#carisupplier').val(ui.item.value);
                         $('#kode_supplier').val(ui.item.kode);
-                        // $('#kode_suppliers').val(ui.item.kode);
-                        // $('#alamat').val(ui.item.alamat);
                         return false;
                     }
                 });
 
-                $("#tampilkan").click(function(){
-                    
+                $("#tampilkan").click(function() {
+
                     tabel.style.visibility = 'visible';
                     let kode_supp = $("#kode_supplier").val();
                     tampilBarang(kode_supp);
                 });
 
-                function tampilBarang(kode_supplier){
+                function tampilBarang(kode_supplier) {
                     $('tbody').html("");
                     $.ajax({
-                            url: "/lapSupplier/"+kode_supplier,
-                            type: 'get',
-                            dataType: "json",
-                            // data: {
-                            //     kode_supplier : kode_supplier
-                            // },
-                            success: function(data) {
-                                let no = 1 ;
-                                $.each(data, function(key,values){
-                                    kode_barang = data[key].kode_barang;
-                                    nama_barang = data[key].nama_barang;
-                                    stok_barang = data[key].stok_barang;
-                                    harga_jual = data[key].harga_jual;
-                                    jumlah_barang = data[key].jumlah_barang;
-                                    // fee = 0.25;
-                                    // keuntungan = nanti isi keuntungan;
-                                    $('tbody').append('<tr>\
-                                        <td>'+ parseInt(key+1) +'</td>\
-                                        <td>'+ kode_barang +'</td>\
-                                        <td>'+ nama_barang +'</td>\
-                                        <td>'+ stok_barang +'</td>\
-                                        <td>'+ harga_jual +'</td>\
-                                        <td>'+ jumlah_barang +'</td>\
+                        url: "/lapSupplier/" + kode_supplier,
+                        type: 'get',
+                        dataType: "json",
+                        success: function(data) {
+                            let no = 1;
+                            $.each(data, function(key, values) {
+                                kode_barang = data[key].kode_barang;
+                                nama_barang = data[key].nama_barang;
+                                stok_barang = data[key].stok_barang;
+                                harga_jual = data[key].harga_jual;
+                                jumlah_barang = data[key].jumlah_barang;
+                                // fee = 0.25;
+                                // keuntungan = nanti isi keuntungan;
+                                $('tbody').append(
+                                    '<tr>\
+                                        <td>' + parseInt(key + 1) + '</td>\
+                                        <td>' + kode_barang + '</td>\
+                                        <td>' + nama_barang + '</td>\
+                                        <td>' + stok_barang + '</td>\
+                                        <td>' + harga_jual + '</td>\
+                                        <td>' + jumlah_barang + '</td>\
                                         <td>2,5%</td>\
-                                        <td>'+ (parseInt(harga_jual)-(parseInt(harga_jual)*0.025))*jumlah_barang+'</td>\
-                                    </tr>');
-                                })
-                                response(data);
-                                // <td>'+ fee +'</td>\
-                                //         <td>'+ keuntungan +'</td>\
-                            }
-                        });
+                                        <td>' + (parseInt(harga_jual) - (parseInt(harga_jual) *  0.025)) * jumlah_barang + '</td>\
+                                    </tr>'
+                                );
+                            })
+                            response(data);
+                        }
+                    });
                 }
             });
         </script>

@@ -9,6 +9,7 @@ class Ekspedisi extends Model
 {
     use HasFactory;
 
+    //Yang Diisi
     protected $fillable = [
         'kode_ekspedisi',
         'nama_ekspedisi',

@@ -16,6 +16,7 @@ class SupplierController extends Controller
         return view('Suply.supplier', ['supplier' => $supplier]);
     }
 
+    //Add Supplier
     public function store(Request $request)
     {
         //Message Alert (X)
@@ -55,7 +56,7 @@ class SupplierController extends Controller
         return view('Suply.supplier', ['supplier' => $supplier]);
     }
 
-    //Status
+    //Status Supplier
     public function status($status, $id)
     {
         $model = Supplier::findOrFail($id);

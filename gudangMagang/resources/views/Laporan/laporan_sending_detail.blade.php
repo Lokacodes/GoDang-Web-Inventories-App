@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="row justify-content-center">
-        {{-- <div class="col-md-6 stretch-card grid-margin ">
-            <div class="card ">
-                <div class="card-body">
-                </div>
-            </div>
-        </div> --}}
         <div id="print_out" class="col-md-6 stretch-card grid-margin ">
             <div class="card ">
                 <div class="card-body">
@@ -19,7 +13,7 @@
                             <p>Penerima :</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class = "text-justify">{{$transaksi->nama_pelanggan}}</p>
+                            <p class="text-justify">{{ $transaksi->nama_pelanggan }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -27,7 +21,7 @@
                             <p>Alamat :</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class = "text-justify">{{$transaksi->alamat_pelanggan}}</p>
+                            <p class="text-justify">{{ $transaksi->alamat_pelanggan }}</p>
                         </div>
                     </div>
 
@@ -36,7 +30,7 @@
                             <p>No Telepon :</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class = "text-justify">{{$transaksi->no_telp}}</p>
+                            <p class="text-justify">{{ $transaksi->no_telp }}</p>
                         </div>
                     </div>
 
@@ -92,11 +86,17 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th><center>Jumlah Barang</center></th>
-                                        <th><center>{{$transaksi->beli_total}}</center></th>
-                                        <th><center>Total Harga</center></th>
                                         <th>
-                                            <center> {{$transaksi->harga_total}} </center>
+                                            <center>Jumlah Barang</center>
+                                        </th>
+                                        <th>
+                                            <center>{{ $transaksi->beli_total }}</center>
+                                        </th>
+                                        <th>
+                                            <center>Total Harga</center>
+                                        </th>
+                                        <th>
+                                            <center> {{ $transaksi->harga_total }} </center>
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -106,19 +106,21 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <p>Catatan : {{$transaksi->catatan}}</p>
+                            <p>Catatan : {{ $transaksi->catatan }}</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <p>Kurir : {{$transaksi->nama_ekspedisi}} (Rp {{$transaksi->ongkir}},-)</p>
+                            <p>Kurir : {{ $transaksi->nama_ekspedisi }} (Rp {{ $transaksi->ongkir }},-)</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4><center>TOTAL : Rp {{$transaksi->ongkir + $transaksi->harga_total}},-</center></h4>
+                            <h4>
+                                <center>TOTAL : Rp {{ $transaksi->ongkir + $transaksi->harga_total }},-</center>
+                            </h4>
                         </div>
                     </div>
 
@@ -132,18 +134,17 @@
         </div>
     </div>
 
-@push('page-script')
-    <script type="text/javascript">
-         $(document).ready(function() {
-        $("#print-button").click(function() {
-            var printContents = document.getElementById("print_out").innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-        });
-    });
-
-    </script>
-@endpush
+    @push('page-script')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#print-button").click(function() {
+                    var printContents = document.getElementById("print_out").innerHTML;
+                    var originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    window.print();
+                    document.body.innerHTML = originalContents;
+                });
+            });
+        </script>
+    @endpush
 @endsection

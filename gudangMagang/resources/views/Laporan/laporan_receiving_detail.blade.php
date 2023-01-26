@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="row justify-content-center">
-        {{-- <div class="col-md-6 stretch-card grid-margin ">
-            <div class="card ">
-                <div class="card-body">
-                </div>
-            </div>
-        </div> --}}
         <div id="print_out" class="col-md-6 stretch-card grid-margin ">
             <div class="card ">
                 <div class="card-body">
