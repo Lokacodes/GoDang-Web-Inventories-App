@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
 
         //Return Views
-        return redirect()->intended('/login');
+        return redirect()->intended('/login')->with('alert', 'Login Gagal');
     }
 
     //Registrasi Process

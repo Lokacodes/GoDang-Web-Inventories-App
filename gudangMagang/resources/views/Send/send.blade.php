@@ -192,10 +192,6 @@
                 keranjang.style.visibility = 'hidden';
                 pengiriman.style.visibility = 'hidden';
 
-                var render = createwidgetlokasi("provinsi", "kotaKab", "kecamatan", "kelurahan");
-
-
-
                 $("#show").click(function() {
                     $("#output").html(trackdatalokasi);
                 });
@@ -243,8 +239,6 @@
                     },
                     select: function(event, ui) {
                         // Set selection
-
-
                         $('#caribarang').val(ui.item.value);
                         $('#kode_barang').val(ui.item.label1);
                         $('#harga_jual').val(ui.item.label4);
