@@ -42,9 +42,6 @@
                                         <center>Tanggal Penerimaan</center>
                                     </th>
                                     <th>
-                                        <center>Supplier</center>
-                                    </th>
-                                    <th>
                                         <center>Action</center>
                                     </th>
                                 </tr>
@@ -63,9 +60,6 @@
                                         </td>
                                         <td>
                                             <center>{{ $r->tanggal_receive }}</center>
-                                        </td>
-                                        <td>
-                                            <center>{{ $r->kode_supplier }}</center>
                                         </td>
                                         <td>
                                             <center>

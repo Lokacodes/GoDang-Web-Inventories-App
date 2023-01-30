@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -31,20 +31,6 @@ class BarangController extends Controller
         //View File
         return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand, 'supplier' => $supplier]);
     }
-
-    // //Search
-    // public function search(Request $request)
-    // {
-    //     //Variable
-    //     $cari = $request->cari;
-
-    //     //Request To Table
-    //     $barang = DB::table('barangs')
-    //         ->where('kode_barang', 'like', "%" . $cari . "%");
-
-    //     //View File
-    //     return view('Barang.list', ['barang' => $barang]);
-    // }
 
     //Create Barang
     public function store(Request $request)
@@ -167,7 +153,7 @@ class BarangController extends Controller
         return redirect('/barang')->with('success', 'Data Telah Terupdate');
     }
 
-    //Status
+    //Status Barang
     public function status($status, $kode_barang)
     {
         $model = Barang::findOrFail($kode_barang);

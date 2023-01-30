@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TransaksiKirim extends Model
 {
     use HasFactory;
+
+    //Yang Diisi
     protected $fillable = [
         'kode_pengiriman',
         'tanggal_transaksi',
@@ -21,5 +23,4 @@ class TransaksiKirim extends Model
         'harga_total',
         'ongkir'
     ];
-
 }

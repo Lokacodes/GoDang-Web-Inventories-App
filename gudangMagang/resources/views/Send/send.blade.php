@@ -11,29 +11,29 @@
 
                                 <div class="col-md-6">
                                     <label>Kode Sending</label>
-                                
+
                                     <input type="text" class="form-control" name="kode_sending" id="kode_sending"
                                         value="{{ 'OUT-' . date('dmy') . '-' . $kd }}" placeholder="Kode Sending"
                                         readonly />
                                 </div>
                                 <div class="col-md-6">
                                     <label>Tanggal</label>
-                                
+
                                     <input type="text" class="form-control" name="tanggal" id="tanggal"
-                                        value="{{ date('d-m-y') }}" placeholder="Tanggal"/>
-                                </div>                                
-                            </div>                            
+                                        value="{{ date('d-m-y') }}" placeholder="Tanggal" />
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <div class="row">    
+                            <div class="row">
                                 <div style="display:none;" class="col-md-6">
                                     <label>Kode Sending</label>
-                                
+
                                     <input type="text" class="form-control" name="kode_send" id="kode_send"
                                         value="{{ 'OUT-' . date('dmy') . '-' . $kd }}" placeholder="Kode Sending"
                                         readonly />
-                                </div>                            
-                            </div>                            
+                                </div>
+                            </div>
                         </div>
                         <br>
                         <p class="card-description">
@@ -122,13 +122,13 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
         <div id="info_pengiriman" class="col-md-6 grid-margin stretch-card">
-            <div class="card" >
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Detail Informasi Ekspedisi</h4>
 
@@ -166,10 +166,10 @@
                             <label>Ongkos Kirim</label>
                             <div class="form-group">
                                 <input class="typeahead" type="text" id="ongkir" name="ongkir"
-                                    placeholder="Ongkos Kirim" >
+                                    placeholder="Ongkos Kirim">
                             </div>
                         </div>
-                        
+
                     </div>
 
                     <div class="row">
@@ -177,7 +177,7 @@
                             <button id="save_bt" type="submit" class="btn btn-info">
                                 Save
                             </button>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,9 +192,9 @@
                 keranjang.style.visibility = 'hidden';
                 pengiriman.style.visibility = 'hidden';
 
-                var render=createwidgetlokasi("provinsi","kotaKab","kecamatan","kelurahan");
+                var render = createwidgetlokasi("provinsi", "kotaKab", "kecamatan", "kelurahan");
 
-            
+
 
                 $("#show").click(function() {
                     $("#output").html(trackdatalokasi);
@@ -206,7 +206,7 @@
                         $.ajax({
                             url: "/sending/kurir",
                             type: 'post',
-                            dataType: "json", 
+                            dataType: "json",
                             data: {
                                 _token: $("#csrf").val(),
                                 search: request.term
@@ -244,28 +244,20 @@
                     select: function(event, ui) {
                         // Set selection
 
-                        
+
                         $('#caribarang').val(ui.item.value);
                         $('#kode_barang').val(ui.item.label1);
                         $('#harga_jual').val(ui.item.label4);
                         $('#berat_barang').val(ui.item.berat);
 
-                        if(ui.item.label2 <= 0){
+                        if (ui.item.label2 <= 0) {
                             $('#stok_barang').val("Stok Habis!");
                             document.getElementById("tambah_keranjang").disabled = true;
                             alert('Stok habis!');
-
-                            // document.getElementById("caribarang").value = "";
-                            // document.getElementById("kode_barang").value = "";
-                            // document.getElementById("harga_jual").value = "";
-                            // document.getElementById("berat_barang").value = "";
-                            // document.getElementById("jumlah").value = "";
-                            // document.getElementById("stok_barang").value = "";
-                        }
-                        else{
+                        } else {
                             $('#stok_barang').val(ui.item.label2);
                         }
-                        
+
                         return false;
                     }
                 });
@@ -321,7 +313,7 @@
 
 
                             if (!isNaN(totalValue) && totalValue.length != 0) {
-                                sumberat += (parseFloat(totalValue)*parseFloat(jumlah_this));
+                                sumberat += (parseFloat(totalValue) * parseFloat(jumlah_this));
                             }
                             // console.log(sumberat);
                         })
@@ -330,7 +322,7 @@
 
                     function totalbeli() {
                         $("#jumlah").each(function() {
-                            
+
 
                             let totalValue = $(this).val();
 
@@ -368,12 +360,12 @@
             });
         </script>
 
-<script>
-    var msg = '{{ Session::get('alert') }}';
-    var exist = '{{ Session::has('alert') }}';
-    if (exist) {
-        alert(msg);
-    }
-</script>
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
+            }
+        </script>
     @endpush
 @endsection

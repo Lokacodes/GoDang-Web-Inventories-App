@@ -31,7 +31,7 @@ class ReceivingController extends Controller
         return view('Receive.receive', compact('receive', 'kd'));
     }
 
-    //Search
+    //Search Supplier
     public function searchsupply(Request $request)
     {
         $search = $request->search;
@@ -56,13 +56,11 @@ class ReceivingController extends Controller
         return response()->json($response);
     }
 
-    //Barang
+    //Search Barang
     public function barang(Request $request)
     {
         $search = $request->search;
         $supplier = $request->supplier;
-
-
 
         if ($search == '') {
             $barang = Barang::orderBy('nama_barang', 'asc')
@@ -88,6 +86,7 @@ class ReceivingController extends Controller
         return response()->json($response);
     }
 
+    //Save Receiving
     public function receivingStore(Request $request)
     {
         if ($request->kode_barang == null) {
@@ -105,65 +104,23 @@ class ReceivingController extends Controller
                 $receive->kode_barang = $request->kode_barang[$i];
                 $receive->kode_supplier = $request->kode_supplier[$i];
                 $receive->jumlah_barang = $request->jumlah[$i];
-                // $receive->tanggal_receive = $request->tanggal;
                 //dd($request);
                 $receive->save();
-
-
-
-                // $received = new Received();
-                // $received->kode_receive = $request->kode_receiving[$i];
-                // $received->kode_barang = $request->kode_barang[$i];
-                // $received->kode_supplier = $request->kode_supplier[$i];
-                // $received->jumlah_barang = $request->jumlah[$i];
-                // $received->tanggal_receive = $request->tanggal;
-                // //dd($request);
-                // $received->save();
 
                 $sendingFind = $receive->kode_barang;
                 $barang = Barang::where('kode_barang', $sendingFind)->first();
                 $jumlahReceive = ((float)($barang->stok_barang)) + ((float)($receive->jumlah_barang));
                 $barang->stok_barang = $jumlahReceive;
                 //dd($barang);
-
                 $barang->save();
-
-
-
-                // /* To send Notification in admin notice board after purchase */
-                // $user = User::where('username','admin')->get();
-                // Notification::send($user,new PurchaseComplete($request->product_name));
-
             }
 
             $transaksiTerima = new TransaksiTerima();
             $transaksiTerima->kode_receive = $request->receives;
             $transaksiTerima->tanggal_receive = $request->tanggal;
-            $transaksiTerima->kode_supplier = $request->kode_suppliers;
             $transaksiTerima->save();
-
 
             return redirect('/receiving')->with('alert', 'Data Penerimaan Barang Telah Disimpan');
         }
     }
-
-    //Table Gudang
-    // public function table(Request $request)
-    // {
-    //     $receive = Receiving::create($request->all());
-    //     $kode_barang = $request->input('kode_barang', []);
-    //     $jumlah = $request->input('jumlah', []);
-    //     $total = $request->input('total', []);
-    //     //  dd($request);
-    //     for ($i=0; $i < count($kode_barang); $i++) {
-    //         if ($kode_barang[$i] != '') {
-    //             $receive->receive()->attach($kode_barang[$i],['jumlah' => $jumlah[$i]]);
-    //             Barang::updateOrCreate(['kode_barang' => $kode_barang],['stok_barang'=> $total[$i]]);
-    //         }
-    //     }
-
-    //     return \redirect('/receiving');
-
-    // }
-
 }

@@ -1,18 +1,5 @@
 @extends('index')
 @section('content')
-    {{-- Search Box --}}
-    {{-- <br>
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="search-wrapper">
-                <div class="input-holder">
-                    <input type="text" class="search-input" placeholder="Type to search" />
-                    <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
-                </div>
-                <span class="close" onclick="searchToggle(this, event);"></span>
-            </div>
-        </div>
-    </div><br> --}}
 
     {{-- Table Supplier --}}
     <div class="row">

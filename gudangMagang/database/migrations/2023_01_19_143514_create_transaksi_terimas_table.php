@@ -17,7 +17,6 @@ class CreateTransaksiTerimasTable extends Migration
             $table->id();
             $table->string('kode_receive')->nullable();
             $table->date('tanggal_receive')->nullable();
-            $table->string('kode_supplier')->nullable();
             $table->timestamps();
         });
     }

@@ -12,11 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/s/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/search.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
     <link href="{{ asset('assets/jqueryui/jquery-ui.css') }}" rel="stylesheet" type="text/css">
 
@@ -225,26 +222,18 @@
 
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
-    <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
     <script src="{{ asset('assets/js/todolist.js') }}"></script>
-    <script src="{{ asset('assets/js/card.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-    <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/js/select2.js') }}"></script>
-    <script src="{{ asset('assets/js/search.js') }}"></script>
     <script src="{{ asset('assets/jqueryui/jquery-ui.js') }}"></script>
-    <script src="http://api.iksgroup.co.id/apijs/lokasiapi.js"></script>
     <!-- End custom js for this page-->
     @stack('page-script')
 

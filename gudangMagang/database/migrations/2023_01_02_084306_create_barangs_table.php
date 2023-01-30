@@ -24,7 +24,7 @@ class CreateBarangsTable extends Migration
             $table->integer('harga_jual')->nullable();
             $table->integer('berat_barang')->nullable();
             $table->string('kode_supplier')->nullable();
-            $table->tinyInteger('status')->default('1');
+            $table->tinyInteger('status_barang')->default('1');
             // $table->string('foto')->nullable();
             $table->timestamps();
         });

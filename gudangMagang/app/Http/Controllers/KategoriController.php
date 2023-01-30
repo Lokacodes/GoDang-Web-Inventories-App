@@ -39,7 +39,7 @@ class KategoriController extends Controller
         }
     }
 
-    //Status
+    //Status Kategori
     public function status($status, $id)
     {
         $model = Kategori::findOrFail($id);

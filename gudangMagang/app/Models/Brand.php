@@ -14,6 +14,5 @@ class Brand extends Model
         'kode_brand',
         'nama_brand',
         'status',
-
     ];
 }
