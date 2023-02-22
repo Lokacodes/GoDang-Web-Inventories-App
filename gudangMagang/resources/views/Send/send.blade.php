@@ -269,7 +269,7 @@
                     let jumlah = $("#jumlah").val();
                     let harga = $("#harga_jual").val();
                     let kurir = $("#cari_kurir").val();
-                    let subtotal = parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val());
+                    let subtotal = ((0.975 * parseInt($("#berat_barang").val()))*(parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val()))) - (parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val())) ;
                     let ongkir = $("#ongkir").val();
                     let total = parseInt(subtotal) + parseInt(ongkir);
                     let berat = $("#berat_barang").val();
@@ -333,11 +333,11 @@
                         $("#harga_jual").each(function() {
 
                             let totalValue = $(this).val();
-                            let jumlah_this = $("#jumlah").val();
+                            let jumlah_this = subtotal;
 
 
                             if (!isNaN(totalValue) && totalValue.length != 0) {
-                                sumharga += (parseFloat(totalValue) * parseFloat(jumlah_this));
+                                sumharga += (parseFloat(jumlah_this));
                             }
                             // console.log(sumharga);
                             // console.log(jumlah_this);
