@@ -119,7 +119,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <h4>
-                                <center>TOTAL : Rp {{ $transaksi->ongkir + $transaksi->harga_total }},-</center>
+                                <center>TOTAL : Rp {{ $transaksi->harga_total }},-</center>
                             </h4>
                         </div>
                     </div>

@@ -28,8 +28,20 @@ class BarangController extends Controller
             ->join('brands', 'brands.kode_brand', '=', 'barangs.kode_brand')
             ->paginate(5);
 
+        //id
+        $autoId = DB::table('barangs')->select(DB::raw('MAX(RIGHT(kode_barang,2)) as autoId'));
+        $kd = "";
+        if ($autoId->count() > 0) {
+            foreach ($autoId->get() as $a) {
+                $tmp = ((int)$a->autoId) + 1;
+                $kd = sprintf("%02s", $tmp);
+            }
+        } else {
+            $kd = "01";
+        }
+
         //View File
-        return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand, 'supplier' => $supplier]);
+        return view('Barang.list', ['barang' => $barang, 'kat' => $kategori, 'brand' => $brand, 'supplier' => $supplier, 'kd' => $kd]);
     }
 
     //Create Barang

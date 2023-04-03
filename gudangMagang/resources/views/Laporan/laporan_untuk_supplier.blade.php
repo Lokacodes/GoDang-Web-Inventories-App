@@ -34,6 +34,32 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div id="stok_barang" class="col-md-6 stretch-card grid-margin ">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6   ">
+                            <div class="form-group">
+                                <label for="caribarang">Input Nama Barang</label>
+                                <input type="text" class="form-control form-control-user" id="caribarang"
+                                    name="caribarang" placeholder="Masukkan Nama Barang" aria-label="Search"
+                                    aria-describedby="basic-addon2">
+                                <input type="hidden" name="_token" id="csrf" value="{{ Session::token() }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="stok">Stok Barang</label>
+                                <input readonly type="text" class="form-control form-control-user" id="stok"
+                                    name="stok" placeholder="Stok Barang">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="card col-md-12" id="barang_list" name="barang_list">
@@ -45,13 +71,13 @@
                                 <center>NO</center>
                             </th>
                             <th>
+                                <center>Kode Pengiriman</center>
+                            </th>
+                            <th>
                                 <center>Kode Barang</center>
                             </th>
                             <th>
                                 <center>Nama Barang</center>
-                            </th>
-                            <th>
-                                <center>Stok</center>
                             </th>
                             <th>
                                 <center>Harga</center>
@@ -79,8 +105,10 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 let tabel = document.getElementById('barang_list');
+                let stok = document.getElementById('stok_barang');
                 tabel.style.visibility = 'hidden';
-
+                stok.style.visibility = 'hidden';
+                // stok.style.visibility = 'hidden';
                 $("#carisupplier").autocomplete({
                     source: function(request, response) {
                         // Fetch data
@@ -102,12 +130,37 @@
                         $('#carisupplier').val(ui.item.value);
                         $('#kode_supplier').val(ui.item.kode);
                         return false;
+                    },
+                });
+
+                $("#caribarang").autocomplete({
+                    source: function(request, response) {
+                        // Fetch data
+                        $.ajax({
+                            url: "/lapSupplier/stok",
+                            type: 'post',
+                            dataType: "json",
+                            data: {
+                                _token: $("#csrf").val(),
+                                search: request.term
+                            },
+                            success: function(data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    select: function(event, ui) {
+                        // Set selection
+                        $('#caribarang').val(ui.item.value);
+                        $('#stok').val(ui.item.label2);
+                        return false;
                     }
                 });
 
                 $("#tampilkan").click(function() {
 
                     tabel.style.visibility = 'visible';
+                    stok.style.visibility = 'visible';
                     let kode_supp = $("#kode_supplier").val();
                     tampilBarang(kode_supp);
                 });
@@ -121,6 +174,7 @@
                         success: function(data) {
                             let no = 1;
                             $.each(data, function(key, values) {
+                                kode_pengiriman = data[key].kode_pengiriman;
                                 kode_barang = data[key].kode_barang;
                                 nama_barang = data[key].nama_barang;
                                 stok_barang = data[key].stok_barang;
@@ -130,15 +184,16 @@
                                 // keuntungan = nanti isi keuntungan;
                                 $('tbody').append(
                                     '<tr>\
-                                        <td>' + parseInt(key + 1) + '</td>\
-                                        <td>' + kode_barang + '</td>\
-                                        <td>' + nama_barang + '</td>\
-                                        <td>' + stok_barang + '</td>\
-                                        <td>' + harga_jual + '</td>\
-                                        <td>' + jumlah_barang + '</td>\
-                                        <td>2,5%</td>\
-                                        <td>' + (parseInt(harga_jual) - (parseInt(harga_jual) *  0.025)) * jumlah_barang + '</td>\
-                                    </tr>'
+                                                <td>' + parseInt(key + 1) + '</td>\
+                                                <td>' + kode_pengiriman + '</td>\
+                                                <td>' + kode_barang + '</td>\
+                                                <td>' + nama_barang + '</td>\
+                                                <td>' + harga_jual + '</td>\
+                                                <td>' + jumlah_barang + '</td>\
+                                                <td>2.5%</td>\
+                                                <td>' + (parseInt(harga_jual) - (parseInt(harga_jual) * 0.025)) *
+                                    jumlah_barang + '</td>\
+                                            </tr>'
                                 );
                             })
                             response(data);
@@ -146,6 +201,7 @@
                     });
                 }
             });
+
         </script>
     @endpush
 @endsection

@@ -126,11 +126,12 @@ class SendingController extends Controller
             $transaksi->berat_total = $request->total_berat;
             $transaksi->beli_total = $request->total_beli;
             $transaksi->harga_total = $request->total_harga;
+            $transaksi->fee = $request->total_fee;
             $transaksi->ongkir = $request->ongkir;
 
             $transaksi->save();
 
-            return redirect('/sending')->with('alert', 'Data Pengiriman telah Disimpan');
+            return redirect('/sending')->with('alert', 'Data Pengiriman Telah Disimpan');
         }
     }
 }

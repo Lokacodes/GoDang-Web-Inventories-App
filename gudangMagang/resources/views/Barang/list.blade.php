@@ -137,8 +137,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
-                                    <input type="text" class="form-control" id="kode_barang" name="kode_barang"
-                                        placeholder="Kode Barang">
+                                    <input value="{{'BR-'.date('dmy').$kd}}" type="text" class="form-control" id="kode_barang" name="kode_barang"
+                                        placeholder="Kode Barang" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>

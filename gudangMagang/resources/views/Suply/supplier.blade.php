@@ -92,8 +92,8 @@
 
                                 <div class="form-group">
                                     <label for="kode_supplier">Kode Supplier</label>
-                                    <input type="text" class="form-control" id="kode_supplier" name="kode_supplier"
-                                        placeholder="Kode Supplier">
+                                    <input value="{{'SP'.$kd}}" type="text" class="form-control" id="kode_supplier" name="kode_supplier"
+                                        placeholder="Kode Supplier" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_supplier">Nama supplier</label>

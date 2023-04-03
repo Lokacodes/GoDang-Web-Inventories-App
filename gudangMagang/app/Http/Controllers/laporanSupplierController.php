@@ -52,6 +52,30 @@ class LaporanSupplierController extends Controller
         return response()->json($response);
     }
 
+    //Stok
+    public function caristok(Request $request)
+    {
+        $search = $request->search;
+        $supplier = $request->supplier;
+        if ($search == '') {
+            $barang = Barang::orderBy('nama_barang', 'asc')
+                ->select('nama_barang', 'stok_barang', 'kode_supplier')
+                ->get();
+        } else {
+            $barang = Barang::orderBy('nama_barang', 'asc')
+                ->select('nama_barang', 'stok_barang', 'kode_supplier')
+                ->where('nama_barang', 'like', '%' . $search . '%')
+                ->get();
+        }
+
+        $response = array();
+        foreach ($barang as $barang) {
+            $response[] = array("value" => $barang->nama_barang, "label2" => $barang->stok_barang);
+        }
+
+        return response()->json($response);
+    }
+
     //Tampil Detail
     public function tampilBarang(Request $request)
     {

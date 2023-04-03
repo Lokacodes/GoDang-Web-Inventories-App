@@ -81,6 +81,13 @@
                                         name="berat_barang" disabled>
                                 </div>
                             </div>
+                            <div class="col-md-3" style="display: none">
+                                <label>FEE</label>
+                                <div>
+                                    <input value= "0.975" class="typeahead" type="text" placeholder="Berat Barang" id="fee"
+                                        name="fee" disabled>
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <label>Jumlah Beli</label>
                                 <input id="jumlah" name="jumlah" type="text" class="form-control" />
@@ -105,6 +112,7 @@
                                     <th width="250px">Nama Barang</th>
                                     <th id="berat_brg">Berat Barang</th>
                                     <th>Jumlah Dibeli</th>
+                                    <th width="250px">FEE</th>
                                     <th width="250px">Sub Total</th>
                                 </tr>
                             </thead>
@@ -114,11 +122,13 @@
                                 <tr>
                                     <th class="text-center bg_total" colspan="2"><b>TOTAL</b></th>
                                     <th><input class="form-control form-control-user" readonly type="text"
-                                            name="total_berat" id="total_berat" value=""></th>
+                                        name="total_berat" id="total_berat" value=""></th>
                                     <th><input class="form-control form-control-user" readonly type="text"
-                                            name="total_beli" id="total_beli" value=""></th>
+                                        name="total_beli" id="total_beli" value=""></th>
                                     <th><input class="form-control form-control-user" readonly type="text"
-                                            name="total_harga" id="total_harga" value=""></th>
+                                        name="total_fee" id="total_fee" value=""></th>
+                                    <th><input class="form-control form-control-user" readonly type="text"
+                                        name="total_harga" id="total_harga" value=""></th>      
                                 </tr>
                             </tfoot>
                         </table>
@@ -260,6 +270,7 @@
                 let sumberat = 0;
                 let sumbeli = 0;
                 let sumharga = 0;
+                let sumfee = 0;
                 $('#tambah_keranjang').click(function() {
                     keranjang.style.visibility = 'visible';
                     pengiriman.style.visibility = 'visible';
@@ -267,11 +278,12 @@
                     let barang = $("#caribarang").val();
                     let kode_barang = $("#kode_barang").val();
                     let jumlah = $("#jumlah").val();
-                    let harga = $("#harga_jual").val();
+                    let harga = $("#harga").val();
                     let kurir = $("#cari_kurir").val();
-                    let subtotal = ((0.975 * parseInt($("#berat_barang").val()))*(parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val()))) - (parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val())) ;
+                    let fee = (parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val())) - ((0.975 * parseInt($("#berat_barang").val()))*(parseInt($("#harga_jual").val()) * parseInt($("#jumlah").val()))) ;
                     let ongkir = $("#ongkir").val();
-                    let total = parseInt(subtotal) + parseInt(ongkir);
+                    let subtotal = $("#harga_jual").val() - parseInt(fee);
+                    let total = parseInt(fee) + parseInt(ongkir);
                     let berat = $("#berat_barang").val();
                     let sending_kode = $("#kode_sending").val();
                     let sisa = $("#stok_barang").val() - $("#jumlah").val();
@@ -290,13 +302,16 @@
                         jumlah +
                         '"readonly></td><td style="display: none;"><input type="text" class="form-control form-control-user" name="sisa[]" value="' +
                         sisa +
+                        '"readonly></td><td><input type="text" class="form-control form-control-user" name="fee[]" value="' +
+                        fee +
                         '"readonly></td><td><input type="text" class="form-control form-control-user" name="subtotal[]" value="' +
                         subtotal +
-                        '" ></td></tr>'
+                        '" readonly></td></tr>'
                     );
                     totalberat();
                     totalbeli();
                     totalharga();
+                    totalfee();
                     row++;
 
                     function totalberat() {
@@ -344,6 +359,23 @@
                         })
                         $('#total_harga').val(sumharga);
                     }
+
+                    function totalfee() {
+                        $("#fee").each(function() {
+
+                            let totalValue = $(this).val();
+                            let jumlah_this = fee;
+
+
+                            if (!isNaN(totalValue) && totalValue.length != 0) {
+                                sumfee += (parseFloat(jumlah_this));
+                            }
+                            // console.log(sumharga);
+                            // console.log(jumlah_this);
+                        })
+                        $('#total_fee').val(sumfee);
+                    }
+
                     document.getElementById("caribarang").value = "";
                     document.getElementById("kode_barang").value = "";
                     document.getElementById("harga_jual").value = "";

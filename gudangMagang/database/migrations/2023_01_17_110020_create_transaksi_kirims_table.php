@@ -25,6 +25,7 @@ class CreateTransaksiKirimsTable extends Migration
             $table->string('berat_total')->nullable();
             $table->string('beli_total')->nullable();
             $table->string('harga_total')->nullable();
+            $table->string('fee')->nullable();
             $table->string('ongkir')->nullable();
             $table->timestamps();
         });
